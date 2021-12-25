@@ -1,10 +1,7 @@
 import React, { FC, ReactNode, useEffect, useState } from 'react'
 
-import { Image } from 'antd-mobile'
+import { Image, PureComponentProps, transformAssetsUrl } from 'antd-mobile'
 import classNames from 'classnames'
-
-import { PureComponentProps } from './pure-component'
-import { transformAssetsUrl } from './transform.url'
 
 export interface ImageAutoProps extends PureComponentProps {
   src: string

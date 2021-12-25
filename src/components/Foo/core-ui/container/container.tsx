@@ -1,10 +1,15 @@
 /* eslint-disable react/no-find-dom-node */
-import React, { FC, PureComponent, useEffect } from 'react'
+import React, { FC, useEffect } from 'react'
 import ReactDOM from 'react-dom'
 
 import classnames from 'classnames'
 
-import { getClassSet, prefixClass, PureComponentProps } from './pure-component'
+import {
+  getClassSet,
+  PureComponent,
+  prefixClass,
+  PureComponentProps,
+} from 'antd-mobile'
 
 type Align = 'end' | 'center' | 'start' | 'top' | 'bottom' | 'left' | 'right'
 

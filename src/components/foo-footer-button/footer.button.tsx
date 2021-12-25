@@ -3,7 +3,7 @@ import React, { FC, ReactNode } from 'react'
 import { Grid } from 'antd-mobile'
 import classNames from 'classnames'
 
-import { PureComponentProps } from '../Foo'
+import { PureComponentProps } from 'antd-mobile'
 
 export interface ItemProps {
   span?: number

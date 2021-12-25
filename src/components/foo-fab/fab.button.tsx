@@ -1,8 +1,7 @@
-import React, { forwardRef, useImperativeHandle, useRef, FC } from 'react'
+import React, { FC, forwardRef, useImperativeHandle, useRef } from 'react'
 
+import { getExtraAttrs } from 'antd-mobile'
 import classNames from 'classnames'
-
-import { getExtraAttrs } from './utils'
 
 export type FabButtonProps = {
   className?: string

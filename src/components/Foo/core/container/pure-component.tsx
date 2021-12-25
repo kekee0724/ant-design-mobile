@@ -56,7 +56,7 @@ export const PureComponent: FC<PureComponentProps> = (props, _ref: any) => {
 
   useEffect(() => {
     if (!shallowCompare(nextProps, props)) {
-      console.log('!shallowCompare')
+      console.log('!shallowCompare', nextProps, props)
       // componentReceiveProps(nextProps, nextContext);
     }
     return () => {

@@ -1,9 +1,8 @@
-import React, { forwardRef, useRef, useState, FC } from 'react'
+import React, { FC, forwardRef, useRef, useState } from 'react'
 
+import { getExtraAttrs, getSlots } from 'antd-mobile'
 import { AddOutline, CloseOutline } from 'antd-mobile-icons'
 import classNames from 'classnames'
-
-import { getExtraAttrs, getSlots } from './utils'
 
 export type FabProps = {
   className?: string

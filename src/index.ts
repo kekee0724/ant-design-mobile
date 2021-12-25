@@ -82,7 +82,7 @@ export { default as TreeSelect } from './components/tree-select'
 export { default as VirtualInput } from './components/virtual-input'
 export { default as WaterMark } from './components/water-mark'
 
-export { Container, Foo, ImageAuto, PureComponent } from './components/Foo'
+export * from './components/Foo'
 
 export { CardText, CardTextTag } from './components/foo-card-text'
 
