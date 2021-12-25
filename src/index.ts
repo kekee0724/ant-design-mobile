@@ -1,6 +1,10 @@
 import './global'
+import './levi.config'
 
-export { setDefaultConfig } from './components/config-provider'
+export {
+  default as ConfigProvider,
+  setDefaultConfig,
+} from './components/config-provider'
 
 export { default as ActionSheet } from './components/action-sheet'
 export { default as AutoCenter } from './components/auto-center'
@@ -15,7 +19,6 @@ export { default as CascaderView } from './components/cascader-view'
 export { default as CheckList } from './components/check-list'
 export { default as Checkbox } from './components/checkbox'
 export { default as Collapse } from './components/collapse'
-export { default as ConfigProvider } from './components/config-provider'
 export { default as DatePicker } from './components/date-picker'
 export { default as DatePickerView } from './components/date-picker-view'
 export { default as Dialog } from './components/dialog'
@@ -56,14 +59,16 @@ export { default as Rate } from './components/rate'
 export { default as Result } from './components/result'
 export { default as SafeArea } from './components/safe-area'
 export { default as ScrollMask } from './components/scroll-mask'
-export { default as Search } from './components/search-bar' // TODO: deprecated
-export { default as SearchBar } from './components/search-bar'
+export {
+  default as Search,
+  default as SearchBar,
+} from './components/search-bar' // TODO: deprecated
 export { default as Selector } from './components/selector'
 export { default as SideBar } from './components/side-bar'
 export { default as Skeleton } from './components/skeleton'
 export { default as Slider } from './components/slider'
 export { default as Space } from './components/space'
-export { default as Stepper } from './components//stepper'
+export { default as Stepper } from './components/stepper'
 export { default as Steps } from './components/steps'
 export { default as SwipeAction } from './components/swipe-action'
 export { default as Swiper } from './components/swiper'
@@ -76,3 +81,23 @@ export { default as Toast } from './components/toast'
 export { default as TreeSelect } from './components/tree-select'
 export { default as VirtualInput } from './components/virtual-input'
 export { default as WaterMark } from './components/water-mark'
+
+export { Container, Foo, ImageAuto, PureComponent } from './components/Foo'
+
+export { CardText, CardTextTag } from './components/foo-card-text'
+
+export { CustomHeader } from './components/foo-custom-header'
+
+export { Fab, FabButton, FabButtons } from './components/foo-fab'
+
+export { FileIcon } from './components/foo-file-icon'
+
+export { default as FooterButton } from './components/foo-footer-button'
+
+export { Hint } from './components/foo-hint'
+
+export { ImageText } from './components/foo-image-text'
+
+export { ListContainer } from './components/foo-list-container'
+
+export { ListTitle } from './components/foo-list-title'

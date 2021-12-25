@@ -19,21 +19,21 @@ export default () => {
   }
   return (
     <>
-      <DemoBlock title='基本用法' background='gray'>
+      <DemoBlock title='基本用法' padding='6px 6px' background='gray'>
         <Card title='卡片标题' onClick={onClick}>
           卡片内容
         </Card>
       </DemoBlock>
 
-      <DemoBlock title='没有卡片内容' background='gray'>
+      <DemoBlock title='没有卡片内容' padding='6px 6px' background='gray'>
         <Card title='卡片标题' onClick={onClick} />
       </DemoBlock>
 
-      <DemoBlock title='没有卡片标题' background='gray'>
+      <DemoBlock title='没有卡片标题' padding='6px 6px' background='gray'>
         <Card onClick={onClick}>卡片内容</Card>
       </DemoBlock>
 
-      <DemoBlock title='自定义卡片内容' background='gray'>
+      <DemoBlock title='自定义卡片内容' padding='6px 6px' background='gray'>
         <Card
           title={
             <div style={{ fontWeight: 'normal' }}>
@@ -58,7 +58,7 @@ export default () => {
         </Card>
       </DemoBlock>
 
-      <DemoBlock title='自定义卡片样式' background='gray'>
+      <DemoBlock title='自定义卡片样式' padding='6px 6px' background='gray'>
         <Card
           headerStyle={{
             color: '#1677ff',

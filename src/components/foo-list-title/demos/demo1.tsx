@@ -1,0 +1,22 @@
+import React from 'react'
+
+import { List, ListTitle } from 'antd-mobile'
+import { DemoBlock } from 'demos'
+
+export default () => {
+  return (
+    <DemoBlock title='基础用法'>
+      <ListTitle>单选</ListTitle>
+      <List mode={'card'}>
+        <List.Item>1</List.Item>
+        <List.Item>2</List.Item>
+      </List>
+      <ListTitle>多选</ListTitle>
+      <List mode={'card'}>
+        <List.Item>1</List.Item>
+        <List.Item>2</List.Item>
+        <List.Item>2</List.Item>
+      </List>
+    </DemoBlock>
+  )
+}

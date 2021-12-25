@@ -250,6 +250,10 @@ export default {
         title: '试验性',
         children: components.experimental,
       },
+      {
+        title: '自定义组件',
+        children: components.self,
+      },
     ],
   },
   resolve: {
