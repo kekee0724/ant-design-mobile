@@ -4,7 +4,7 @@ import Classnames from 'classnames'
 
 import { ClassValue } from './type'
 
-export type PureComponentProps = {
+export interface PureComponentProps extends Partial<React.PureComponent> {
   children?: React.ReactNode
   key?: React.Key
   ref?: React.LegacyRef<any>
