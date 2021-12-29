@@ -2,7 +2,6 @@ import React from 'react'
 
 import {
   Button,
-  Card,
   CustomHeader,
   Ellipsis,
   ImageAuto,
@@ -18,7 +17,7 @@ import { DemoBlock } from 'demos'
 export default () => {
   return (
     <>
-      <DemoBlock title='透明背景'>
+      <DemoBlock title='透明背景' background='' padding=''>
         <CustomHeader
           backCutWidth={384}
           backCutHeight={233}
@@ -62,9 +61,9 @@ export default () => {
           </List>
         </CustomHeader>
       </DemoBlock>
-      <DemoBlock title='与内容结合'>
+      <DemoBlock title='与内容结合' background='' padding=''>
         <CustomHeader
-          className='tabs-white'
+          backColor={true}
           customHeaderList={false}
           navBarNoBack={true}
           navBarNoBorder={false}
@@ -87,7 +86,7 @@ export default () => {
         </CustomHeader>
         <br />
         <CustomHeader
-          className='tabs-white'
+          backColor={true}
           customHeaderList={false}
           navBarNoBack={true}
           navBarNoBorder={false}
@@ -102,9 +101,11 @@ export default () => {
           >
             我的
           </NavBar>
-          <Card className='margin-0'>
-            <SearchBar placeholder='请输入内容' />
-          </Card>
+          <List>
+            <List.Item>
+              <SearchBar placeholder='请输入内容' />
+            </List.Item>
+          </List>
         </CustomHeader>
       </DemoBlock>
     </>

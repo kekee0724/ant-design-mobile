@@ -1,7 +1,9 @@
 import React from 'react'
 
-import { browser, Toast } from 'antd-mobile'
+import { Toast } from 'antd-mobile'
 import { ExclamationOutline } from 'antd-mobile-icons'
+
+import { browser } from '../../core'
 
 /**
  * 深度拷贝

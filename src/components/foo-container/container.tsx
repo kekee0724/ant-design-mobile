@@ -6,10 +6,10 @@ import classnames from 'classnames'
 
 import {
   getClassSet,
-  PureComponent,
   prefixClass,
+  PureComponent,
   PureComponentProps,
-} from 'antd-mobile'
+} from '../Foo/core'
 
 type Align = 'end' | 'center' | 'start' | 'top' | 'bottom' | 'left' | 'right'
 

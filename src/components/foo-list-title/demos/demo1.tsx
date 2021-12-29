@@ -5,7 +5,7 @@ import { DemoBlock } from 'demos'
 
 export default () => {
   return (
-    <DemoBlock title='基础用法'>
+    <DemoBlock title='基础用法' background='' padding='0'>
       <ListTitle>单选</ListTitle>
       <List mode={'card'}>
         <List.Item>1</List.Item>

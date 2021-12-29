@@ -83,11 +83,15 @@ export { default as TreeSelect } from './components/tree-select'
 export { default as VirtualInput } from './components/virtual-input'
 export { default as WaterMark } from './components/water-mark'
 
-export * from './components/Foo'
+export { Foo } from './components/Foo'
 
 export { CardText, CardTextTag } from './components/foo-card-text'
 
+export { Container } from './components/foo-container'
+
 export { CustomHeader } from './components/foo-custom-header'
+
+export { default as Description } from './components/foo-description'
 
 export { Fab, FabButton, FabButtons } from './components/foo-fab'
 
@@ -96,6 +100,8 @@ export { FileIcon } from './components/foo-file-icon'
 export { default as FooterButton } from './components/foo-footer-button'
 
 export { Hint } from './components/foo-hint'
+
+export { ImageAuto } from './components/foo-image-auto'
 
 export { ImageText } from './components/foo-image-text'
 

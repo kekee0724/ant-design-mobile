@@ -1,7 +1,10 @@
-import React, { FC, forwardRef } from 'react'
+import React, { forwardRef } from 'react'
 
 import { Ellipsis, ImageAuto } from 'antd-mobile'
+import { mergeProps } from '../../utils/with-default-props'
 import classNames from 'classnames'
+
+import { ImageAutoProps } from '../foo-image-auto'
 
 export type CardTextProps = {
   url?: any
@@ -20,10 +23,30 @@ export type CardTextProps = {
   textStyle?: any
   textClassName?: any
   customImage?: any
+  content?: any
+  ratio?: '16:9' | '4:3' | '1:1' | '2:3'
+  imageAutoProps?: ImageAutoProps
+  direction?: 'column' | 'row' | 'row-reverse'
 }
 
-export const CardText: FC<CardTextProps> = forwardRef((props, _ref: any) => {
-  const bodyCls = classNames('card-text-container', props.type, props.className)
+export const CardText = forwardRef((p: CardTextProps, _ref: any) => {
+  const defaultProps = {
+    ratio: '16:9',
+    direction: 'column',
+    imageAutoProps: {
+      style: { '--width': '100%' },
+    },
+  }
+
+  const props = mergeProps(defaultProps, p)
+
+  const bodyCls = classNames(
+    'card-text-container',
+    props.type,
+    props.className,
+    props.direction === 'row' && 'card-text-row',
+    props.direction === 'row-reverse' && 'card-text-row reverse'
+  )
 
   return (
     <div className={bodyCls} onClick={props.onClick} style={props.style}>
@@ -31,25 +54,33 @@ export const CardText: FC<CardTextProps> = forwardRef((props, _ref: any) => {
         props.customImage
       ) : (
         <ImageAuto
+          src={props.url}
           width={props.width}
           height={props.height}
           cutWidth={props.cutWidth}
           cutHeight={props.cutHeight}
-          src={props.url}
-          style={{ '--width': '100%' }}
+          ratio={props.ratio}
+          className={classNames(
+            props.direction === 'row-reverse' && 'margin-v margin-right',
+            props.direction === 'row' && 'margin-v margin-left'
+          )}
+          {...props.imageAutoProps}
         >
           {props.children}
         </ImageAuto>
       )}
-      {props.text && (
-        <Ellipsis
-          content={props.text}
-          rows={props.rows || 2}
-          className={`card-text ${props.textClassName}`}
-          style={props.textStyle}
-        />
-      )}
-      {props.footer && <div className='card-footer'>{props.footer}</div>}
+      <div className='card-text-content'>
+        {props.text && (
+          <Ellipsis
+            content={props.text}
+            rows={props.rows || 2}
+            className={`card-text ${props.textClassName}`}
+            style={props.textStyle}
+          />
+        )}
+        {props.content && <div className='card-content'>{props.content}</div>}
+      </div>
+      {props.footer && <div className='card-text-footer'>{props.footer}</div>}
     </div>
   )
 })

@@ -2,11 +2,9 @@ import React from 'react'
 
 import { Hint, List } from 'antd-mobile'
 
-import styles from './demo1.less'
-
 export default () => {
   return (
-    <div className={styles.customBody}>
+    <div>
       <List mode={'card'}>
         <List.Item>1</List.Item>
         <List.Item>2</List.Item>
