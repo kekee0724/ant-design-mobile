@@ -1,8 +1,9 @@
 import React, { CSSProperties, forwardRef, ReactNode, useState } from 'react'
 
-import { Grid } from 'antd-mobile'
-import { mergeProps } from '../../utils/with-default-props'
 import classNames from 'classnames'
+
+import { mergeProps } from '../../utils/with-default-props'
+import Grid from '../grid'
 
 export type DescriptionProps = {
   bodyCls?: string

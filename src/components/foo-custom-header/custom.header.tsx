@@ -1,7 +1,8 @@
 import React, { CSSProperties, FC, forwardRef } from 'react'
 
-import { ImageAuto } from 'antd-mobile'
 import classNames from 'classnames'
+
+import { ImageAuto } from '../foo-image-auto'
 
 export type CustomHeaderProps = {
   className?: string

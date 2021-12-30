@@ -84,7 +84,7 @@ export const components = {
     '/components/scroll-mask',
   ],
   self: [
-    '/components/Foo',
+    '/components/foo',
     '/components/foo-card-text',
     '/components/foo-class',
     '/components/foo-container',

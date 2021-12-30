@@ -1,3 +1,5 @@
+import './spacing.less'
+
 import { attachPropertiesToComponent } from '../../utils/attach-properties-to-component'
 import { Description } from './description'
 import { DescriptionItem } from './description.item'

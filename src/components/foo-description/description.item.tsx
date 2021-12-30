@@ -1,9 +1,10 @@
 import React, { CSSProperties, forwardRef, ReactNode } from 'react'
 
-import { Container, Grid } from 'antd-mobile'
-import { mergeProps } from '../../utils/with-default-props'
 import classNames from 'classnames'
 
+import { mergeProps } from '../../utils/with-default-props'
+import { Container } from '../foo-container'
+import Grid from '../grid'
 import { WidthContext } from './description'
 
 export type DescriptionProps = {

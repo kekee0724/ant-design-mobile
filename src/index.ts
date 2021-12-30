@@ -83,7 +83,7 @@ export { default as TreeSelect } from './components/tree-select'
 export { default as VirtualInput } from './components/virtual-input'
 export { default as WaterMark } from './components/water-mark'
 
-export { Foo } from './components/Foo'
+export { Foo } from './components/foo'
 
 export { CardText, CardTextTag } from './components/foo-card-text'
 

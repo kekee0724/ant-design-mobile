@@ -1,10 +1,10 @@
 import React, { forwardRef } from 'react'
 
-import { Ellipsis, ImageAuto } from 'antd-mobile'
-import { mergeProps } from '../../utils/with-default-props'
 import classNames from 'classnames'
 
-import { ImageAutoProps } from '../foo-image-auto'
+import { mergeProps } from '../../utils/with-default-props'
+import Ellipsis from '../ellipsis'
+import { ImageAuto, ImageAutoProps } from '../foo-image-auto'
 
 export type CardTextProps = {
   url?: any

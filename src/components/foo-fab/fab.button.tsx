@@ -2,7 +2,7 @@ import React, { FC, forwardRef, useImperativeHandle, useRef } from 'react'
 
 import classNames from 'classnames'
 
-import { getExtraAttrs } from '../Foo/core-ui'
+import { getExtraAttrs } from '../foo'
 
 export type FabButtonProps = {
   className?: string

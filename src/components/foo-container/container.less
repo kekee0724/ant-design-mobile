@@ -1,0 +1,170 @@
+@import 'reset.less';
+
+.container-fill {
+  height: 100%;
+
+  > .container-fill {
+    #react-container .container-grow();
+  }
+}
+
+.container-column,
+.container-row {
+  #react-container .display-flex();
+  max-height: 100%;
+  width: 100%;
+
+  > .ViewManager,
+  > .container-fill {
+    #react-container .container-grow();
+  }
+}
+
+.container-column {
+  #react-container .flex-direction(column);
+}
+
+.container-row {
+  #react-container .flex-direction(row);
+
+  > .container-fill {
+    height: auto;
+    width: auto;
+  }
+}
+
+.container-align-end {
+  #react-container .align-items(flex-end);
+}
+
+.container-align-center {
+  #react-container .align-items(center);
+
+  .container-column > & {
+    text-align: center;
+  }
+}
+
+.container-align-start {
+  #react-container .align-items(flex-start);
+}
+
+.container-justified {
+  #react-container .justify-content(space-around);
+}
+
+.container-justify-end {
+  #react-container .justify-content(flex-end);
+}
+
+.container-justify-center {
+  #react-container .justify-content(center);
+}
+
+.container-justify-start {
+  #react-container .justify-content(flex-start);
+}
+
+.container-hidden {
+  overflow: hidden;
+}
+
+.container-scrollable {
+  max-height: 100%;
+  overflow: scroll;
+  position: relative;
+  -webkit-overflow-scrolling: touch;
+
+  &:before,
+  &:after {
+    content: '';
+    height: 1px;
+    position: absolute;
+    width: 1px;
+  }
+
+  &:before {
+    bottom: -1px;
+  }
+
+  &:after {
+    top: -1px;
+  }
+}
+
+.container-hide {
+  visibility: hidden;
+}
+
+.container-pages {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  overflow: hidden;
+  transition: all 0.3s;
+}
+
+.container-page {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  opacity: 1;
+  background-color: var(--bg-color);
+  transform: translate3d(0, 0, 0);
+}
+
+.container-body {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+}
+
+.android {
+  .container-page-shadow {
+    display: none;
+  }
+}
+
+.ios {
+  .container-page-shadow {
+    position: absolute;
+    top: 0;
+    width: 16px;
+    bottom: 0;
+    z-index: -1;
+    content: '';
+    opacity: 1;
+    right: 100%;
+    background: linear-gradient(
+      to right,
+      rgba(0, 0, 0, 0) 0%,
+      rgba(0, 0, 0, 0) 10%,
+      rgba(0, 0, 0, 0.01) 50%,
+      rgba(0, 0, 0, 0.2) 100%
+    );
+  }
+}
+
+.reco-touch-move {
+  &:before {
+    position: absolute;
+    content: '';
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    z-index: 999;
+    pointer-events: auto;
+  }
+
+  * {
+    pointer-events: none;
+    touch-action: none;
+  }
+}

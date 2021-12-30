@@ -3,7 +3,7 @@ import React, { FC, forwardRef, useRef, useState } from 'react'
 import { AddOutline, CloseOutline } from 'antd-mobile-icons'
 import classNames from 'classnames'
 
-import { getExtraAttrs, getSlots } from '../Foo/core-ui'
+import { getExtraAttrs, getSlots } from '../foo'
 
 export type FabProps = {
   className?: string

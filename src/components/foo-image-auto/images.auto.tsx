@@ -7,10 +7,10 @@ import React, {
   useState,
 } from 'react'
 
-import { Image } from 'antd-mobile'
 import classNames from 'classnames'
 
-import { PureComponentProps, transformAssetsUrl } from '../Foo/core'
+import { PureComponentProps, transformAssetsUrl } from '../foo'
+import Image from '../image'
 
 type ratioType = '16:9' | '4:3' | '1:1' | '2:3'
 
