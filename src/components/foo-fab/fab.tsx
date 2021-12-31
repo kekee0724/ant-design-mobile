@@ -91,6 +91,8 @@ export const Fab: FC<FabProps> = forwardRef((props, _ref) => {
 
   // $(dom).find(".fab-close").off("click", close).on("click", close);
 
+  let oL: number, oT: number
+
   return (
     <div
       id={id}
@@ -99,6 +101,36 @@ export const Fab: FC<FabProps> = forwardRef((props, _ref) => {
       data-morph-to={morphTo}
       ref={elRef}
       {...extraAttrs}
+      onTouchStart={e => {
+        const touchDom = elRef.current as any
+        const ev = e || window.event
+        const touch = ev.targetTouches[0]
+        oL = touch.clientX - touchDom.offsetLeft
+        oT = touch.clientY - touchDom.offsetTop
+      }}
+      onTouchMove={e => {
+        const touchDom = elRef.current as any
+        const maxW = document.body.clientWidth - touchDom?.offsetWidth
+        const maxH = document.body.clientHeight - touchDom?.offsetHeight
+        const ev = e || window.event
+        const touch = ev.targetTouches[0]
+        let oLeft = touch.clientX - oL
+        let oTop = touch.clientY - oT
+        if (oLeft < 0) {
+          oLeft = 0
+        } else if (oLeft >= maxW) {
+          oLeft = maxW
+        }
+        if (oTop < 0) {
+          oTop = 0
+        } else if (oTop >= maxH) {
+          oTop = maxH
+        }
+        touchDom.style.left = oLeft + 'px'
+        touchDom.style.top = oTop + 'px'
+        touchDom.style.bottom = 'auto'
+        touchDom.style.right = 'auto'
+      }}
     >
       <a className='fab-toggle-button' onClick={() => setShow(!show)}>
         <i>

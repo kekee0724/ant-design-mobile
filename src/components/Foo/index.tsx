@@ -1,8 +1,6 @@
 import './default.less'
 import './common.less'
-import './foo.less'
 import './index.less'
-// import './umi.less'
 
 import { Foo } from './foo'
 

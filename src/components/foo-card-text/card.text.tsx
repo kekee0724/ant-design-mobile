@@ -69,17 +69,19 @@ export const CardText = forwardRef((p: CardTextProps, _ref: any) => {
           {props.children}
         </ImageAuto>
       )}
-      <div className='card-text-content'>
-        {props.text && (
-          <Ellipsis
-            content={props.text}
-            rows={props.rows || 2}
-            className={`card-text ${props.textClassName}`}
-            style={props.textStyle}
-          />
-        )}
-        {props.content && <div className='card-content'>{props.content}</div>}
-      </div>
+      {(props.text || props.content) && (
+        <div className='card-text-content'>
+          {props.text && (
+            <Ellipsis
+              content={props.text}
+              rows={props.rows || 2}
+              className={`card-text ${props.textClassName}`}
+              style={props.textStyle}
+            />
+          )}
+          {props.content && <div className='card-content'>{props.content}</div>}
+        </div>
+      )}
       {props.footer && <div className='card-text-footer'>{props.footer}</div>}
     </div>
   )

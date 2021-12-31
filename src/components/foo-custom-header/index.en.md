@@ -22,3 +22,4 @@ nav:
 | style            | 自定义样式             | `css`     | -      |
 | customHeaderList | 是否使用内部 List 样式 | `boolean` | -      |
 | className        | 自定义 class           | `string`  | -      |
+| backColor        | 是否有纯色背景         | `boolean` | -      |

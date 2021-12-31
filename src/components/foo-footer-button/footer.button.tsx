@@ -3,6 +3,7 @@ import React, { FC, ReactNode } from 'react'
 import classNames from 'classnames'
 
 import { PureComponentProps } from '../foo'
+import type { GridProps } from '../grid'
 import Grid from '../grid'
 
 export interface ItemProps {
@@ -55,11 +56,15 @@ export interface FooterButtonProps extends PureComponentProps {
   className?: string
   border?: boolean
   back?: boolean
-  children?: any[]
+  children?: ReactNode
+  columns: number
+  gap: number | string | [number | string, number | string]
+  gridProps: Partial<GridProps>
 }
 
-export const FooterButton: FC<FooterButtonProps> = (props: any, _ref: any) => {
-  const { back, border, className, children } = props
+export const FooterButton: FC<FooterButtonProps> = (props, _ref: any) => {
+  const { back, border, columns, gap, className, gridProps } = props
+  let { children } = props
 
   const bodyCls = classNames(
     'reco-footer-button',
@@ -68,14 +73,28 @@ export const FooterButton: FC<FooterButtonProps> = (props: any, _ref: any) => {
     back && 'footer-back'
   )
 
-  // 客户列表的图片，在请求错误时要显示传过来的文字不显示错误图片
-  return (
-    <Grid columns={children?.length} gap={8} className={bodyCls}>
+  if (children instanceof Array) {
+    children = children.filter(item => {
+      return item instanceof Object
+    })
+  }
+
+  return children instanceof Array ? (
+    <Grid
+      columns={columns || children?.length}
+      gap={gap}
+      className={bodyCls}
+      {...gridProps}
+    >
       {children}
     </Grid>
+  ) : (
+    <div className={bodyCls}>{children}</div>
   )
 }
 
 FooterButton.defaultProps = {
   className: '',
+  columns: 0,
+  gap: 8,
 }

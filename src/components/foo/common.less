@@ -2,13 +2,12 @@
 
 * {
   word-break: break-all;
-  box-sizing: border-box;
 }
 
 html,
 body {
-  -webkit-touch-callout: none;
-  -webkit-user-select: none;
+  // -webkit-touch-callout: none;
+  // -webkit-user-select: none;
 }
 
 html,
@@ -82,7 +81,7 @@ div.adm-nav-bar {
 }
 
 .adm-popup-body-position-right {
-  width: 280px;
+  width: 300px;
 }
 
 [class*='rotate-'] {
@@ -160,6 +159,10 @@ div.adm-nav-bar {
     margin-top: 6px;
   }
 
+  + .adm-card {
+    margin-top: 6px;
+  }
+
   + .adm-form {
     .adm-list {
       margin-top: 6px;
@@ -217,6 +220,7 @@ a.adm-list-item:active {
   overflow-x: auto;
   overflow-y: hidden;
   white-space: nowrap;
+  -webkit-overflow-scrolling: touch;
 
   &:before,
   &:after {

@@ -1,3 +1,4 @@
+import { NavBar } from './components/nav-bar/nav-bar'
 import './global'
 import './levi.config'
 
@@ -85,6 +86,8 @@ export { default as WaterMark } from './components/water-mark'
 
 export { Foo } from './components/foo'
 
+export { CardContainer } from './components/foo-card-container'
+
 export { CardText, CardTextTag } from './components/foo-card-text'
 
 export { Container } from './components/foo-container'
@@ -94,6 +97,8 @@ export { CustomHeader } from './components/foo-custom-header'
 export { default as Description } from './components/foo-description'
 
 export { Fab, FabButton, FabButtons } from './components/foo-fab'
+
+export { Fold } from './components/foo-fold'
 
 export { FileIcon } from './components/foo-file-icon'
 
@@ -108,3 +113,5 @@ export { ImageText } from './components/foo-image-text'
 export { ListContainer } from './components/foo-list-container'
 
 export { ListTitle } from './components/foo-list-title'
+
+export { NavBar as Navbar } from './components/foo-navbar'

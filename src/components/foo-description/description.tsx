@@ -6,6 +6,7 @@ import { mergeProps } from '../../utils/with-default-props'
 import Grid from '../grid'
 
 export type DescriptionProps = {
+  className?: string
   bodyCls?: string
   style?: CSSProperties
   title?: string | ReactNode
@@ -36,6 +37,7 @@ export const Description = forwardRef((p: DescriptionProps, _ref: any) => {
   const props: DescriptionProps = mergeProps(defaultProps, p)
 
   const {
+    className,
     bodyCls,
     style,
     title,
@@ -50,7 +52,7 @@ export const Description = forwardRef((p: DescriptionProps, _ref: any) => {
   } = props
 
   return (
-    <div className={bodyCls} style={style}>
+    <div className={className} style={style}>
       <WidthContext.Provider value={labelAllWidth!}>
         {titleShow && (
           <div className='size-18 margin-bottom-xxs'>{title || '--'}</div>

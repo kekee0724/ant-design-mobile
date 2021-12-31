@@ -1,4 +1,4 @@
-import React, { CSSProperties, FC, forwardRef } from 'react'
+import React, { CSSProperties, forwardRef, FC } from 'react'
 
 import classNames from 'classnames'
 
@@ -14,10 +14,11 @@ export type CustomHeaderProps = {
   navBarNoBorder?: boolean
   navBarNoBack?: boolean
   customHeaderList?: boolean
+  backColor?: boolean
 }
 
 export const CustomHeader: FC<CustomHeaderProps> = forwardRef(
-  (props: CustomHeaderProps, _ref: any) => {
+  (props, _ref: any) => {
     const {
       className,
       style,
@@ -28,6 +29,7 @@ export const CustomHeader: FC<CustomHeaderProps> = forwardRef(
       navBarNoBorder,
       navBarNoBack,
       customHeaderList,
+      backColor,
     } = props
     const bodyCls = classNames(
       'reco-custom-header',
@@ -35,7 +37,8 @@ export const CustomHeader: FC<CustomHeaderProps> = forwardRef(
       !navBarNoBorder && 'nav-no-border',
       !navBarNoBack && 'nav-no-back',
       customHeaderList && 'custom-header-list',
-      !backImageSrc && 'header-no-back'
+      !backImageSrc && 'header-no-back',
+      backColor && 'reco-custom-back'
     )
     return (
       <div className={bodyCls} style={style}>

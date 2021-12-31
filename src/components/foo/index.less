@@ -26,7 +26,6 @@ div.adm-nav-bar {
 }
 * {
   word-break: break-all;
-  box-sizing: border-box;
 }
 html,
 body {
@@ -201,7 +200,7 @@ div.adm-nav-bar .adm-nav-bar-back {
   pointer-events: none;
 }
 .adm-popup-body-position-right {
-  width: 280px;
+  width: 300px;
 }
 [class*='rotate-'] {
   transition: all 0.3s;
@@ -260,6 +259,9 @@ div.adm-nav-bar .adm-nav-bar-back {
 .reco-title + .adm-list {
   margin-top: 6px;
 }
+.reco-title + .adm-card {
+  margin-top: 6px;
+}
 .reco-title + .adm-form .adm-list {
   margin-top: 6px;
 }
@@ -302,6 +304,7 @@ a.adm-list-item:active .reco-file-icon .file-icon-text {
   overflow-x: auto;
   overflow-y: hidden;
   white-space: nowrap;
+  -webkit-overflow-scrolling: touch;
 }
 .horizontal-scroll:before,
 .horizontal-scroll:after {
@@ -339,6 +342,11 @@ a.adm-list-item:active .reco-file-icon .file-icon-text {
 /*子级所有的隐藏内容显示*/
 .all-show .none {
   display: initial;
+}
+.card {
+  margin: var(--default);
+  border-radius: 8px;
+  overflow: hidden;
 }
 /**
  * 定义循环方法
@@ -524,6 +532,7 @@ a.adm-list-item:active .reco-file-icon .file-icon-text {
 }
 .container-column,
 .container-row {
+  box-sizing: border-box;
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
@@ -2324,9 +2333,6 @@ a.adm-list-item:active .reco-file-icon .file-icon-text {
   position: relative;
   background-color: transparent;
 }
-.reco-custom-header .reco-describe {
-  color: #444;
-}
 .reco-custom-header > .reco-image {
   filter: blur(2px);
 }
@@ -2432,5 +2438,27 @@ a.adm-list-item:active .reco-file-icon .file-icon-text {
 .card-text-footer {
   padding: 0 var(--default) var(--default);
   width: 100%;
+  box-sizing: border-box;
+}
+.flex {
+  display: flex;
+}
+.align-start {
+  align-items: flex-start;
+}
+.align-center {
+  align-items: center;
+}
+.align-end {
+  align-items: flex-end;
+}
+.justify-start {
+  justify-content: flex-start;
+}
+.justify-center {
+  justify-content: center;
+}
+.justify-end {
+  justify-content: flex-end;
 }
 /*# sourceMappingURL=index.css.map */

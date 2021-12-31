@@ -26,7 +26,7 @@ export interface ImageAutoProps extends PureComponentProps {
   style?: any
   className?: any
   fit?: any // 图片填充模式 'contain' | 'cover' | 'fill' | 'none' | 'scale-down'
-  onClick?: (event: React.MouseEvent<HTMLImageElement, Event>) => void // 图片点击时间
+  onClick?: (e: any) => void // 图片点击时间
   alt?: any // 图片描述
   borderRadius?: any // 图片圆角
   lazy?: boolean // 图片是否懒加载
@@ -113,7 +113,7 @@ export const ImageAuto: FC<ImageAutoProps> = (props: any, _ref: any) => {
           dom.current = e
         }}
         className={classNames('reco-image', classes)}
-        onClick={() => onClick}
+        onClick={onClick}
       >
         <Images
           src={src as string}

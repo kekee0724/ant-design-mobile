@@ -18,6 +18,7 @@ export type DescriptionProps = {
   justify?: 'start' | 'center' | 'end'
   hide?: boolean
   span?: number
+  direction?: 'column' | 'row'
 }
 
 export const DescriptionItem = forwardRef((p: DescriptionProps, _ref: any) => {
@@ -28,6 +29,7 @@ export const DescriptionItem = forwardRef((p: DescriptionProps, _ref: any) => {
     // align: "center",
     labelColon: true,
     span: 1,
+    direction: 'row',
   }
 
   const props = mergeProps(defaultProps, p)
@@ -43,7 +45,9 @@ export const DescriptionItem = forwardRef((p: DescriptionProps, _ref: any) => {
     labelColon,
     hide,
     span,
+    direction,
   } = props
+
   return (
     <WidthContext.Consumer>
       {width => {
@@ -53,14 +57,16 @@ export const DescriptionItem = forwardRef((p: DescriptionProps, _ref: any) => {
             className={classNames(bodyCls, hide && 'none')}
             style={style}
           >
-            <Container direction={'row'} align={align} justify={justify}>
-              <div
-                className='margin-right-xxs reco-describe'
-                style={{ width: labelWidth || width }}
-              >
-                {label}
-                {labelColon && ':'}
-              </div>
+            <Container direction={direction} align={align} justify={justify}>
+              {label && (
+                <div
+                  className='margin-right-xxs reco-describe'
+                  style={{ width: width || labelWidth }}
+                >
+                  {label}
+                  {labelColon && ':'}
+                </div>
+              )}
               <Container fill>{children}</Container>
             </Container>
           </Grid.Item>
