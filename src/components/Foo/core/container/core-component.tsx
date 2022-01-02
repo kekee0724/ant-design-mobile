@@ -7,7 +7,7 @@ import PropTypes from 'prop-types'
 
 import { resolvePath } from '../utils/resolve'
 // import { resolvePath } from '../'
-import { PureComponentProps } from './pure-component'
+import { PureComponentProps, PureComponentState } from './pure-component'
 // import { URLSearchParams, isAuth } from "../http";
 // import { PluginHost, CorePlugin, AttachPlugin, IAttachInfo } from "../plugins";
 import { Location, MessageInstance, PageWrap } from './type'
@@ -29,6 +29,8 @@ export interface CoreComponentProps extends PureComponentProps {
   createMessageTools: () => MessageInstance
 }
 
+export interface CoreComponentState extends PureComponentState {}
+
 export const childContextTypes = {
   registerPlugins: PropTypes.func,
   removePlugins: PropTypes.func,
@@ -38,7 +40,7 @@ export const childContextTypes = {
 
 export const getDerivedStateFromProps = (
   props: CoreComponentProps,
-  state: any
+  state: CoreComponentState
 ) => {
   return props.state || state
 }
@@ -107,31 +109,31 @@ const __goBack = (props: CoreComponentProps, e?: MouseEvent | boolean) => {
 export const goTo = (
   props: CoreComponentProps,
   path: string | LocationDescriptorObject,
-  state?: any
+  state?: CoreComponentState
 ) => {
-  __goTo(resolveRoutePath(props, path, state), state)
+  __goTo(props, resolveRoutePath(props, path, state), state)
 }
 
 const __goTo = (
   props: CoreComponentProps,
   path: string | LocationDescriptorObject,
-  state?: any
+  state?: CoreComponentState
 ) => {
-  getHistory(props).push(path as any, state)
+  getHistory(props).push(path, state)
 }
 
 export const jump = (
   props: CoreComponentProps,
   path: string | LocationDescriptorObject,
-  state?: any
+  state?: CoreComponentState
 ) => {
-  __jump(resolveRoutePath(props, path, state), state)
+  __jump(props, resolveRoutePath(props, path, state), state)
 }
 
 const __jump = (
   props: CoreComponentProps,
   path: string | LocationDescriptorObject,
-  state?: any
+  state?: CoreComponentState
 ) => {
   getHistory(props).replace(path as any, state)
 }
@@ -150,7 +152,7 @@ export const renderEmbeddedView = (
       match,
       staticContext,
       wrap,
-      ...(props as any),
+      ...props,
     },
     ...children
   )
@@ -159,7 +161,7 @@ export const renderEmbeddedView = (
 const resolveRoutePath = (
   props: CoreComponentProps,
   path: string | LocationDescriptorObject | any,
-  _state?: any
+  _state?: CoreComponentState
 ) => {
   const { match } = props,
     history = getHistory(props)

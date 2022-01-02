@@ -193,6 +193,10 @@ export default {
     ],
     '/components': [
       {
+        title: 'Customize',
+        children: components.self,
+      },
+      {
         title: 'Basic',
         children: components.basic,
       },
@@ -223,6 +227,10 @@ export default {
     ],
     '/zh/components': [
       {
+        title: '自定义组件',
+        children: components.self,
+      },
+      {
         title: '基础',
         children: components.basic,
       },
@@ -249,10 +257,6 @@ export default {
       {
         title: '试验性',
         children: components.experimental,
-      },
-      {
-        title: '自定义组件',
-        children: components.self,
       },
     ],
   },
