@@ -95,6 +95,7 @@ export const components = {
     '/components/foo-fold',
     '/components/foo-file-icon',
     '/components/foo-footer-button',
+    '/components/foo-gd-map',
     '/components/foo-hint',
     '/components/foo-html-content',
     '/components/foo-image-auto',

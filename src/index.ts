@@ -103,6 +103,8 @@ export { FileIcon } from './components/foo-file-icon'
 
 export { default as FooterButton } from './components/foo-footer-button'
 
+export { GDMap } from './components/foo-gd-map'
+
 export { Hint } from './components/foo-hint'
 
 export { HtmlContent } from './components/foo-html-content'

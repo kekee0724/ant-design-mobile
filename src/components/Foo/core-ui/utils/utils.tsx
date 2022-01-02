@@ -1,9 +1,8 @@
 import React from 'react'
 
-// import { Toast } from 'antd-mobile'
-import Toast from '../../../toast'
 import { ExclamationOutline } from 'antd-mobile-icons'
 
+import Toast from '../../../toast'
 import { browser } from '../../core'
 
 /**
