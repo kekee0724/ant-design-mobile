@@ -29,15 +29,15 @@ export type CardTextProps = {
   direction?: 'column' | 'row' | 'row-reverse'
 }
 
-export const CardText = forwardRef((p: CardTextProps, _ref: any) => {
-  const defaultProps = {
-    ratio: '16:9',
-    direction: 'column',
-    imageAutoProps: {
-      style: { '--width': '100%' },
-    },
-  }
+const defaultProps = {
+  ratio: '16:9',
+  direction: 'column',
+  imageAutoProps: {
+    style: { '--width': '100%' },
+  },
+}
 
+export const CardText = forwardRef((p: CardTextProps) => {
   const props = mergeProps(defaultProps, p)
 
   const bodyCls = classNames(

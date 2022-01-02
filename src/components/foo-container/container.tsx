@@ -96,7 +96,7 @@ export interface ContainerProps extends PureComponentProps {
   range?: BiRange
 }
 
-export const Container: FC<ContainerProps> = (props, _ref: any) => {
+export const Container: FC<ContainerProps> = props => {
   const {
       className,
       component: Component,

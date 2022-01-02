@@ -1,4 +1,4 @@
-import { AnyAction } from 'redux'
+export { AnyAction } from 'redux'
 interface MessageInstance {
   info(content: React.ReactNode, duration?: number, onClose?: () => void): void
   success(

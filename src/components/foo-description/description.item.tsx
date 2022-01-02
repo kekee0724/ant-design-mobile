@@ -21,7 +21,7 @@ export type DescriptionProps = {
   direction?: 'column' | 'row'
 }
 
-export const DescriptionItem = forwardRef((p: DescriptionProps, _ref: any) => {
+export const DescriptionItem = forwardRef((p: DescriptionProps) => {
   const defaultProps = {
     bodyCls: '',
     labelWidth: '80px',

@@ -1,4 +1,4 @@
-function normalizeArray(parts: any, allowAboveRoot: any) {
+function normalizeArray(parts: any[], allowAboveRoot: boolean) {
   // if the path tries to go above the root, `up` ends up > 0
   let up = 0
   for (let i = parts.length - 1; i >= 0; i--) {

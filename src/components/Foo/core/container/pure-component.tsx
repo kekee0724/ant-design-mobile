@@ -51,7 +51,7 @@ export const classnames = (...classes: ClassValue[]) => {
   return Classnames(...classes)
 }
 
-export const PureComponent: FC<PureComponentProps> = (props, _ref: any) => {
+export const PureComponent: FC<PureComponentProps> = props => {
   const nextProps = useRef(props)
 
   useEffect(() => {

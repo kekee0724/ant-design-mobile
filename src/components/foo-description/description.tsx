@@ -22,7 +22,7 @@ export type DescriptionProps = {
 
 export const WidthContext = React.createContext<number | string>(null!)
 
-export const Description = forwardRef((p: DescriptionProps, _ref: any) => {
+export const Description = forwardRef((p: DescriptionProps) => {
   const [show, setShow] = useState<boolean>()
 
   const defaultProps = {

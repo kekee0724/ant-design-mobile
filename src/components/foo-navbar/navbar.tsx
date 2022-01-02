@@ -35,7 +35,7 @@ const defaultProps = {
   fabContentOpen: true,
 }
 
-export const NavBar: FC<NavBarProp> = forwardRef((p, _ref: any) => {
+export const NavBar: FC<NavBarProp> = forwardRef(p => {
   const props = mergeProps(defaultProps, p)
   const {
     visible,

@@ -1,4 +1,3 @@
-import { NavBar } from './components/nav-bar/nav-bar'
 import './global'
 import './levi.config'
 
@@ -105,6 +104,8 @@ export { FileIcon } from './components/foo-file-icon'
 export { default as FooterButton } from './components/foo-footer-button'
 
 export { Hint } from './components/foo-hint'
+
+export { HtmlContent } from './components/foo-html-content'
 
 export { ImageAuto } from './components/foo-image-auto'
 

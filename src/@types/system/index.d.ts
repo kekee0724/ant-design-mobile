@@ -175,6 +175,105 @@ declare namespace Levi {
       }
     }
   }
+
+  namespace Webkit {
+    interface Config {
+      messageHandlers: MessageHandlers
+    }
+
+    interface MessageHandlers {
+      [key: string]: PostMessage
+    }
+
+    interface PostMessage {
+      postMessage<T>(data?: T): void
+    }
+  }
+
+  namespace WebViewJavascriptBridge {
+    interface Config {
+      callHandler<T>(func: string, data?: T): void
+    }
+  }
+  interface Pagination {
+    CurrentPage: number
+    Items: any[]
+    ItemsPerPage: number
+    TotalItems: number
+    TotalPages: number
+  }
+
+  namespace ListView {
+    class DataSources {
+      constructor(params: DataSource.Params)
+
+      cloneWithRows<T>(dataBlob: T[], rowIdentities?): this
+
+      cloneWithRowsAndSections<T>(
+        dataBlob: T[],
+        sectionIdentities?,
+        rowIdentities?
+      ): this
+
+      getRowCount(): number
+
+      getRowAndSectionCount(): number
+
+      rowShouldUpdate(sectionIndex, rowIndex)
+
+      getRowData(sectionIndex, rowIndex)
+
+      getRowIDForFlatIndex(index)
+
+      getSectionIDForFlatIndex(index)
+
+      getSectionLengths(): number[]
+
+      sectionHeaderShouldUpdate(sectionIndex)
+
+      getSectionHeaderData(sectionIndex)
+    }
+
+    namespace DataSource {
+      interface Params {
+        rowHasChanged?(prevRowData, nextRowData): boolean
+
+        getRowData?(dataBlob, sectionID, rowID)
+
+        getSectionHeaderData?(dataBlob, sectionID)
+
+        sectionHeaderHasChanged?(prevSectionData, nextSectionData)
+      }
+    }
+  }
+
+  namespace Validation {
+    interface AbstractControl {
+      value: any
+      readonly name: string
+      errors?: any
+    }
+
+    type ValidationErrors = {
+      [key: string]: any
+    }
+
+    interface ValidatorFn {
+      (control: AbstractControl): ValidationErrors | null
+    }
+  }
+
+  namespace Statistics {
+    interface MtaLinkH5 {
+      eventStats(eventid, param)
+
+      pageBasicStats(pageName)
+
+      setLoginUin()
+
+      versionControl()
+    }
+  }
 }
 
 // 客户端配置
@@ -182,6 +281,33 @@ declare const client: Levi.Config.Client
 
 // 服务端配置
 declare const server: Levi.Config.Server
+
+// webkit
+declare const webkit: Levi.Webkit.Config
+
+// MtaLinkH5
+declare const MtaLinkH5: Levi.Statistics.MtaLinkH5
+
+// WebViewJavascriptBridge
+declare const WebViewJavascriptBridge: Levi.WebViewJavascriptBridge.Config
+
+declare const __webpack_require__: any
+
+declare function getIosVersion(version: string): void
+
+declare function setHeight(height: number | string): void
+
+declare function thirdAuthLogin(
+  type: string,
+  openId: string,
+  token: string,
+  params: string,
+  isLogin: string | number | boolean
+): void
+
+declare class Aliplayer {
+  constructor(params?: any, play?: (play: any) => void)
+}
 
 // 数组拓展
 interface Array<T> {
@@ -283,3 +409,7 @@ interface String {
 
   htmlInjectEncode(tagExp?: RegExp): string
 }
+
+declare const AMap: any
+declare const AMapUI: any
+declare const Loca: any

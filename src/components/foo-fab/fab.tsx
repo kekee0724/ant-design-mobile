@@ -17,7 +17,7 @@ export type FabProps = {
   position?: string
 }
 
-export const Fab: FC<FabProps> = forwardRef((props, _ref) => {
+export const Fab: FC<FabProps> = forwardRef(props => {
   const {
     className,
     id,

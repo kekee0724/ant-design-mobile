@@ -12,7 +12,7 @@ export type ListTitleProps = {
   extra?: any
 }
 
-export const ListTitle: FC<ListTitleProps> = forwardRef((props, _ref: any) => {
+export const ListTitle: FC<ListTitleProps> = forwardRef(props => {
   const { title, extra } = props
   const bodyCls = classNames('reco-title', props.className)
   return title || extra ? (

@@ -5,7 +5,8 @@ import React, { ComponentClass, FC, FunctionComponent } from 'react'
 import { LocationDescriptorObject } from 'history'
 import PropTypes from 'prop-types'
 
-import { resolvePath } from '../'
+import { resolvePath } from '../utils/resolve'
+// import { resolvePath } from '../'
 import { PureComponentProps } from './pure-component'
 // import { URLSearchParams, isAuth } from "../http";
 // import { PluginHost, CorePlugin, AttachPlugin, IAttachInfo } from "../plugins";
@@ -184,7 +185,7 @@ const resolveRoutePath = (
   return path
 }
 
-export const CoreComponent: FC<CoreComponentProps> = (props, _ref: any) => {
+export const CoreComponent: FC<CoreComponentProps> = props => {
   return <>{props.children}</>
 }
 

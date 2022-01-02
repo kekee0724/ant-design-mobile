@@ -10,7 +10,7 @@ export type ImageTextProps = {
   text?: any
 }
 
-export const ImageText: FC<ImageTextProps> = forwardRef((props, _ref: any) => {
+export const ImageText: FC<ImageTextProps> = forwardRef(props => {
   const { className, iconSize, style, icon, text } = props
 
   const bodyCls = classNames('reco-image-text', className)

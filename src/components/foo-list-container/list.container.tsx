@@ -8,15 +8,13 @@ export type ListContainerProps = {
   style?: object
 }
 
-export const ListContainer: FC<ListContainerProps> = forwardRef(
-  (props, _ref: any) => {
-    const { className, children, style } = props
+export const ListContainer: FC<ListContainerProps> = forwardRef(props => {
+  const { className, children, style } = props
 
-    const bodyCls = classNames('list-definition', className)
-    return (
-      <div className={bodyCls} style={style}>
-        {children}
-      </div>
-    )
-  }
-)
+  const bodyCls = classNames('list-definition', className)
+  return (
+    <div className={bodyCls} style={style}>
+      {children}
+    </div>
+  )
+})

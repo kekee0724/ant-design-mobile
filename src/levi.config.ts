@@ -58,6 +58,12 @@ export const server: Levi.Config.Server = (window['server'] = {
     aboutUsMobile: '021-23231080',
     adminPhone: '18002332204',
   },
+  auth: {
+    oauth2Url: 'authorization/oauth2',
+    autoLogin: !0,
+    autoRefreshToken: !0,
+    anonymousLogin: !0,
+  },
   /**
    * 项目接口地址
    */

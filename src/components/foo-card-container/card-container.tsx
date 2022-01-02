@@ -4,10 +4,8 @@ export type CardContainerProps = {
   children?: any
 }
 
-export const CardContainer = forwardRef(
-  (props: CardContainerProps, _ref: any) => {
-    const { children } = props
+export const CardContainer = forwardRef((props: CardContainerProps) => {
+  const { children } = props
 
-    return <div className='card'>{children}</div>
-  }
-)
+  return <div className='card'>{children}</div>
+})

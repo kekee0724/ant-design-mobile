@@ -96,6 +96,7 @@ export const components = {
     '/components/foo-file-icon',
     '/components/foo-footer-button',
     '/components/foo-hint',
+    '/components/foo-html-content',
     '/components/foo-image-auto',
     '/components/foo-image-text',
     '/components/foo-list-container',

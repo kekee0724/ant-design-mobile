@@ -4,7 +4,7 @@ export type fileIconProps = {
   text: string
 }
 
-export const FileIcon: FC<fileIconProps> = forwardRef((props, _ref) => {
+export const FileIcon: FC<fileIconProps> = forwardRef(props => {
   return (
     <div className='reco-file-icon'>
       <i className='mobile mobile-blank_file' />

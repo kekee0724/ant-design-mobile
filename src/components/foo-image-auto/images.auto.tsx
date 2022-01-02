@@ -36,7 +36,7 @@ export interface ImageAutoProps extends PureComponentProps {
   ratio?: ratioType // 比例显示图片
 }
 
-export const ImageAuto: FC<ImageAutoProps> = (props: any, _ref: any) => {
+export const ImageAuto: FC<ImageAutoProps> = props => {
   const {
     src: target,
     width,
@@ -147,7 +147,7 @@ ImageAuto.defaultProps = {
   onClick: () => {},
 }
 
-export const Images = forwardRef((props: any, _ref: any) => {
+export const Images: FC<ImageAutoProps> = forwardRef(props => {
   const {
     src: target,
     fit,

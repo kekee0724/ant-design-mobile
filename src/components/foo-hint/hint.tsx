@@ -8,7 +8,7 @@ export interface HintProps {
   style?: object
 }
 
-export const Hint: FC<HintProps> = forwardRef((props, _ref: any) => {
+export const Hint: FC<HintProps> = forwardRef(props => {
   const { className, children, style } = props
   const bodyCls = classNames('reco-hint', className)
 

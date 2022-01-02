@@ -62,7 +62,7 @@ export interface FooterButtonProps extends PureComponentProps {
   gridProps: Partial<GridProps>
 }
 
-export const FooterButton: FC<FooterButtonProps> = (props, _ref: any) => {
+export const FooterButton: FC<FooterButtonProps> = (props: any) => {
   const { back, border, columns, gap, className, gridProps } = props
   let { children } = props
 
