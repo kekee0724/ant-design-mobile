@@ -15,6 +15,8 @@ export interface PureComponentProps extends Partial<React.PureComponent> {
   className?: string
 }
 
+export interface PureComponentState {}
+
 const CLASSNAMES = {
   disabled: 'disabled',
   active: 'active',

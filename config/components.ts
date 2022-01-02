@@ -85,6 +85,7 @@ export const components = {
   ],
   self: [
     '/components/foo',
+    '/components/foo-calender',
     '/components/foo-card-container',
     '/components/foo-card-text',
     '/components/foo-class',
