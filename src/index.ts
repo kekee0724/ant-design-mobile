@@ -1,5 +1,5 @@
 import './global'
-import './levi.config'
+export * from './levi.config'
 
 export {
   default as ConfigProvider,
