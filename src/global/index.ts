@@ -1,4 +1,6 @@
 import './global.less'
+import './default.less'
+import './index.less'
 import { canUseDom } from '../utils/can-use-dom'
 
 if (canUseDom) {
