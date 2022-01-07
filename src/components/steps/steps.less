@@ -54,7 +54,13 @@
 }
 
 .@{class-prefix-steps} {
+  --title-font-size: 13px;
+  --description-font-size: 12px;
+  --indicator-margin-right: 0;
+  --icon-size: 18px;
+
   width: 100%;
+  box-sizing: border-box;
 
   &-horizontal {
     display: flex;
@@ -84,9 +90,10 @@
 
     .@{class-prefix-step}-content {
       text-align: center;
-      font-size: 12px;
+      font-size: var(--description-font-size);
       padding-top: 2px;
       .@{class-prefix-step}-title {
+        font-size: var(--title-font-size);
       }
       .@{class-prefix-step}-description {
         margin-top: 2px;
@@ -97,7 +104,6 @@
 
   &-vertical {
     padding: 8px 16px;
-    --title-font-size: 17px;
 
     .@{class-prefix-step} {
       display: flex;
@@ -106,7 +112,7 @@
       .@{class-prefix-step}-indicator {
         flex: none;
         width: 24px;
-        margin-right: 8px;
+        margin-right: var(--indicator-margin-right);
 
         &::after {
           left: 50%;
@@ -136,7 +142,7 @@
         }
         .@{class-prefix-step}-description {
           padding-top: 2px;
-          font-size: 15px;
+          font-size: var(--description-font-size);
           color: var(--adm-color-weak);
         }
       }
@@ -145,7 +151,7 @@
 }
 
 .@{class-prefix-step}-icon-container {
-  font-size: 18px;
+  font-size: var(--icon-size);
 }
 
 .@{class-prefix-step}-icon-dot {

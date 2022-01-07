@@ -1,14 +1,17 @@
 # List
 
 <code src="./demos/demo1.tsx"></code>
+<code src="./demos/demo2.tsx"></code>
+<code src="./demos/demo3.tsx"></code>
 
 ## Props
 
 ### List
 
-| Name | Description                          | Type                  | Default     |
-| ---- | ------------------------------------ | --------------------- | ----------- |
-| mode | Support two modes: default and card. | `'default' \| 'card'` | `'default'` |
+| Name   | Description                          | Type                  | Default     |
+| ------ | ------------------------------------ | --------------------- | ----------- |
+| header | The title of list.                   | `ReactNode`           | -           |
+| mode   | Support two modes: default and card. | `'default' \| 'card'` | `'default'` |
 
 ### List.Item
 

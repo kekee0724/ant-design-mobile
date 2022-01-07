@@ -57,21 +57,30 @@ export default () => {
         </Steps>
       </DemoBlock>
 
-      <DemoBlock title='自定义图标'>
-        <Steps direction='vertical' current={1}>
+      <DemoBlock title='自定义图标和大小'>
+        <Steps
+          direction='vertical'
+          current={1}
+          style={{
+            '--title-font-size': '17px',
+            '--description-font-size': '15px',
+            '--indicator-margin-right': '12px',
+            '--icon-size': '22px',
+          }}
+        >
           <Step
-            title='第一步'
-            description='完成人1111'
+            title='填写机构信息'
+            description='这里是一些描述'
             icon={<CheckCircleFill />}
           />
           <Step
-            title='第二步'
-            description='完成人1111'
+            title='签约机构'
+            description='这里是一些描述'
             icon={<ClockCircleFill />}
           />
           <Step
-            title='第三步'
-            description='完成人1111'
+            title='关联服务区'
+            description='这里是一些描述'
             icon={<HandPayCircleOutline />}
           />
         </Steps>
