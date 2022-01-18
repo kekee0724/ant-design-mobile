@@ -165,7 +165,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-<<<<<<< HEAD
 "@amap/amap-jsapi-loader@npm:^1.0.1":
   version: 1.0.1
   resolution: "@amap/amap-jsapi-loader@npm:1.0.1"
@@ -173,14 +172,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/cli@npm:^7.16.7":
-  version: 7.16.7
-  resolution: "@babel/cli@npm:7.16.7"
-=======
 "@babel/cli@npm:^7.16.8":
   version: 7.16.8
   resolution: "@babel/cli@npm:7.16.8"
->>>>>>> master
   dependencies:
     "@nicolo-ribaudo/chokidar-2": 2.1.8-no-fsevents.3
     chokidar: ^3.4.0
@@ -2425,15 +2419,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@material-ui/types@npm:^4.0.0":
-  version: 4.1.1
-  resolution: "@material-ui/types@npm:4.1.1"
-  dependencies:
-    "@types/react": "*"
-  checksum: 987a4ae1848b25ca14d644fa59d4c5ba46b5f1900318930b48bcc63b92b12757cc4413c8e50d3e7660c39b2f44653ce831f818cb648bac3836f14b7de8193e3e
-  languageName: node
-  linkType: hard
-
 "@nicolo-ribaudo/chokidar-2@npm:2.1.8-no-fsevents.3":
   version: 2.1.8-no-fsevents.3
   resolution: "@nicolo-ribaudo/chokidar-2@npm:2.1.8-no-fsevents.3"
@@ -2876,11 +2861,11 @@ __metadata:
   linkType: hard
 
 "@types/jquery@npm:^3.5.11":
-  version: 3.5.11
-  resolution: "@types/jquery@npm:3.5.11"
+  version: 3.5.13
+  resolution: "@types/jquery@npm:3.5.13"
   dependencies:
     "@types/sizzle": "*"
-  checksum: bad7c4495ade39e712462af534169790115d07874bb1a8c43a597676bd4e4d62caaf961353836f1e9f67309cac3a224b8743da07bad4cb2ff853b93f1856014b
+  checksum: cb4e6aacaf36905049d5ac93da1fabed17da285fafe38c88feba89d7c9912e108c934ea05c908b87ae199f2830e5e002a72d0cc8aaef4a33539581d0a7a6abe8
   languageName: node
   linkType: hard
 
@@ -3063,26 +3048,6 @@ __metadata:
     "@types/history": "*"
     "@types/react": "*"
   checksum: c2697e608c2ba007370a23e490b0811f564777e01b51f5f5f61b365357a32f6470d4ace6a99f21f026217d10030cc28e2ce292b065558a9e7ab762bc0e3f3d5a
-  languageName: node
-  linkType: hard
-
-"@types/react-swipeable-views-utils@npm:^0.13.3":
-  version: 0.13.3
-  resolution: "@types/react-swipeable-views-utils@npm:0.13.3"
-  dependencies:
-    "@material-ui/types": ^4.0.0
-    "@types/react": "*"
-    "@types/react-swipeable-views": "*"
-  checksum: 6ac25780701839b8a9d8b3f9e6fb72a5baeab26d294f94ff8b5cb6a2dbeb80ffa39b06812e2603f3ece17aaff8e7249cae9e14f56e68f36d6b84871bc6480938
-  languageName: node
-  linkType: hard
-
-"@types/react-swipeable-views@npm:*, @types/react-swipeable-views@npm:^0.13.1":
-  version: 0.13.1
-  resolution: "@types/react-swipeable-views@npm:0.13.1"
-  dependencies:
-    "@types/react": "*"
-  checksum: 47908514a541d40c454b09c3eb47e6bbe55742c37e88181b412052297941191d08b1fc0ec176b6c886bb3f22a8d66aff9bdeb2c26496c6335a7579e9aea02302
   languageName: node
   linkType: hard
 
@@ -4141,12 +4106,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "antd-mobile@workspace:."
   dependencies:
-<<<<<<< HEAD
     "@amap/amap-jsapi-loader": ^1.0.1
-    "@babel/cli": ^7.16.7
-=======
     "@babel/cli": ^7.16.8
->>>>>>> master
     "@babel/core": ^7.16.7
     "@babel/plugin-transform-modules-commonjs": ^7.16.8
     "@babel/preset-env": ^7.16.8
@@ -4167,8 +4128,6 @@ __metadata:
     "@types/lodash": ^4.14.178
     "@types/react": ^17.0.38
     "@types/react-helmet": ^6.1.5
-    "@types/react-swipeable-views": ^0.13.1
-    "@types/react-swipeable-views-utils": ^0.13.3
     "@types/resize-observer-browser": ^0.1.6
     "@typescript-eslint/eslint-plugin": ^5.9.1
     "@typescript-eslint/parser": ^5.9.1
@@ -4177,23 +4136,14 @@ __metadata:
     antd-mobile-icons: ^0.2.2
     antd-mobile-v5-count: ^1.0.1
     babel-loader: ^8.2.3
-<<<<<<< HEAD
-    babel-plugin-import: ^1.13.3
-    babel-plugin-transform-async-to-promises: ^0.8.18
     base-64: ^1.0.0
-=======
->>>>>>> master
     classnames: ^2.3.1
     css-loader: ^6.5.1
     dayjs: ^1.10.7
     del: ^6.0.0
     dumi: ^1.1.38
-<<<<<<< HEAD
     dva: ^2.4.1
-    eslint: ^8.6.0
-=======
     eslint: ^8.7.0
->>>>>>> master
     eslint-config-prettier: ^8.3.0
     eslint-plugin-react: ^7.28.0
     eslint-plugin-react-hooks: ^4.3.0
@@ -8426,9 +8376,9 @@ fsevents@^1.2.7:
   linkType: hard
 
 "immer@npm:^9.0.7":
-  version: 9.0.7
-  resolution: "immer@npm:9.0.7"
-  checksum: 3655ad64bf5ab5adf2854f7d2a9ad543f2cd995fcd169b6f10294f41fdb2cbcbd44d8beaa3e01b3c0b6149001190e57f6ab2cd735e6a929780b7462f2e973c9b
+  version: 9.0.12
+  resolution: "immer@npm:9.0.12"
+  checksum: bcbec6d76dac65e49068eb67ece4d407116e62b8cde3126aa89c801e408f5047763ba0aeb62f1938c1aa704bb6612f1d8302bb2a86fa1fc60fcc12d8b25dc895
   languageName: node
   linkType: hard
 

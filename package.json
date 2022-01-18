@@ -12,6 +12,7 @@
     "publish": "npm publish ./lib --tag next"
   },
   "dependencies": {
+    "@amap/amap-jsapi-loader": "^1.0.1",
     "@react-spring/web": "^9.4.2",
     "@types/resize-observer-browser": "^0.1.6",
     "@use-gesture/react": "^10.2.4",
