@@ -70,7 +70,10 @@ export const Tabs: FC<TabsProps> = p => {
   const [activeKey, setActiveKey] = usePropsValue({
     value: props.activeKey,
     defaultValue: props.defaultActiveKey ?? firstActiveKey,
-    onChange: props.onChange,
+    onChange: v => {
+      if (v === null) return
+      props.onChange?.(v)
+    },
   })
 
   const [{ x, width }, api] = useSpring(() => ({
@@ -294,7 +297,11 @@ export const Tabs: FC<TabsProps> = p => {
         }
         if (pane.props.forceRender) {
           return (
-            <div key={pane.key} style={{ display: 'none' }}>
+            <div
+              key={pane.key}
+              className={`${classPrefix}-content`}
+              style={{ display: 'none' }}
+            >
               {pane.props.children}
             </div>
           )

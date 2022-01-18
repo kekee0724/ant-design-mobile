@@ -1,12 +1,12 @@
 import React, { ReactNode, useMemo } from 'react'
 import classNames from 'classnames'
 import { CheckOutline, CloseOutline } from 'antd-mobile-icons'
-import Loading from '../loading'
 import Mask from '../mask'
 import { mergeProps } from '../../utils/with-default-props'
 import { PropagationEvent } from '../../utils/with-stop-propagation'
 import { GetContainer } from '../../utils/render-to-container'
 import AutoCenter from '../auto-center'
+import SpinLoading from '../spin-loading'
 
 const classPrefix = `adm-toast`
 
@@ -41,7 +41,9 @@ export const InternalToast: React.FC<ToastProps> = p => {
       case 'fail':
         return <CloseOutline />
       case 'loading':
-        return <Loading color='white' className={`${classPrefix}-loading`} />
+        return (
+          <SpinLoading color='white' className={`${classPrefix}-loading`} />
+        )
       default:
         return icon
     }
