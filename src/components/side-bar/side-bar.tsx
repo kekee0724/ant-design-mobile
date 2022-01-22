@@ -4,6 +4,7 @@ import classNames from 'classnames'
 import Badge from '../badge'
 import { NativeProps, withNativeProps } from '../../utils/native-props'
 import { usePropsValue } from '../../utils/use-props-value'
+import { Corner } from './corner'
 
 const classPrefix = `adm-side-bar`
 
@@ -49,35 +50,73 @@ export const SideBar: FC<SideBarProps> = props => {
     },
   })
 
+  const lastItem = items[items.length - 1]
+  const isLastItemActive = lastItem && lastItem.key === activeKey
+
   return withNativeProps(
     props,
-    <div className={classNames(classPrefix)}>
-      {items.map(item => {
-        const active = item.key === activeKey
-        return withNativeProps(
-          item.props,
-          <div
-            key={item.key}
-            onClick={() => {
-              const { key } = item
-              if (key === undefined || key === null || item.props.disabled)
-                return
-              setActiveKey(key.toString())
-            }}
-            className={classNames(`${classPrefix}-item`, {
-              [`${classPrefix}-item-active`]: active,
-              [`${classPrefix}-item-disabled`]: item.props.disabled,
-            })}
-          >
-            <Badge content={item.props.badge}>
-              <div className={`${classPrefix}-item-title`}>
-                {active && <div className={`${classPrefix}-item-highlight`} />}
-                {item.props.title}
-              </div>
-            </Badge>
-          </div>
-        )
-      })}
+    <div className={classPrefix}>
+      <div className={`${classPrefix}-items`}>
+        {items.map((item, index) => {
+          const active = item.key === activeKey
+          const isActiveNextSibling =
+            items[index - 1] && items[index - 1].key === activeKey
+          const isActivePreviousSibling =
+            items[index + 1] && items[index + 1].key === activeKey
+          return withNativeProps(
+            item.props,
+            <div
+              key={item.key}
+              onClick={() => {
+                const { key } = item
+                if (key === undefined || key === null || item.props.disabled)
+                  return
+                setActiveKey(key.toString())
+              }}
+              className={classNames(`${classPrefix}-item`, {
+                [`${classPrefix}-item-active`]: active,
+                [`${classPrefix}-item-disabled`]: item.props.disabled,
+              })}
+            >
+              <>
+                {isActiveNextSibling && (
+                  <Corner
+                    className={`${classPrefix}-item-corner ${classPrefix}-item-corner-top`}
+                  />
+                )}
+                {isActivePreviousSibling && (
+                  <Corner
+                    className={`${classPrefix}-item-corner ${classPrefix}-item-corner-bottom`}
+                  />
+                )}
+              </>
+              <Badge
+                content={item.props.badge}
+                className={`${classPrefix}-badge`}
+              >
+                <div className={`${classPrefix}-item-title`}>
+                  {active && (
+                    <div className={`${classPrefix}-item-highlight`} />
+                  )}
+                  {item.props.title}
+                </div>
+              </Badge>
+            </div>
+          )
+        })}
+      </div>
+      <div
+        className={classNames(
+          `${classPrefix}-extra-space`,
+          isLastItemActive && `${classPrefix}-item-active-next-sibling`
+        )}
+      >
+        {isLastItemActive && (
+          <Corner
+            className={`${classPrefix}-item-corner ${classPrefix}-item-corner-top`}
+          />
+        )}
+      </div>
     </div>
   )
 }
