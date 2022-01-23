@@ -9,15 +9,20 @@
     top: 0;
     bottom: 0;
     z-index: 1;
-    // background-color: rgba(255, 255, 255, 0.6);
-    background-color: hsla(0, 0%, 100%, 0.6);
+    background-color: rgba(255, 255, 255, 0.8);
+
     > .adm-card {
       background: #fff;
     }
 
     > .adm-list-default {
       border: none;
+
+      > .adm-list-body {
+        border: none;
+      }
     }
+
     .header-text-shadow {
       text-shadow: 0 0 1px #000;
     }
@@ -31,6 +36,10 @@
       bottom: 0;
       background-color: transparent;
       border: none;
+      .adm-list-body {
+        background-color: transparent;
+        border: none;
+      }
     }
   }
 
@@ -51,10 +60,6 @@
       position: relative;
       background-color: transparent;
     }
-  }
-
-  .reco-describe {
-    color: var(--adm-color-weak);
   }
 
   > .reco-image {
