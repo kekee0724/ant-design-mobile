@@ -25,7 +25,7 @@ export default () => {
             'https://fat.bitechdevelop.com/reco-ipark-10-1-mobileapi/userFile/files/thumbnail/picture/bi_activity/20211019/76bd943dec1437073a90cd64054967f0_wh_768x466_x.jpg'
           }
           customHeaderList={true}
-          style={{ height: '26vh' }}
+          style={{ height: '180px', '--adm-image-height': '180px' } as any}
         >
           <NavBar />
           <List>

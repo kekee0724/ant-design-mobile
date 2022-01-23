@@ -1,6 +1,7 @@
 @import 'reset.less';
 
 .container-fill {
+  text-align: left;
   height: 100%;
 
   > .container-fill {
@@ -66,10 +67,6 @@
   #react-container .justify-content(flex-start);
 }
 
-.container-hidden {
-  overflow: hidden;
-}
-
 .container-scrollable {
   max-height: 100%;
   overflow: scroll;
@@ -91,6 +88,10 @@
   &:after {
     top: -1px;
   }
+}
+
+.container-hidden {
+  overflow: hidden;
 }
 
 .container-hide {
@@ -126,30 +127,22 @@
   bottom: 0;
 }
 
-.android {
-  .container-page-shadow {
-    display: none;
-  }
-}
-
-.ios {
-  .container-page-shadow {
-    position: absolute;
-    top: 0;
-    width: 16px;
-    bottom: 0;
-    z-index: -1;
-    content: '';
-    opacity: 1;
-    right: 100%;
-    background: linear-gradient(
-      to right,
-      rgba(0, 0, 0, 0) 0%,
-      rgba(0, 0, 0, 0) 10%,
-      rgba(0, 0, 0, 0.01) 50%,
-      rgba(0, 0, 0, 0.2) 100%
-    );
-  }
+.container-page-shadow {
+  position: absolute;
+  top: 0;
+  width: 16px;
+  bottom: 0;
+  z-index: -1;
+  content: '';
+  opacity: 1;
+  right: 100%;
+  background: linear-gradient(
+    to right,
+    rgba(0, 0, 0, 0) 0%,
+    rgba(0, 0, 0, 0) 10%,
+    rgba(0, 0, 0, 0.01) 50%,
+    rgba(0, 0, 0, 0.2) 100%
+  );
 }
 
 .reco-touch-move {
@@ -167,5 +160,9 @@
   * {
     pointer-events: none;
     touch-action: none;
+  }
+
+  .container-scrollable {
+    overflow: hidden;
   }
 }

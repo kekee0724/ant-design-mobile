@@ -1,4 +1,4 @@
-// import './calender.less'
+import './calendar.less'
 
 import { RMCalendar } from './calender'
 
