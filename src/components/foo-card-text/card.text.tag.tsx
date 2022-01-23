@@ -1,9 +1,11 @@
-import React, { FC, forwardRef } from 'react'
+import React, { FC, forwardRef, ReactNode } from 'react'
 
 import classNames from 'classnames'
 
 export type CardTextTagProps = {
-  [key: string]: any
+  type?: 'signing-up' | 'in-progress' | 'released' | undefined | null
+  children?: ReactNode
+  size?: 'default' | 'small'
 }
 
 export const CardTextTag: FC<CardTextTagProps> = forwardRef(props => {
@@ -22,7 +24,13 @@ export const CardTextTag: FC<CardTextTagProps> = forwardRef(props => {
       tagTypeClass = 'released'
   }
   return (
-    <div className={classNames('card-text-tag', tagTypeClass)}>
+    <div
+      className={classNames(
+        'card-text-tag',
+        props.size === 'small' && 'small',
+        tagTypeClass
+      )}
+    >
       {props.children}
     </div>
   )

@@ -14,6 +14,7 @@ export type DescriptionProps = {
   children?: ReactNode
   labelWidth?: string
   labelColon?: boolean
+  labelJustify?: boolean
   align?: 'center' | 'top' | 'bottom'
   justify?: 'start' | 'center' | 'end'
   hide?: boolean
@@ -24,12 +25,9 @@ export type DescriptionProps = {
 export const DescriptionItem = forwardRef((p: DescriptionProps) => {
   const defaultProps = {
     bodyCls: '',
-    labelWidth: '80px',
     style: {},
-    // align: "center",
     labelColon: true,
     span: 1,
-    direction: 'row',
   }
 
   const props = mergeProps(defaultProps, p)
@@ -46,25 +44,33 @@ export const DescriptionItem = forwardRef((p: DescriptionProps) => {
     hide,
     span,
     direction,
+    labelJustify,
   } = props
 
   return (
     <WidthContext.Consumer>
-      {width => {
+      {obj => {
         return (
           <Grid.Item
             span={span}
             className={classNames(bodyCls, hide && 'none')}
             style={style}
           >
-            <Container direction={direction} align={align} justify={justify}>
+            <Container
+              direction={direction || obj?.direction}
+              align={align || obj?.align}
+              justify={justify || obj.justify}
+            >
               {label && (
                 <div
-                  className='margin-right-xxs reco-describe'
-                  style={{ width: width || labelWidth }}
+                  className={classNames(
+                    'margin-right-xxs reco-describe',
+                    (labelJustify || obj?.labelJustify) && 'text-justify'
+                  )}
+                  style={{ width: labelWidth || obj?.width }}
                 >
                   {label}
-                  {labelColon && ':'}
+                  {(labelColon || obj?.labelColon) && ':'}
                 </div>
               )}
               <Container fill>{children}</Container>

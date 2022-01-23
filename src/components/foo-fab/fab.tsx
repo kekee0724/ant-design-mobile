@@ -2,6 +2,7 @@ import React, { FC, forwardRef, useRef, useState } from 'react'
 
 import { AddOutline, CloseOutline } from 'antd-mobile-icons'
 import classNames from 'classnames'
+import $ from 'jquery'
 
 import { getExtraAttrs, getSlots } from '../foo'
 
@@ -28,7 +29,9 @@ export const Fab: FC<FabProps> = forwardRef(props => {
     text,
     onClick,
     position = 'right-bottom',
+    bar,
   } = props as any
+
   const extraAttrs = getExtraAttrs(props)
 
   const elRef = useRef(null)
@@ -83,13 +86,14 @@ export const Fab: FC<FabProps> = forwardRef(props => {
     'fab-morph': morphTo,
     'fab-extended': typeof textEl !== 'undefined',
     'fab-opened': show,
+    'fab-bar': bar,
   })
 
   const close = () => setShow(false)
 
   const dom = elRef.current as any
 
-  // $(dom).find(".fab-close").off("click", close).on("click", close);
+  $(dom).find('.fab-close').off('click', close).on('click', close)
 
   let oL: number, oT: number
 
@@ -102,6 +106,9 @@ export const Fab: FC<FabProps> = forwardRef(props => {
       ref={elRef}
       {...extraAttrs}
       onTouchStart={e => {
+        document
+          .querySelector('.container-scrollable')
+          ?.classList.add('container-hidden')
         const touchDom = elRef.current as any
         const ev = e || window.event
         const touch = ev.targetTouches[0]
@@ -130,6 +137,11 @@ export const Fab: FC<FabProps> = forwardRef(props => {
         touchDom.style.top = oTop + 'px'
         touchDom.style.bottom = 'auto'
         touchDom.style.right = 'auto'
+      }}
+      onTouchEnd={() => {
+        document
+          .querySelector('.container-scrollable')
+          ?.classList.remove('container-hidden')
       }}
     >
       <a className='fab-toggle-button' onClick={() => setShow(!show)}>

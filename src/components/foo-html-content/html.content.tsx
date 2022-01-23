@@ -64,7 +64,7 @@ export const HtmlContent: FC<HtmlContentProps> = (p: any) => {
     const images = [] as any
     $(e)
       .off('.img')
-      .on('click.img', 'img', function () {
+      .on('click.img', 'img', () => {
         setOpen(true)
         setImages(images)
         setIndex(+$(e).attr('id')! || 0)
@@ -112,14 +112,12 @@ export const HtmlContent: FC<HtmlContentProps> = (p: any) => {
         ),
         dangerouslySetInnerHTML: { __html: newHtml },
       })}
-      {open ? (
-        <ImageViewer.Multi
-          images={images.map(data => transformAssetsUrl(data)) as any}
-          visible={open}
-          defaultIndex={index}
-          onClose={onCancel}
-        />
-      ) : null}
+      <ImageViewer.Multi
+        images={images.map(data => transformAssetsUrl(data)!)}
+        visible={open}
+        defaultIndex={index}
+        onClose={onCancel}
+      />
     </>
   )
 }

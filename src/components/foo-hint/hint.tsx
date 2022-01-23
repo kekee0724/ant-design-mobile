@@ -1,11 +1,11 @@
-import React, { FC, forwardRef, ReactNode } from 'react'
+import React, { CSSProperties, FC, forwardRef, ReactNode } from 'react'
 
 import classNames from 'classnames'
 
 export interface HintProps {
-  children?: ReactNode
   className?: string
-  style?: object
+  style?: CSSProperties
+  children?: ReactNode
 }
 
 export const Hint: FC<HintProps> = forwardRef(props => {

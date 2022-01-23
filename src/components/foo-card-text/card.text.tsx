@@ -27,6 +27,7 @@ export type CardTextProps = {
   ratio?: '16:9' | '4:3' | '1:1' | '2:3'
   imageAutoProps?: ImageAutoProps
   direction?: 'column' | 'row' | 'row-reverse'
+  rowAlign?: 'center' | 'top' | 'bottom'
 }
 
 const defaultProps = {
@@ -45,7 +46,10 @@ export const CardText = forwardRef((p: CardTextProps) => {
     props.type,
     props.className,
     props.direction === 'row' && 'card-text-row',
-    props.direction === 'row-reverse' && 'card-text-row reverse'
+    props.direction === 'row-reverse' && 'card-text-row reverse',
+    props.rowAlign === 'center' && 'container-align-center',
+    props.rowAlign === 'top' && 'container-align-start',
+    props.rowAlign === 'bottom' && 'container-align-end'
   )
 
   return (

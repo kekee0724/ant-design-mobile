@@ -13,6 +13,9 @@ export interface GDMapProps extends PureComponentProps {
   title?: string
   mapStyle?: string
   titleStyle?: string
+  custom?: boolean
+  option?: object
+  init?: any
 }
 
 const defaultProps = {
@@ -23,14 +26,13 @@ const defaultProps = {
 export const GDMap: FC<GDMapProps> = p => {
   const props = mergeProps(defaultProps, p)
 
-  const { title, mapStyle, titleStyle } = props
-
+  const { title, address, option, mapStyle, titleStyle, init, custom } = props
+  let spaceMap: any
   const [show, setShow] = useState(false)
 
   useEffect(() => {
-    const { address } = props
     AMapLoader.load({
-      key: client?.mapKey ? client.mapKey : '', // 申请好的Web端开发者Key，首次调用 load 时必填
+      key: server?.mapKey ? server.mapKey : '', // 申请好的Web端开发者Key，首次调用 load 时必填
       version: '2.0', // 指定要加载的 JSAPI 的版本，缺省时默认为 1.4.15
       plugins: [], // 需要使用的的插件列表，如比例尺'AMap.Scale'等
       // AMapUI: {
@@ -44,7 +46,7 @@ export const GDMap: FC<GDMapProps> = p => {
       // },
     })
       .then(() => {
-        address && renderMapStyle(address!)
+        custom ? customMap(option) : address && renderMapStyle(address!)
       })
       .catch(e => {
         console.log(e)
@@ -54,13 +56,18 @@ export const GDMap: FC<GDMapProps> = p => {
     // }
   }, [])
 
+  const customMap = (option: object | undefined) => {
+    const map = new AMap.Map(spaceMap, option)
+    init && init(map)
+  }
+
   const renderMapStyle = (address: string) => {
     new AMap.plugin('AMap.Geocoder', () => {
       const geocoder = new AMap.Geocoder({ city: '全国' })
       geocoder.getLocation(address, (status: any, result: any) => {
         if (status === 'complete' && result.info === 'OK') {
           const lnglat = result.geocodes[0].location,
-            map = new AMap.Map('spaceMap', {
+            map = new AMap.Map(spaceMap, {
               zoom: 15,
               center: [lnglat.lng, lnglat.lat],
             }),
@@ -86,7 +93,7 @@ export const GDMap: FC<GDMapProps> = p => {
                   lng: data!.Longitude,
                   lat: data!.Latitude,
                 },
-                map = new AMap.Map('spaceMap', {
+                map = new AMap.Map(spaceMap, {
                   zoom: 15,
                   center: [lnglat.lng, lnglat.lat],
                 }),
@@ -104,7 +111,9 @@ export const GDMap: FC<GDMapProps> = p => {
     })
   }
 
-  return (
+  return custom ? (
+    <div className='space-map' ref={e => (spaceMap = e)} />
+  ) : (
     <List className={mapStyle} mode='card'>
       {title && (
         <List.Item className={titleStyle}>
@@ -112,7 +121,13 @@ export const GDMap: FC<GDMapProps> = p => {
         </List.Item>
       )}
       <List.Item>
-        {!show ? <div className='space-map' id='spaceMap' /> : null}
+        {!show ? (
+          <div
+            className='space-map'
+            ref={e => (spaceMap = e)}
+            style={{ height: '180px' }}
+          />
+        ) : null}
         {show ? (
           <Empty
             style={{ padding: '64px 0' }}

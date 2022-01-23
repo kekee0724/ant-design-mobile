@@ -19,7 +19,6 @@ declare namespace Levi {
       showheader: boolean
       showloading: boolean
       openMapLocation: boolean
-      mapKey?: string
     }
 
     namespace Client {
@@ -63,6 +62,7 @@ declare namespace Levi {
      * @interface Server
      */
     interface Server {
+      mapKey?: string
       /**
        * Api Key
        *

@@ -1,4 +1,4 @@
-import React, { FC, ReactNode } from 'react'
+import React, { CSSProperties, FC, ReactNode } from 'react'
 
 import classNames from 'classnames'
 
@@ -12,10 +12,12 @@ export interface ItemProps {
   children?: ReactNode
   align?: 'center' | 'top' | 'bottom'
   justify?: 'left' | 'center' | 'right'
+  className?: string
+  style?: CSSProperties
 }
 
 export const Item: FC<ItemProps> = props => {
-  const { align, justify, span, onClick, children } = props
+  const { align, justify, span, onClick, children, className, style } = props
   let alignClass, justifyClass
   switch (align) {
     case 'center':
@@ -39,7 +41,9 @@ export const Item: FC<ItemProps> = props => {
   }
   return (
     <Grid.Item
+      style={style}
       className={classNames(
+        className,
         (alignClass || justifyClass) && 'flex',
         alignClass,
         justifyClass
@@ -79,7 +83,7 @@ export const FooterButton: FC<FooterButtonProps> = (props: any) => {
     })
   }
 
-  return children instanceof Array ? (
+  return children instanceof Array && children.length > 1 ? (
     <Grid
       columns={columns || children?.length}
       gap={gap}

@@ -46,10 +46,10 @@ export const client: Levi.Config.Client = (window['client'] = {
       { icon: 'mobile mobile-my', title: '我的', key: '/my', type: 'my' },
     ],
   },
-  mapKey: '32a27fb58b64adbf3846556e180e5134',
 })
 
 export const server: Levi.Config.Server = (window['server'] = {
+  mapKey: '32a27fb58b64adbf3846556e180e5134',
   apiKey: {
     apiKey: 'Bitech\\H5',
     secret: 'vgkEeveppBwCzPHr',
