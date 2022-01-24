@@ -38,8 +38,8 @@ let st: any = 0,
   _this: ObjState
 
 export interface RMCalendarProps extends PureComponentProps {
-  defaultDate: any
-  type: any
+  defaultDate?: any
+  type?: any
   touch?: any
   width?: any
   locale?: any
@@ -100,21 +100,8 @@ const getDerivedStateFromProps = (
   return null
 }
 
-export const RMCalendar: FC<RMCalendarProps> = forwardRef((p, _ref) => {
+export const RMCalendar: FC = forwardRef((p: RMCalendarProps) => {
   const props = mergeProps(defaultProps, p)
-  const propTypes = {
-    defaultDate: PropTypes.instanceOf(Date).isRequired,
-    type: PropTypes.oneOf(['month', 'week']),
-    firstDayOfWeek: PropTypes.oneOf([0, 1, 2, 3, 4, 5, 6]),
-    schedule: PropTypes.any,
-    width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-    locale: PropTypes.oneOf(['zh-cn', 'en']),
-    toolbar: PropTypes.bool,
-    touch: PropTypes.bool,
-    onCellClick: PropTypes.func,
-    onPageChange: PropTypes.func,
-    onDayClick: PropTypes.func,
-  }
   const calendar = React.createRef() as any
   let aniTwo: number
   let ani: number
@@ -546,3 +533,17 @@ export const RMCalendar: FC<RMCalendarProps> = forwardRef((p, _ref) => {
     </div>
   )
 })
+
+RMCalendar.propTypes = {
+  defaultDate: PropTypes.instanceOf(Date).isRequired,
+  type: PropTypes.oneOf(['month', 'week']),
+  firstDayOfWeek: PropTypes.oneOf([0, 1, 2, 3, 4, 5, 6]),
+  schedule: PropTypes.any,
+  width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  locale: PropTypes.oneOf(['zh-cn', 'en']),
+  toolbar: PropTypes.bool,
+  touch: PropTypes.bool,
+  onCellClick: PropTypes.func,
+  onPageChange: PropTypes.func,
+  onDayClick: PropTypes.func,
+}
