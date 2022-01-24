@@ -1,15 +1,10 @@
 import React, { ComponentClass, FC, FunctionComponent } from 'react'
 
-// import { Action, AnyAction } from "redux";
-// import { SubscriptionAPI } from "dva";
 import { LocationDescriptorObject } from 'history'
 import PropTypes from 'prop-types'
 
 import { resolvePath } from '../utils/resolve'
-// import { resolvePath } from '../'
 import { PureComponentProps, PureComponentState } from './pure-component'
-// import { URLSearchParams, isAuth } from "../http";
-// import { PluginHost, CorePlugin, AttachPlugin, IAttachInfo } from "../plugins";
 import { Location, MessageInstance, PageWrap } from './type'
 
 const PREFIX_REG = /^(\\|\/)/
