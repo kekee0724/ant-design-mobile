@@ -1,13 +1,13 @@
 import React from 'react'
 
-import { Card, Description } from 'antd-mobile'
+import { Card, Description, List } from 'antd-mobile'
 import { DemoBlock } from 'demos'
 
 export default () => {
   return (
     <>
       <DemoBlock title='基本用法 type="block"' background='#f5f7fa' padding='0'>
-        <Card>
+        <List>
           <Description columns={1} title='BIPARK智慧园区宣讲会'>
             <Description.Item label='活动时间'>
               2021.02.12 ~ 2021.02.12
@@ -17,7 +17,7 @@ export default () => {
             </Description.Item>
             <Description.Item label='活动地址'>纳贤路800号</Description.Item>
           </Description>
-        </Card>
+        </List>
         <Card>
           <Description columns={1} title='BIPARK智慧园区宣讲会' toggle={true}>
             <Description.Item label='活动时间'>2021.02.12</Description.Item>
