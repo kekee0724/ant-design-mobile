@@ -5,8 +5,7 @@ import React, {
   useRef,
 } from 'react'
 import type { ReactNode } from 'react'
-import classNames from 'classnames'
-import { NativeProps } from '../../utils/native-props'
+import { NativeProps, withNativeProps } from '../../utils/native-props'
 import { usePropsValue } from '../../utils/use-props-value'
 import { mergeProps } from '../../utils/with-default-props'
 
@@ -17,7 +16,13 @@ export type TextAreaProps = Pick<
     React.TextareaHTMLAttributes<HTMLTextAreaElement>,
     HTMLTextAreaElement
   >,
-  'autoComplete' | 'disabled' | 'readOnly' | 'onFocus' | 'onBlur'
+  | 'autoComplete'
+  | 'disabled'
+  | 'readOnly'
+  | 'onFocus'
+  | 'onBlur'
+  | 'onCompositionStart'
+  | 'onCompositionEnd'
 > & {
   onChange?: (val: string) => void
   value?: string
@@ -53,17 +58,7 @@ const defaultProps = {
 export const TextArea = forwardRef<TextAreaRef, TextAreaProps>(
   (p: TextAreaProps, ref) => {
     const props = mergeProps(defaultProps, p)
-    const {
-      className,
-      style,
-      defaultValue: outerDefaultValue,
-      value: outerValue,
-      onChange: outerOnChange,
-      rows: rows,
-      autoSize: autoSize,
-      showCount,
-      ...textAreaProps
-    } = props
+    const { autoSize, showCount, maxLength } = props
     const [value, setValue] = usePropsValue(props)
     const nativeTextAreaRef = useRef<HTMLTextAreaElement>(null)
 
@@ -98,40 +93,55 @@ export const TextArea = forwardRef<TextAreaRef, TextAreaProps>(
       textArea.style.height = `${height}px`
     }, [value, autoSize])
 
+    const compositingRef = useRef(false)
+
     let count
+    const valueLength = [...value].length
     if (typeof showCount === 'function') {
-      count = showCount(value.length, props.maxLength)
+      count = showCount(valueLength, maxLength)
     } else if (showCount) {
       count = (
         <div className={`${classPrefix}-count`}>
-          {props.maxLength === undefined
-            ? value.length
-            : value.length + '/' + props.maxLength}
+          {maxLength === undefined
+            ? valueLength
+            : valueLength + '/' + maxLength}
         </div>
       )
     }
 
-    return (
-      <div
-        className={classNames(`${classPrefix}-wrapper`, className)}
-        style={style}
-      >
+    return withNativeProps(
+      props,
+      <div className={classPrefix}>
         <textarea
           ref={nativeTextAreaRef}
-          {...textAreaProps}
-          className={classPrefix}
-          rows={rows}
+          className={`${classPrefix}-element`}
+          rows={props.rows}
           value={value}
+          placeholder={props.placeholder}
           onChange={e => {
-            setValue(e.target.value)
-          }}
-          onFocus={e => {
-            props.onFocus?.(e)
-          }}
-          onBlur={e => {
-            props.onBlur?.(e)
+            let v = e.target.value
+            if (maxLength && !compositingRef.current) {
+              v = [...v].slice(0, maxLength).join('')
+            }
+            setValue(v)
           }}
           id={props.id}
+          onCompositionStart={e => {
+            compositingRef.current = true
+            props.onCompositionStart?.(e)
+          }}
+          onCompositionEnd={e => {
+            compositingRef.current = false
+            if (maxLength) {
+              setValue([...value].slice(0, maxLength).join(''))
+            }
+            props.onCompositionEnd?.(e)
+          }}
+          autoComplete={props.autoComplete}
+          disabled={props.disabled}
+          readOnly={props.readOnly}
+          onFocus={props.onFocus}
+          onBlur={props.onBlur}
         />
         {count}
       </div>

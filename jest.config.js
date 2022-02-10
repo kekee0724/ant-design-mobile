@@ -16,9 +16,15 @@ module.exports = {
   },
   moduleNameMapper: {
     '\\.(css|less)$': '<rootDir>/src/tests/mocks/style-mock.js',
+    '^antd-mobile$': '<rootDir>/src/index.ts',
   },
   watchPlugins: [
     'jest-watch-typeahead/filename',
     'jest-watch-typeahead/testname',
+  ],
+  collectCoverageFrom: [
+    '<rootDir>/src/**/*.{js,jsx,ts,tsx}',
+    '!**/demos/**',
+    '!**/tests/**',
   ],
 }

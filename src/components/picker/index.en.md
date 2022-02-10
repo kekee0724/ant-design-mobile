@@ -6,7 +6,9 @@ The Picker series includes three components: [Picker](#picker), [CascadePicker](
 
 <code src="./demos/demo1.tsx"></code>
 
-### Picker API
+<code src="./demos/demo2.tsx"></code>
+
+### Props
 
 ```typescript | pure
 type PickerColumnItem = {
@@ -27,7 +29,7 @@ type PickerValueExtend = {
 | ------------ | --------------------------------------- | -------------------------------------------------------------- | -------- |
 | columns      | Options to configure each column        | `PickerColumn[] \| ((value: PickerValue[]) => PickerColumn[])` | -        |
 | value        | Selected options                        | `PickerValue[]`                                                | -        |
-| defaultValue | Default selected options                | `PickerValue[]`                                                | -        |
+| defaultValue | Default selected options                | `PickerValue[]`                                                | `[]`     |
 | onSelect     | Triggered when the options are changed  | `(value: PickerValue[], extend: PickerValueExtend) => void`    | -        |
 | onConfirm    | Triggered when confirming               | `(value: PickerValue[], extend: PickerValueExtend) => void`    | -        |
 | onCancel     | Triggered when cancelling               | `() => void`                                                   | -        |
@@ -40,11 +42,19 @@ type PickerValueExtend = {
 
 In addition, the following attributes of [Popup](./popup) are supported: `getContainer` `afterShow` `afterClose` `onClick` `stopPropagation`
 
+### CSS Variables
+
+| Name                      | Description                             | Default | Global |
+| ------------------------- | --------------------------------------- | ------- | ------ |
+| --header-button-font-size | Font size of confirm and cancel button. | `15px`  | -      |
+| --title-font-size         | Font size of title.                     | `15px`  | -      |
+| --item-font-size          | Font size of option items.              | `16px`  | -      |
+
 ## CascadePicker
 
 <code src="../cascade-picker/demos/demo1.tsx"></code>
 
-### CascadePicker API
+### Props
 
 ```typescript
 type CascadePickerOption = {
@@ -60,11 +70,15 @@ type CascadePickerOption = {
 
 Other props are the same as `Picker`, but `columns` are not supported.
 
+### CSS Variables
+
+Same as `Picker`.
+
 ## DatePicker
 
 <code src="../date-picker/demos/demo1.tsx"></code>
 
-### DatePicker API
+### Props
 
 | Name         | Description                                                                                                                          | Type                                                                                   | Default         |
 | ------------ | ------------------------------------------------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------- | --------------- |
@@ -94,6 +108,10 @@ type DatePickerFilter = Partial<
 ```
 
 In addition, the following attributes of `Picker` are supported: `onCancel` `onClose` `visible` `confirmText` `cancelText` `getContainer` `afterShow` `afterClose` `onClick` `title` `stopPropagation`
+
+### CSS Variables
+
+Same as `Picker`.
 
 ## Imperative Call
 
@@ -133,4 +151,6 @@ Because the type of `value` is `Date`.
 
 ### Why is there no "hour-minute" or "month-day" option?
 
-Different from the `Picker` component, the value type of the `DatePicker` is a `Date` object, so it needs to be selected from the beginning of the year. Only the parameters of hour and minutes cannot construct a `Date` object.
+Different from the Picker component, the value type of the DatePicker is a `Date` object, so it needs to be selected from the beginning of the year. Only the parameters of hour and minutes cannot construct a `Date` object.
+
+If you need to use DatePicker like that, you can implement it yourself through the Picker component.

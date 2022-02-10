@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Checkbox, Dropdown, Space } from 'antd-mobile'
+import { Checkbox, Space } from 'antd-mobile'
 import { DemoBlock } from 'demos'
 import { SmileFill, SmileOutline } from 'antd-mobile-icons'
 
@@ -18,6 +18,11 @@ export default () => {
           </div>
           <Checkbox>有描述的勾选框</Checkbox>
           <Checkbox defaultChecked>默认选中</Checkbox>
+        </Space>
+      </DemoBlock>
+
+      <DemoBlock title='状态'>
+        <Space direction='vertical'>
           <Checkbox defaultChecked disabled>
             禁用状态
           </Checkbox>

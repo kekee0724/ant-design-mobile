@@ -1,11 +1,12 @@
-import React, { memo, useLayoutEffect, useRef } from 'react'
+import React, { memo, useRef } from 'react'
 import { useSpring, animated } from '@react-spring/web'
 import { useDrag } from '@use-gesture/react'
 import { convertPx } from '../../utils/convert-px'
 import { rubberbandIfOutOfBounds } from '../../utils/rubberband'
 import { bound } from '../../utils/bound'
 import { PickerColumnItem, PickerValue } from './index'
-import { isEqual } from 'lodash-es'
+import isEqual from 'lodash/isEqual'
+import { useIsomorphicLayoutEffect } from 'ahooks'
 
 const classPrefix = `adm-picker-view`
 
@@ -34,7 +35,7 @@ export const Wheel = memo<Props>(
 
     const draggingRef = useRef(false)
 
-    useLayoutEffect(() => {
+    useIsomorphicLayoutEffect(() => {
       if (draggingRef.current) return
       if (!value) return
       const targetIndex = column.findIndex(item => item.value === value)
@@ -43,7 +44,7 @@ export const Wheel = memo<Props>(
       api.start({ y: finalPosition, immediate: y.goal !== finalPosition })
     }, [value, column])
 
-    useLayoutEffect(() => {
+    useIsomorphicLayoutEffect(() => {
       if (column.length === 0) {
         if (value !== null) {
           onSelect(null)
@@ -154,7 +155,7 @@ export const Wheel = memo<Props>(
     return (
       <div className={`${classPrefix}-column`} {...bind()}>
         <animated.div
-          style={{ y }}
+          style={{ translateY: y }}
           className={`${classPrefix}-column-wheel`}
           aria-hidden
         >

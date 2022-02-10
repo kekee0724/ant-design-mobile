@@ -9,18 +9,18 @@ import {
   PropagationEvent,
   withStopPropagation,
 } from '../../utils/with-stop-propagation'
+import { Arrow } from './arrow'
+import { GetContainer } from '../../utils/render-to-container'
 
 const classPrefix = `adm-popover`
-const enterClassName = 'entering'
-const leaveClassName = 'leaving'
 
-export type BasePopoverProps = {
-  getContainer?: () => HTMLElement
+export type PopoverProps = {
+  getContainer?: GetContainer
   destroyOnHide?: boolean
   children: ReactElement
   mode?: 'light' | 'dark'
   trigger?: 'click'
-  placement:
+  placement?:
     | 'top'
     | 'left'
     | 'right'
@@ -34,19 +34,12 @@ export type BasePopoverProps = {
     | 'rightTop'
     | 'rightBottom'
   stopPropagation?: PropagationEvent[]
+  content: React.ReactNode
 } & Pick<
   TooltipProps,
-  | 'defaultVisible'
-  | 'visible'
-  | 'onVisibleChange'
-  | 'overlayStyle'
-  | 'overlayClassName'
-  | 'align'
-  | 'zIndex'
+  'defaultVisible' | 'visible' | 'onVisibleChange' | 'align'
 > &
   NativeProps<'--z-index'>
-
-type PopoverProps = BasePopoverProps & { content: React.ReactNode }
 
 export type PopoverRef = {
   show: () => void
@@ -55,8 +48,10 @@ export type PopoverRef = {
 }
 
 const defaultProps = {
+  placement: 'top',
   defaultVisible: false,
   stopPropagation: ['click'],
+  getContainer: () => document.body,
 }
 
 export const Popover = forwardRef<PopoverRef, PopoverProps>((p, ref) => {
@@ -83,36 +78,23 @@ export const Popover = forwardRef<PopoverRef, PopoverProps>((p, ref) => {
 
   const overlay = withStopPropagation(
     props.stopPropagation,
-    <div className={`${classPrefix}-inner-content`}>
-      {(props as PopoverProps).content}
-    </div>
+    <div className={`${classPrefix}-inner-content`}>{props.content}</div>
   )
 
   return (
     <Tooltip
       {...props}
-      overlayClassName={classNames(
-        `${classPrefix}-${mode}`,
-        props.overlayClassName
-      )}
+      placement={props.placement}
+      align={props.align}
+      overlayClassName={classNames(`${classPrefix}-${mode}`, props.className)}
+      overlayStyle={props.style}
       destroyTooltipOnHide={props.destroyOnHide}
       prefixCls={classPrefix}
       getTooltipContainer={props.getContainer || (() => document.body)}
       visible={visible}
-      arrowContent={<span className={`${classPrefix}-arrow-content`} />}
+      arrowContent={<Arrow className={`${classPrefix}-arrow-icon`} />}
       onVisibleChange={setVisible}
       trigger={props.trigger ?? []}
-      motion={{
-        motionName: {
-          appear: enterClassName,
-          appearActive: enterClassName,
-          enter: enterClassName,
-          enterActive: enterClassName,
-          leaveActive: leaveClassName,
-          leave: leaveClassName,
-        },
-        motionDeadline: 200,
-      }}
       overlay={overlay}
     >
       {props.children}

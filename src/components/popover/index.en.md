@@ -1,10 +1,10 @@
 # Popover
 
+## Popover
+
 <code src="./demos/demo1.tsx"></code>
 
-## Name
-
-### Popover
+### Props
 
 | Name            | Description                                                                                  | Type                                                                                                                                                             | Default               |
 | --------------- | -------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------- |
@@ -20,23 +20,11 @@
 | mode            | Set bright color mode or black mode                                                          | `'light' \| 'dark'`                                                                                                                                              | `'light'`             |
 | stopPropagation | Stop the propagation of some events.                                                         | `PropagationEvent[]`                                                                                                                                             | `['click']`           |
 
-### Popover.Menu
+### CSS Variables
 
-Except for `content`, all other attributes are inherited from `Popover`, the unique attributes are as follows:
-
-| Name     | Description                                                | Type                     | Default |
-| -------- | ---------------------------------------------------------- | ------------------------ | ------- |
-| actions  | Menu list, used when the pop-up content is a standard menu | `Action[]`               | -       |
-| onAction | Callback of the selected menum, when the menu list is used | `(item: Action) => void` | -       |
-
-#### Action
-
-| Name     | Description                                                | Type               | Default                   |
-| -------- | ---------------------------------------------------------- | ------------------ | ------------------------- |
-| text     | Menu list, used when the pop-up content is a standard menu | `ReactNode`        | -                         |
-| icon     | The icon of the menu item                                  | `ReactNode`        | `null`                    |
-| key      | The unique identifier of the menu, the default is `index`  | `string \| number` | `actions` array's `index` |
-| disabled | Whether disabled                                           | `boolean`          | `false`                   |
+| Name      | Description                      | Default | Global                  |
+| --------- | -------------------------------- | ------- | ----------------------- |
+| --z-index | `z-index` of the popover element | `1030`  | `--adm-popover-z-index` |
 
 ### Ref
 
@@ -46,8 +34,32 @@ Except for `content`, all other attributes are inherited from `Popover`, the uni
 | hide    | Hide the Popover                 | `() => void` |
 | visible | Whether the Popover is diplaying | `boolean`    |
 
+## Popover.Menu
+
+<code src="./demos/demo2.tsx"></code>
+
+### Props
+
+Except for `content`, all other attributes are inherited from `Popover`, the unique attributes are as follows:
+
+| Name     | Description                                                | Type                     | Default |
+| -------- | ---------------------------------------------------------- | ------------------------ | ------- |
+| actions  | Menu list, used when the pop-up content is a standard menu | `Action[]`               | -       |
+| onAction | Callback of the selected menum, when the menu list is used | `(item: Action) => void` | -       |
+
+### Action
+
+| Name     | Description                                                | Type               | Default                   |
+| -------- | ---------------------------------------------------------- | ------------------ | ------------------------- |
+| text     | Menu list, used when the pop-up content is a standard menu | `ReactNode`        | -                         |
+| icon     | The icon of the menu item                                  | `ReactNode`        | `null`                    |
+| key      | The unique identifier of the menu, the default is `index`  | `string \| number` | `actions` array's `index` |
+| disabled | Whether disabled                                           | `boolean`          | `false`                   |
+
 ### CSS Variables
 
-| Name      | Description                      | Default | Global                  |
-| --------- | -------------------------------- | ------- | ----------------------- |
-| --z-index | `z-index` of the popover element | `1030`  | `--adm-popover-z-index` |
+Same as Popover.
+
+### Ref
+
+Same as Popover.

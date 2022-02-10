@@ -1,13 +1,15 @@
 import { components } from './components'
+import { IConfig } from 'dumi'
 
 const pxToRem = require('postcss-pxtorem')
 
-export default {
+const config: IConfig = {
   mode: 'site',
   title: 'Ant Design Mobile',
-  logo: 'https://gw.alipayobjects.com/mdn/rms_ee68a8/afts/img/A*_JSuS4uucYAAAAAAAAAAAAAAARQnAQ',
+  logo: 'https://gw.alipayobjects.com/zos/bmw-prod/b4eaf7fb-c494-497a-81a7-4b588555948c.svg',
+  // logo: 'https://gw.alipayobjects.com/zos/bmw-prod/ca6dffc0-d922-478d-9854-1f8a3d2eab4c.svg',
   favicon:
-    'https://gw.alipayobjects.com/mdn/rms_ee68a8/afts/img/A*_JSuS4uucYAAAAAAAAAAAAAAARQnAQ',
+    'https://gw.alipayobjects.com/zos/bmw-prod/48fd0638-85c4-42a6-9420-617b80845004.svg',
   navs: {
     'en': [
       {
@@ -330,4 +332,7 @@ export default {
       ],
     },
   },
+  plugins: ['./.dumi/plugin-gallery/index.ts'],
 }
+
+export default config

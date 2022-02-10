@@ -1,14 +1,10 @@
-import React, {
-  useState,
-  forwardRef,
-  useImperativeHandle,
-  useRef,
-  useLayoutEffect,
-} from 'react'
+import React, { useState, forwardRef, useImperativeHandle, useRef } from 'react'
 import { usePropsValue } from '../../utils/use-props-value'
 import { CloseCircleFill } from 'antd-mobile-icons'
 import { NativeProps, withNativeProps } from '../../utils/native-props'
 import { mergeProps } from '../../utils/with-default-props'
+import classNames from 'classnames'
+import { useIsomorphicLayoutEffect } from 'ahooks'
 
 const classPrefix = `adm-input`
 
@@ -33,6 +29,8 @@ export type InputProps = Pick<
   | 'autoCorrect'
   | 'onKeyDown'
   | 'onKeyUp'
+  | 'onCompositionStart'
+  | 'onCompositionEnd'
 > & {
   value?: string
   defaultValue?: string
@@ -91,7 +89,7 @@ export const Input = forwardRef<InputRef, InputProps>((p, ref) => {
     props.onKeyDown?.(e)
   }
 
-  useLayoutEffect(() => {
+  useIsomorphicLayoutEffect(() => {
     if (!props.enterKeyHint) return
     nativeInputRef.current?.setAttribute('enterkeyhint', props.enterKeyHint)
     return () => {
@@ -101,10 +99,15 @@ export const Input = forwardRef<InputRef, InputProps>((p, ref) => {
 
   return withNativeProps(
     props,
-    <div className={`${classPrefix}-wrapper`}>
+    <div
+      className={classNames(
+        `${classPrefix}`,
+        props.disabled && `${classPrefix}-disabled`
+      )}
+    >
       <input
         ref={nativeInputRef}
-        className={classPrefix}
+        className={`${classPrefix}-element`}
         value={value}
         onChange={e => {
           setValue(e.target.value)
@@ -133,8 +136,10 @@ export const Input = forwardRef<InputRef, InputProps>((p, ref) => {
         autoCorrect={props.autoCorrect}
         onKeyDown={handleKeydown}
         onKeyUp={props.onKeyUp}
+        onCompositionStart={props.onCompositionStart}
+        onCompositionEnd={props.onCompositionEnd}
       />
-      {props.clearable && !!value && (
+      {props.clearable && !!value && !props.readOnly && (
         <div
           className={`${classPrefix}-clear`}
           onMouseDown={e => {

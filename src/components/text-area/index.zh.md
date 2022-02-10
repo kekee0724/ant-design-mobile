@@ -2,7 +2,7 @@
 
 <code src="./demos/demo1.tsx"></code>
 
-## 属性
+### 属性
 
 | 属性         | 说明                                            | 类型                                                             | 默认值  |
 | ------------ | ----------------------------------------------- | ---------------------------------------------------------------- | ------- |
@@ -16,9 +16,9 @@
 | showCount    | 显示字数，支持自定义渲染                        | `boolean \| ((length: number, maxLength?: number) => ReactNode)` | `false` |
 | id           | `textarea` 元素的 `id`，常用来配合 `label` 使用 | `string`                                                         | -       |
 
-此外还支持以下原生属性：`autoComplete` `disabled` `readOnly` `onFocus` `onBlur`
+此外还支持以下原生属性：`autoComplete` `disabled` `readOnly` `onFocus` `onBlur` `onCompositionStart` `onCompositionEnd`
 
-## CSS 变量
+### CSS 变量
 
 | 属性                | 说明                   | 默认值                   |
 | ------------------- | ---------------------- | ------------------------ |

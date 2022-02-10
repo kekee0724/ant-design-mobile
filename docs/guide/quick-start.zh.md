@@ -20,9 +20,9 @@ import { Button } from 'antd-mobile'
 
 ## 兼容性
 
-目前的兼容性标准为 iOS Safari >= 10 和 Chrome >= 49。
+如果你不做任何额外的处理，那么 antd-mobile 默认的兼容性为 iOS Safari >= 10 和 Chrome >= 51（也就是 ES6 的兼容标准）。
 
-但是需要你在项目中进行 Babel 配置：
+而通过下面的 babel 配置后，可以达到最大兼容性，为 iOS Safari >= 10 和 Chrome >= 49：
 
 ```json
 {
@@ -32,15 +32,13 @@ import { Button } from 'antd-mobile'
       {
         "targets": {
           "chrome": "49",
-          "ios": "10"
+          "ios": "9.1"
         }
       }
     ]
   ]
 }
 ```
-
-当然，你也可以根据自己项目中的实际需要对 `targets` 进行配置或者不进行 babel 编译。
 
 ## 在线体验
 
@@ -51,3 +49,7 @@ import { Button } from 'antd-mobile'
 欢迎加入我们的钉钉交流群：
 
 <img src="https://gw.alipayobjects.com/mdn/rms_25513e/afts/img/A*hBjlR4nUWjkAAAAAAAAAAAAAARQnAQ" alt="ding-group" width="300" />
+
+或者也可以加入我们的 Discord 讨论组：
+
+https://discord.gg/jmNvw4WFYn

@@ -23,9 +23,19 @@ type RcFieldProps = Omit<FieldProps, 'children'>
 
 const classPrefix = `adm-form-item`
 
-export type FormItemProps = RcFieldProps &
-  NativeProps &
-  Pick<ListItemProps, 'style' | 'onClick' | 'extra'> & {
+export type FormItemProps = Pick<
+  RcFieldProps,
+  | 'dependencies'
+  | 'valuePropName'
+  | 'name'
+  | 'rules'
+  | 'messageVariables'
+  | 'trigger'
+  | 'validateTrigger'
+  | 'shouldUpdate'
+  | 'initialValue'
+> &
+  Pick<ListItemProps, 'style' | 'onClick' | 'extra' | 'arrow'> & {
     label?: React.ReactNode
     help?: React.ReactNode
     hasFeedback?: boolean
@@ -35,7 +45,7 @@ export type FormItemProps = RcFieldProps &
     hidden?: boolean
     layout?: FormLayout
     children: ChildrenType
-  }
+  } & NativeProps
 
 interface MemoInputProps {
   value: any
@@ -61,6 +71,7 @@ type FormItemLayoutProps = Pick<
   | 'hidden'
   | 'layout'
   | 'extra'
+  | 'arrow'
 > & {
   htmlFor?: string
   errors?: string[]
@@ -79,6 +90,7 @@ const FormItemLayout: React.FC<FormItemLayoutProps> = props => {
     htmlFor,
     hidden,
     errors,
+    arrow,
   } = props
 
   const context = useContext(FormContext)
@@ -113,6 +125,7 @@ const FormItemLayout: React.FC<FormItemLayoutProps> = props => {
       })}
       disabled={disabled}
       onClick={props.onClick}
+      arrow={arrow}
     >
       {children}
     </List.Item>
@@ -144,6 +157,7 @@ export const FormItem: FC<FormItemProps> = props => {
     onClick,
     shouldUpdate,
     dependencies,
+    arrow,
     ...fieldProps
   } = props
 
@@ -209,6 +223,7 @@ export const FormItem: FC<FormItemProps> = props => {
         onClick={onClick}
         hidden={hidden}
         layout={layout}
+        arrow={arrow}
       >
         <NoStyleItemContext.Provider value={onSubMetaChange}>
           {baseChildren}

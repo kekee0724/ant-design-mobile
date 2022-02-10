@@ -20,9 +20,9 @@ If you are developing an internal project in alibaba group or ant group, please 
 
 ## Compatibility
 
-The current compatibility standards are iOS Safari >= 10 and Chrome >= 49.
+If you don't do any additional processing, then antd-mobile default compatibility is iOS Safari >= 10 and Chrome >= 51 (that is, ES6 compatibility standard).
 
-However, it is needed to add some babel config in your project:
+With the following babel configuration, maximum compatibility can be achieved for iOS Safari >= 10 and Chrome >= 49:
 
 ```json
 {
@@ -40,8 +40,11 @@ However, it is needed to add some babel config in your project:
 }
 ```
 
-And of course, you can adjust the `targets` config according to your requirements. Or just don't do babel transpiling.
-
 ## Playground
 
 If you don't want to configure your environment locally, you can also try it directly on [codesandbox](https://codesandbox.io/s/antd-mobile-snrxr?file=/package.json).
+
+## Discussion Groups
+
+- [DingDing](https://gw.alipayobjects.com/mdn/rms_25513e/afts/img/A*hBjlR4nUWjkAAAAAAAAAAAAAARQnAQ)
+- [Discord](https://discord.gg/jmNvw4WFYn)

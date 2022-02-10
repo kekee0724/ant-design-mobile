@@ -2,7 +2,7 @@
 
 <code src="./demos/demo1.tsx"></code>
 
-## API
+### Props
 
 | Name         | Description                                                        | Type                                                             | Default |
 | ------------ | ------------------------------------------------------------------ | ---------------------------------------------------------------- | ------- |
@@ -16,9 +16,9 @@
 | showCount    | Display the number of words, supports custom render                | `boolean \| ((length: number, maxLength?: number) => ReactNode)` | `false` |
 | id           | `id` of `textarea` element, often used in conjunction with `label` | `string`                                                         | -       |
 
-In addition, the following native attributes are supported: `autoComplete` `disabled` `readOnly` `onFocus` `onBlur`
+In addition, the following native attributes are supported: `autoComplete` `disabled` `readOnly` `onFocus` `onBlur` `onCompositionStart` `onCompositionEnd`
 
-## CSS Variables
+### CSS Variables
 
 | Name                | Description                   | Default                  |
 | ------------------- | ----------------------------- | ------------------------ |
