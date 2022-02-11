@@ -19,7 +19,7 @@ nav:
 | rows           | 图片下的内容几行截取                | `nubmer`                                                         | 2                                |
 | cutWidth       | 图片裁剪宽度                        | `string`                                                         | -                                |
 | cutHeight      | 图片裁剪高度                        | `string`                                                         | -                                |
-| style          | 自定义样式                          | css                                                              | -                                |
+| style          | 自定义样式                          | `css 丨 --text-content-margin 描述边距`                          | -                                |
 | onClick        | 卡片点击事件                        | `(event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void ` | -                                |
 | className      | 自定义                              | `class string `                                                  | -                                |
 | footer         | text 不满足时使用自定义图片下的内容 | `any `                                                           | -                                |

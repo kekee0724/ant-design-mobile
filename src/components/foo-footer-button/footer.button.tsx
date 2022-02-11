@@ -2,16 +2,19 @@ import React, { CSSProperties, FC, ReactNode } from 'react'
 
 import classNames from 'classnames'
 
+import Button from '../button'
 import { PureComponentProps } from '../foo'
 import type { GridProps } from '../grid'
 import Grid from '../grid'
+import Popover from '../popover'
 
 export interface ItemProps {
   span?: number
   onClick?: () => void
   children?: ReactNode
   align?: 'center' | 'top' | 'bottom'
-  justify?: 'left' | 'center' | 'right'
+  justify?: 'start' | 'center' | 'end'
+  gridItemProps?: any
   className?: string
   style?: CSSProperties
 }
@@ -33,10 +36,10 @@ export const Item: FC<ItemProps> = props => {
     case 'center':
       justifyClass = 'justify-center'
       break
-    case 'left':
+    case 'start':
       justifyClass = 'justify-start'
       break
-    case 'right':
+    case 'end':
       justifyClass = 'justify-end'
   }
   return (
@@ -60,14 +63,15 @@ export interface FooterButtonProps extends PureComponentProps {
   className?: string
   border?: boolean
   back?: boolean
-  children?: ReactNode
-  columns: number
-  gap: number | string | [number | string, number | string]
-  gridProps: Partial<GridProps>
+  columns?: number
+  gridProps?: Partial<GridProps>
+  gap?: number | string | [number | string, number | string]
+  showMore?: boolean
+  style?: CSSProperties
 }
 
 export const FooterButton: FC<FooterButtonProps> = (props: any) => {
-  const { back, border, columns, gap, className, gridProps } = props
+  const { back, border, columns, gap, className, gridProps, showMore } = props
   let { children } = props
 
   const bodyCls = classNames(
@@ -83,18 +87,60 @@ export const FooterButton: FC<FooterButtonProps> = (props: any) => {
     })
   }
 
-  return children instanceof Array && children.length > 1 ? (
-    <Grid
-      columns={columns || children?.length}
-      gap={gap}
-      className={bodyCls}
-      {...gridProps}
-    >
-      {children}
-    </Grid>
-  ) : (
-    <div className={bodyCls}>{children}</div>
-  )
+  if (children instanceof Array) {
+    if (showMore && children.length > (columns || 3)) {
+      return (
+        <Grid
+          columns={columns || (children!.length <= 3 ? children!.length : 4)}
+          gap={gap}
+          className={bodyCls}
+          {...gridProps}
+        >
+          {children.filter((_data, index) => index < (columns || 3))}
+          <Grid.Item>
+            <Popover.Menu
+              actions={children
+                .filter((_data, index) => index >= (columns || 3))
+                ?.map(data => {
+                  return {
+                    text:
+                      data.props.children instanceof Object
+                        ? data.props.children?.props?.children
+                        : data.props.children,
+                    props: data.props,
+                  } as any
+                })}
+              onAction={(e: any) => {
+                e.props.children instanceof Object
+                  ? e.props?.children?.props?.onClick &&
+                    e.props?.children?.props?.onClick()
+                  : e.props?.onClick && e.props?.onClick()
+              }}
+              placement={'topRight'}
+              trigger='click'
+            >
+              <Button block>更多</Button>
+            </Popover.Menu>
+          </Grid.Item>
+        </Grid>
+      )
+    } else if (children.length >= 1) {
+      return (
+        <Grid
+          columns={columns || children!.length}
+          gap={gap}
+          className={bodyCls}
+          {...gridProps}
+        >
+          {children}
+        </Grid>
+      )
+    } else {
+      return null
+    }
+  } else {
+    return <div className={bodyCls}>{children}</div>
+  }
 }
 
 FooterButton.defaultProps = {

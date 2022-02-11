@@ -55,3 +55,11 @@ nav:
 | all-show                                        | 将子级的 none 元素都显示                                                               |
 | margin、margin-v、margin-h、margin-left、...    | 边距，-xxs 微小边距，一般用于图标与文字之间、 -xs 微边距，紧凑布局使用、-sm 、-lg、-xl |
 | padding、padding-v、padding-h、margin-left、... | 边距，-xxs 微小边距，一般用于图标与文字之间、 -xs 微边距，紧凑布局使用、-sm 、-lg、-xl |
+
+margin 与 padding 说明
+
+中间参数 -left 左边距; -right 右边距; -top 上边距; -bottom 下边距; -v 上下边距; -h 左右边距;
+
+后面参数 @xxs: 4px; @xs: 8px; 默认: 12px; @sm: 16px; @lg: 24px; @xl: 32px;
+
+示例： margin-left、 margin-left-xs

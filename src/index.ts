@@ -117,6 +117,8 @@ export { ImageAuto } from './components/foo-image-auto'
 
 export { ImageText } from './components/foo-image-text'
 
+export { InputLabel } from './components/foo-input-label'
+
 export { ListContainer } from './components/foo-list-container'
 
 export { ListTitle } from './components/foo-list-title'
