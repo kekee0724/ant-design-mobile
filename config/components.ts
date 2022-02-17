@@ -93,6 +93,7 @@ export const components = {
     '/components/foo-container',
     '/components/foo-custom-header',
     '/components/foo-description',
+    '/components/foo-echarts',
     '/components/foo-fab',
     '/components/foo-file-icon',
     '/components/foo-fold',

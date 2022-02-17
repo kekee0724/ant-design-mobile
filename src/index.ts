@@ -99,6 +99,8 @@ export { CustomHeader } from './components/foo-custom-header'
 
 export { default as Description } from './components/foo-description'
 
+export { ECharts } from './components/foo-echarts'
+
 export { Fab, FabButton, FabButtons } from './components/foo-fab'
 
 export { Fold } from './components/foo-fold'
