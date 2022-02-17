@@ -1,6 +1,6 @@
 import './echarts.less'
 
-import { ECharts } from './echarts'
+import { ECharts } from './echarts-func'
 
 export type { EChartsProps } from './echarts'
 
