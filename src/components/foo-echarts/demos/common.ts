@@ -1081,29 +1081,29 @@ export const option13 = {
   'tooltip': {
     'trigger': 'axis',
     'textStyle': {
-      'fontSize': 28,
+      'fontSize': 14,
     },
     'axisPointer': {
       'type': 'shadow',
     },
   },
   'legend': {
-    'top': '9%',
+    // 'top': '9%',
     'left': 'center',
-    'itemWidth': 30,
-    'itemHeight': 30,
-    'textStyle': {
-      'fontSize': 28,
-      'color': '#fff',
-    },
+    // 'itemWidth': 15,
+    // 'itemHeight': 15,
+    // 'textStyle': {
+    // 'fontSize': 14,
+    // 'color': '#fff',
+    // },
   },
-  'grid': {
-    'left': '5%',
-    'right': '15%',
-    'top': '128',
-    'bottom': '4%',
-    'containLabel': true,
-  },
+  // 'grid': {
+  //   'left': '5%',
+  //   'right': '15%',
+  //   'top': '128',
+  //   'bottom': '4%',
+  //   'containLabel': true,
+  // },
   'xAxis': {
     'type': 'value',
     'axisTick': {
@@ -1126,10 +1126,10 @@ export const option13 = {
       'show': false,
     },
     'axisLabel': {
-      'color': '#fff',
-      'fontSize': 28,
+      // 'color': '#fff',
+      // 'fontSize': 14,
       'fontFamily': 'PingFangSC-Regular',
-      'align': 'right',
+      // 'align': 'right',
       'fontWeight': '400',
     },
     'axisLine': {
@@ -1155,38 +1155,38 @@ export const option13 = {
       'color': '#00cc00',
       'data': [
         {
-          'value': 2.1972245773362196,
-          'values': 9,
+          'rate': 2.1972245773362196,
+          'value': 9,
         },
         {
-          'value': 5.476463551931511,
-          'values': 239,
+          'rate': 5.476463551931511,
+          'value': 239,
         },
         {
-          'value': 2.5649493574615367,
-          'values': 13,
+          'rate': 2.5649493574615367,
+          'value': 13,
         },
         {
-          'value': 3.8501476017100584,
-          'values': 47,
+          'rate': 3.8501476017100584,
+          'value': 47,
         },
         {
-          'value': 6.481577129276431,
-          'values': 653,
+          'rate': 6.481577129276431,
+          'value': 653,
         },
         {
-          'value': 4.962844630259907,
-          'values': 143,
+          'rate': 4.962844630259907,
+          'value': 143,
         },
         {
-          'value': 4.844187086458591,
-          'values': 127,
+          'rate': 4.844187086458591,
+          'value': 127,
         },
       ],
       'label': {
         'show': true,
         'position': 'right',
-        'fontSize': 28,
+        // 'fontSize': 14,
       },
       'itemStyle': {
         'normal': {
@@ -1200,38 +1200,38 @@ export const option13 = {
       'color': '#50FAAB',
       'data': [
         {
+          'rate': 1,
           'value': 1,
-          'values': 1,
         },
         {
-          'value': 2.772588722239781,
-          'values': 16,
+          'rate': 2.772588722239781,
+          'value': 16,
         },
         {
+          'rate': 1,
           'value': 1,
-          'values': 1,
         },
         {
-          'value': 1.0986122886681096,
-          'values': 3,
+          'rate': 1.0986122886681096,
+          'value': 3,
         },
         {
-          'value': 4.532599493153256,
-          'values': 93,
+          'rate': 4.532599493153256,
+          'value': 93,
         },
         {
-          'value': 2.8903717578961645,
-          'values': 18,
+          'rate': 2.8903717578961645,
+          'value': 18,
         },
         {
+          'rate': 1,
           'value': 1,
-          'values': 1,
         },
       ],
       'label': {
         'show': true,
         'position': 'right',
-        'fontSize': 28,
+        // 'fontSize': 14,
       },
       'itemStyle': {
         'normal': {
