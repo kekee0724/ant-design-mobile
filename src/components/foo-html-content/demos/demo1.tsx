@@ -18,6 +18,65 @@ export default () => {
           }
         />
       </DemoBlock>
+      <DemoBlock title='高级用法' background='' padding='0'>
+        <HtmlContent
+          html={`<div class="as-article-body table-article">
+            项目名称：上汽通用五菱汽车股份有限公司青岛分公司总装车间离合器执行机构制动液加注机项目
+            <br/>
+            招标项目编号：0633-194012118095
+            <br/>
+            招标范围：离合器执行机构制动液加注机，1套
+            <br/>
+            招标机构：广西机电设备招标有限公司
+            <br/>
+            招标人：上汽通用五菱汽车股份有限公司
+            <br/>
+            开标时间：2019-03-06 10:00
+            <br/>
+            公示开始时间：2019-03-19 17:11
+            <br/>
+            评标公示截止时间：2019-03-22 23:59
+            <br/>
+            中标候选人名单：
+            <table border="1" style="border-collapse: collapse;" width="400px">
+             <tr>
+              <th width="30px">
+               候选人排名
+              </th>
+              <th width="130px">
+               投标商名称
+              </th>
+              <th width="120px">
+               制造商
+              </th>
+              <th width="120px">
+               制造商国别及地区
+              </th>
+             </tr>
+             <tr>
+              <td align="center">
+               1
+              </td>
+              <td align="center" style="word-wrap:break-word;word-break:break-all;">
+               FIVES？FILLING？&amp;？SEALING
+              </td>
+              <td align="center" style="word-wrap:break-word;word-break:break-all;">
+               FIVES FILLING &amp; SEALING
+              </td>
+              <td align="center" style="word-wrap:break-word;word-break:break-all;">
+               法国
+              </td>
+             </tr>
+            </table>
+            <br/>
+            <!--div class="login-prompt">
+                               <h4>**内容为隐藏内容，<a id="login" href="javascript:void(0);">登录</a>后即可查看，新用户请<a href="http://account.ebnew.com/pass/register.htm">注册</a>!</h4>
+                               <p><span class="custom-service">客服热线：400-0606-000</span><span class="">咨询电话：010-58851111</span></p>
+                             </div>-->
+           </div>
+           `}
+        />
+      </DemoBlock>
     </>
   )
 }
