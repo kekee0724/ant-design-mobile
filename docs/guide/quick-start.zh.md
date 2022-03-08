@@ -3,9 +3,9 @@
 ## 安装
 
 ```bash
-$ npm install --save antd-mobile@next
+$ npm install --save antd-mobile
 # or
-$ yarn add antd-mobile@next
+$ yarn add antd-mobile
 ```
 
 ## 引入
@@ -32,13 +32,17 @@ import { Button } from 'antd-mobile'
       {
         "targets": {
           "chrome": "49",
-          "ios": "9.1"
+          "ios": "10"
         }
       }
     ]
   ]
 }
 ```
+
+对于 TypeScript，我们兼容的版本是 >= 3.8。
+
+对于 React，我们兼容的版本是 >= 16.8.0。
 
 ## 在线体验
 

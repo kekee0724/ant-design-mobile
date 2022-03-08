@@ -1,4 +1,10 @@
-import React, { FC, ReactNode, useMemo, useState } from 'react'
+import React, {
+  forwardRef,
+  ReactNode,
+  useMemo,
+  useState,
+  useImperativeHandle,
+} from 'react'
 import { NativeProps, withNativeProps } from '../../utils/native-props'
 import dayjs, { Dayjs } from 'dayjs'
 import classNames from 'classnames'
@@ -7,15 +13,23 @@ import { ArrowLeft } from './arrow-left'
 import { ArrowLeftDouble } from './arrow-left-double'
 import { useConfig } from '../config-provider'
 import isoWeek from 'dayjs/plugin/isoWeek'
-import { useIsomorphicLayoutEffect } from 'ahooks'
+import { useIsomorphicLayoutEffect, useUpdateEffect } from 'ahooks'
 
 dayjs.extend(isoWeek)
 
 const classPrefix = 'adm-calendar'
 
+type Page = { month: number; year: number }
+
+export type CalenderRef = {
+  jumpTo: (page: Page | ((page: Page) => Page)) => void
+  jumpToToday: () => void
+}
+
 export type CalendarProps = {
   weekStartsOn?: 'Monday' | 'Sunday'
   renderLabel?: (date: Date) => string | null | undefined
+  onPageChange?: (year: number, month: number) => void
 } & (
   | {
       selectionMode?: undefined
@@ -42,7 +56,7 @@ const defaultProps = {
   weekStartsOn: 'Sunday',
 }
 
-export const Calendar: FC<CalendarProps> = p => {
+export const Calendar = forwardRef<CalenderRef, CalendarProps>((p, ref) => {
   const today = dayjs()
   const props = mergeProps(defaultProps, p)
   const { locale } = useConfig()
@@ -52,7 +66,53 @@ export const Calendar: FC<CalendarProps> = p => {
     if (item) markItems.unshift(item)
   }
 
-  const [current, setCurrent] = useState(() => dayjs().date(1))
+  const dateRange = useMemo<[Date | null, Date | null]>(() => {
+    if (props.selectionMode === 'single') {
+      const value = props.value ?? props.defaultValue ?? null
+      return [value, value]
+    } else if (props.selectionMode === 'range') {
+      return props.value ?? props.defaultValue ?? [null, null]
+    } else {
+      return [null, null]
+    }
+  }, [props.selectionMode, props.value, props.defaultValue])
+
+  const [begin, setBegin] = useState<Dayjs | null>(null)
+  const [end, setEnd] = useState<Dayjs | null>(null)
+  useIsomorphicLayoutEffect(() => {
+    setBegin(dateRange[0] ? dayjs(dateRange[0]) : null)
+    setEnd(dateRange[1] ? dayjs(dateRange[1]) : null)
+  }, [dateRange[0], dateRange[1]])
+
+  const [current, setCurrent] = useState(() =>
+    dayjs(dateRange[0] ?? today).date(1)
+  )
+
+  useUpdateEffect(() => {
+    props.onPageChange?.(current.year(), current.month() + 1)
+  }, [current])
+
+  useImperativeHandle(ref, () => ({
+    jumpTo: pageOrPageGenerator => {
+      let page: Page
+      if (typeof pageOrPageGenerator === 'function') {
+        page = pageOrPageGenerator({
+          year: current.year(),
+          month: current.month() + 1,
+        })
+      } else {
+        page = pageOrPageGenerator
+      }
+      setCurrent(
+        dayjs()
+          .year(page.year)
+          .month(page.month - 1)
+      )
+    },
+    jumpToToday: () => {
+      setCurrent(dayjs().date(1))
+    },
+  }))
   const header = (
     <div className={`${classPrefix}-header`}>
       <a
@@ -96,24 +156,6 @@ export const Calendar: FC<CalendarProps> = p => {
     </div>
   )
 
-  const dateRange = useMemo<[Date | null, Date | null]>(() => {
-    if (props.selectionMode === 'single') {
-      const value = props.value ?? props.defaultValue ?? null
-      return [value, value]
-    } else if (props.selectionMode === 'range') {
-      return props.value ?? props.defaultValue ?? [null, null]
-    } else {
-      return [null, null]
-    }
-  }, [props.selectionMode, props.value, props.defaultValue])
-
-  const [begin, setBegin] = useState<Dayjs | null>(null)
-  const [end, setEnd] = useState<Dayjs | null>(null)
-  useIsomorphicLayoutEffect(() => {
-    setBegin(dateRange[0] ? dayjs(dateRange[0]) : null)
-    setEnd(dateRange[1] ? dayjs(dateRange[1]) : null)
-  }, [dateRange[0], dateRange[1]])
-
   function renderCells() {
     const cells: ReactNode[] = []
     let iterator = current.subtract(current.isoWeekday(), 'day')
@@ -153,13 +195,18 @@ export const Calendar: FC<CalendarProps> = p => {
               props.onChange?.(d.toDate())
             } else if (props.selectionMode === 'range') {
               if (begin !== null && end === null) {
-                if (d.isBefore(begin)) {
-                  setEnd(begin)
-                  setBegin(d)
-                  props.onChange?.([d.toDate(), begin.toDate()])
+                if (begin.isSame(d.toDate())) {
+                  setBegin(null)
+                  setEnd(null)
                 } else {
-                  setEnd(d)
-                  props.onChange?.([begin.toDate(), d.toDate()])
+                  if (d.isBefore(begin)) {
+                    setEnd(begin)
+                    setBegin(d)
+                    props.onChange?.([d.toDate(), begin.toDate()])
+                  } else {
+                    setEnd(d)
+                    props.onChange?.([begin.toDate(), d.toDate()])
+                  }
                 }
               } else {
                 setBegin(d)
@@ -201,4 +248,4 @@ export const Calendar: FC<CalendarProps> = p => {
       {body}
     </div>
   )
-}
+})

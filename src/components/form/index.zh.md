@@ -2,39 +2,33 @@
 
 <code src="./demos/demo1.tsx"></code>
 
-<code src="./demos/demo2.tsx"></code>
-
 <code src="./demos/demo3.tsx"></code>
 
-自定义或第三方的表单控件，也可以与 Form 组件一起使用。只要该组件遵循以下的约定：
+<code src="./demos/demo5.tsx"></code>
 
-> - 提供受控属性 `value` 值同名的属性。
-> - 提供 `onChange` 事件。
-
-<code src="./demos/demo4.tsx"></code>
-
-<code src="./demos/demo-error.tsx" debug></code>
+<code src="./demos/demo2.tsx"></code>
 
 ## Form
 
 ### 属性
 
-| 属性             | 说明                                                         | 类型                                           | 默认值       |
-| ---------------- | ------------------------------------------------------------ | ---------------------------------------------- | ------------ |
-| hasFeedback      | 是否展示错误反馈                                             | `boolean`                                      | `true`       |
-| layout           | 布局模式                                                     | `'vertical' \| 'horizontal'`                   | `'vertical'` |
-| mode             | 支持默认和卡片两种模式                                       | `'default' \| 'card'`                          | `'default'`  |
-| footer           | 表单尾部的内容，常常用来放置提交按钮                         | `ReactNode`                                    | -            |
-| form             | 经 `Form.useForm()` 创建的 form 控制实例，不提供时会自动创建 | `FormInstance`                                 | -            |
-| initialValues    | 表单默认值，只有初始化以及重置时生效                         | `object`                                       | -            |
-| name             | 表单名称，会作为表单字段 `id` 前缀使用                       | `string`                                       | -            |
-| preserve         | 当字段被删除时保留字段值                                     | `boolean`                                      | `true`       |
-| validateMessages | 验证提示模板，说明见下                                       | `ValidateMessages`                             | -            |
-| validateTrigger  | 统一设置字段触发验证的时机                                   | `string \| string[]`                           | `'onChange'` |
-| onFieldsChange   | 字段更新时触发                                               | `(changedFields, allFields) => void`           | -            |
-| onFinish         | 提交表单且数据验证成功后触发                                 | `(values) => void`                             | -            |
-| onFinishFailed   | 提交表单且数据验证失败后触发                                 | `({ values, errorFields, outOfDate }) => void` | -            |
-| onValuesChange   | 字段值更新时触发                                             | `(changedValues, allValues) => void`           | -            |
+| 属性              | 说明                                                         | 类型                                               | 默认值       |
+| ----------------- | ------------------------------------------------------------ | -------------------------------------------------- | ------------ |
+| mode              | 支持默认和卡片两种模式                                       | `'default' \| 'card'`                              | `'default'`  |
+| layout            | 布局模式                                                     | `'vertical' \| 'horizontal'`                       | `'vertical'` |
+| hasFeedback       | 是否展示错误反馈                                             | `boolean`                                          | `true`       |
+| requiredMarkStyle | 必填选填的标记样式                                           | `'asterisk' \| 'text-required' \| 'text-optional'` | `'asterisk'` |
+| footer            | 表单尾部的内容，常常用来放置提交按钮                         | `ReactNode`                                        | -            |
+| form              | 经 `Form.useForm()` 创建的 form 控制实例，不提供时会自动创建 | `FormInstance`                                     | -            |
+| initialValues     | 表单默认值，只有初始化以及重置时生效                         | `object`                                           | -            |
+| name              | 表单名称，会作为表单字段 `id` 前缀使用                       | `string`                                           | -            |
+| preserve          | 当字段被删除时保留字段值                                     | `boolean`                                          | `true`       |
+| validateMessages  | 验证提示模板，说明见下                                       | `ValidateMessages`                                 | -            |
+| validateTrigger   | 统一设置字段触发验证的时机                                   | `string \| string[]`                               | `'onChange'` |
+| onFieldsChange    | 字段更新时触发                                               | `(changedFields, allFields) => void`               | -            |
+| onFinish          | 提交表单且数据验证成功后触发                                 | `(values) => void`                                 | -            |
+| onFinishFailed    | 提交表单且数据验证失败后触发                                 | `({ values, errorFields, outOfDate }) => void`     | -            |
+| onValuesChange    | 字段值更新时触发                                             | `(changedValues, allValues) => void`               | -            |
 
 ### FormInstance
 
@@ -64,38 +58,94 @@ const validateMessages = {
 <Form validateMessages={validateMessages} />;
 ```
 
+### CSS 变量
+
+| 变量名          | 描述                   | 默认值                              |
+| --------------- | ---------------------- | ----------------------------------- |
+| --border-inner  | 表单项之间的边框样式   | `solid 1px var(--adm-border-color)` |
+| --border-top    | 表单容器顶部的边框样式 | `solid 1px var(--adm-border-color)` |
+| --border-bottom | 表单容器底部的边框样式 | `solid 1px var(--adm-border-color)` |
+
 ## Form.Item
 
 ### 属性
 
-| 属性             | 说明                                                                                                         | 类型                                          | 默认值                                             |
-| ---------------- | ------------------------------------------------------------------------------------------------------------ | --------------------------------------------- | -------------------------------------------------- |
-| label            | 标签名                                                                                                       | `ReactNode`                                   | -                                                  |
-| help             | 提示文本                                                                                                     | `ReactNode`                                   | -                                                  |
-| extra            | 表单项右侧区域                                                                                               | `ReactNode`                                   | -                                                  |
-| required         | 是否必选                                                                                                     | `boolean`                                     | `false`（如有设置 `rules`，则会根据 `rules` 判断） |
-| disabled         | 是否禁用                                                                                                     | `boolean`                                     | `false`                                            |
-| noStyle          | 不使用样式，只使用字段管理                                                                                   | `boolean`                                     | `false`                                            |
-| hidden           | 是否隐藏整个字段                                                                                             | `boolean`                                     | `false`                                            |
-| layout           | 布局模式                                                                                                     | `'vertical' \| 'horizontal'`                  | 父级 Form 的 `layout`                              |
-| hasFeedback      | 是否展示错误反馈                                                                                             | `boolean`                                     | `true`                                             |
-| arrow            | 是否展示右侧箭头                                                                                             | `boolean \| ReactNode`                        | -                                                  |
-| onClick          | 点击时触发                                                                                                   | `(e: React.MouseEvent) => void`               | -                                                  |
-| dependencies     | 设置依赖字段，说明见下                                                                                       | `NamePath[]`                                  | -                                                  |
-| valuePropName    | 子节点的值的属性，如 Switch 的是 'checked'。该属性为 `getValueProps` 的封装，自定义 `getValueProps` 后会失效 | `string`                                      | `value`                                            |
-| name             | 字段名，支持数组                                                                                             | `NamePath`                                    | -                                                  |
-| rules            | 校验规则，设置字段的校验逻辑                                                                                 | `Rule[]`                                      | -                                                  |
-| messageVariables | 默认验证字段的信息                                                                                           | `Record<string, string>`                      | -                                                  |
-| trigger          | 设置收集字段值变更的时机                                                                                     | `string`                                      | `onChange`                                         |
-| validateTrigger  | 设置字段校验的时机                                                                                           | `string \| string[]`                          | `onChange`                                         |
-| shouldUpdate     | 自定义字段更新逻辑，说明见下                                                                                 | `boolean \| (prevValue, curValue) => boolean` | `false`                                            |
-| initialValue     | 设置子元素默认值，如果与 Form 的 `initialValues` 冲突则以 Form 为准                                          | `any`                                         | -                                                  |
+| 属性                                               | 说明                                                                                                         | 类型                                          | 默认值                                             |
+| -------------------------------------------------- | ------------------------------------------------------------------------------------------------------------ | --------------------------------------------- | -------------------------------------------------- |
+| label                                              | 标签名                                                                                                       | `ReactNode`                                   | -                                                  |
+| help                                               | 提示文本                                                                                                     | `ReactNode`                                   | -                                                  |
+| description                                        | 表单项下方区域                                                                                               | `ReactNode`                                   | -                                                  |
+| extra                                              | 表单项右侧区域                                                                                               | `ReactNode`                                   | -                                                  |
+| required                                           | 是否必选                                                                                                     | `boolean`                                     | `false`（如有设置 `rules`，则会根据 `rules` 判断） |
+| disabled                                           | 是否禁用                                                                                                     | `boolean`                                     | `false`                                            |
+| noStyle                                            | 不使用样式，只使用字段管理                                                                                   | `boolean`                                     | `false`                                            |
+| hidden                                             | 是否隐藏整个字段                                                                                             | `boolean`                                     | `false`                                            |
+| layout                                             | 布局模式                                                                                                     | `'vertical' \| 'horizontal'`                  | 父级 Form 的 `layout`                              |
+| childElementPosition <Experimental></Experimental> | 表单控件部分的位置                                                                                           | `'normal' \| 'right'`                         | `'normal'`                                         |
+| hasFeedback                                        | 是否展示错误反馈                                                                                             | `boolean`                                     | `true`                                             |
+| arrow                                              | 是否展示右侧箭头                                                                                             | `boolean \| ReactNode`                        | -                                                  |
+| onClick                                            | 点击时触发                                                                                                   | `(e: React.MouseEvent) => void`               | -                                                  |
+| dependencies                                       | 设置依赖字段，说明见下                                                                                       | `NamePath[]`                                  | -                                                  |
+| valuePropName                                      | 子节点的值的属性，如 Switch 的是 'checked'。该属性为 `getValueProps` 的封装，自定义 `getValueProps` 后会失效 | `string`                                      | `value`                                            |
+| name                                               | 字段名，支持数组                                                                                             | `NamePath`                                    | -                                                  |
+| rules                                              | 校验规则，设置字段的校验逻辑                                                                                 | `Rule[]`                                      | -                                                  |
+| messageVariables                                   | 默认验证字段的信息                                                                                           | `Record<string, string>`                      | -                                                  |
+| trigger                                            | 设置收集字段值变更的时机                                                                                     | `string`                                      | `onChange`                                         |
+| validateTrigger                                    | 设置字段校验的时机                                                                                           | `string \| string[]`                          | `onChange`                                         |
+| shouldUpdate                                       | 自定义字段更新逻辑，说明见下                                                                                 | `boolean \| (prevValue, curValue) => boolean` | `false`                                            |
+| initialValue                                       | 设置子元素默认值，如果与 Form 的 `initialValues` 冲突则以 Form 为准                                          | `any`                                         | -                                                  |
 
-被设置了 `name` 属性的 `Form.Item` 包装的控件，表单控件会自动添加 `value`（或 `valuePropName` 指定的其他属性） `onChange`（或 `trigger` 指定的其他属性），数据同步将被 Form 接管，这会导致以下结果：
+被设置了 `name` 属性的 `Form.Item` 包装的控件，表单控件会**自动添加** `value`（或 `valuePropName` 指定的其他属性） `onChange`（或 `trigger` 指定的其他属性），数据同步将被 Form 接管，因此，如果你给 `Form.Item` 设置了 `name` 属性，**那么请确保它的 `children` 是一个有效的 `ReactElement` 控件**，并且能够接受上文中提到的 `value` 和 `onChange` 属性（或指定的其他属性），例如：
+
+```jsx
+<Form.Item name='foo'>
+  <Input />
+</Form.Item>
+```
+
+而下面这些写法都是错误的：
+
+```jsx
+<Form.Item name='foo'>
+  <Input />
+  <div>hello</div>
+</Form.Item>
+// 错误：Form.Item 的 children 中包含了多个元素
+```
+
+```jsx
+<Form.Item name='foo'>
+  hello
+  <Input />
+</Form.Item>
+// 错误：同上，Form.Item 的 children 中包含了多个元素
+```
+
+```jsx
+<Form.Item name='foo'>
+  <div>
+    <Input />
+  </div>
+</Form.Item>
+// 错误：Form.Item 的 children 其实是 div，而 div 并不能接受 value 和 onChange 属性
+```
+
+同时请注意：
 
 1. 你**不再需要也不应该**用 `onChange` 来做数据收集同步（你可以使用 Form 的 `onValuesChange`），但还是可以继续监听 `onChange` 事件。
 2. 你不能用控件的 `value` 或 `defaultValue` 等属性来设置表单域的值，默认值可以用 Form 里的 `initialValues` 来设置。注意 `initialValues` 不能被 `setState` 动态更新，你需要用 `setFieldsValue` 来更新。
 3. 你不应该用 `setState`，可以使用 `form.setFieldsValue` 来动态改变表单值。
+
+举个例子，下面的这种写法是错误的：
+
+```jsx
+<Form.Item name='foo'>
+  <Input
+    value={myInputValue} // 错误：value 不应该被手动控制
+    onChange={(v) => { setMyInputValue(v) }} // 错误：虽然你可以监听 onChange 事件，但是你不应该在这里去维护自己的状态
+  />
+</Form.Item>
+```
 
 ### dependencies
 
@@ -145,6 +195,38 @@ Form 通过增量更新方式，只更新被修改的字段相关组件以达到
   </Form.Item>
 </Form>
 ```
+
+## 自定义表单字段
+
+自定义或第三方的表单控件，也可以与 Form 组件一起使用。只要该组件遵循以下的约定：
+
+- 提供受控属性 `value` 值同名的属性。
+- 提供 `onChange` 事件。
+
+<code src="./demos/demo4.tsx"></code>
+
+## Form.Header
+
+你可以通过 `Form.Header` 来对表单项进行分组。
+
+### 属性
+
+| 属性     | 说明                                                 | 类型        | 默认值 |
+| -------- | ---------------------------------------------------- | ----------- | ------ |
+| children | 分组标题，如果不传的话，则会渲染为一个没有内容的分隔 | `ReactNode` | -      |
+
+## Form.Subscribe
+
+### 属性
+
+| 属性     | 说明                           | 类型                                                                    | 默认值 |
+| -------- | ------------------------------ | ----------------------------------------------------------------------- | ------ |
+| to       | 同 Form.Item 的 `dependencies` | `NamePath[]`                                                            | -      |
+| children | 渲染函数                       | `(changedValues: Record<string, any>, form: FormInstance) => ReactNode` | -      |
+
+### 示例
+
+<code src="./demos/demo-subscribe.tsx"></code>
 
 ## 一些通用的类型定义
 

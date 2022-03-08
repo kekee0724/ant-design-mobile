@@ -4,7 +4,7 @@
 
 antd-mobile itself only supports React stack.
 
-We are currently developing the corresponding Alipay mini program version, which is expected to be released as a separate component library in the near future.
+For Alipay mini programs, you can use [antd-mini](https://mini.ant.design/).
 
 There is no corresponding twin component library for mini programs on WeChat and other platforms, and community members are welcome to develop them.
 
@@ -14,7 +14,7 @@ No. Consider using [antd-mobile-rn](https://github.com/ant-design/ant-design-mob
 
 ### Why did you jump from v2 to v5? Where did v3 and v4 go?
 
-V2 has been released a long time ago. In the last two years, we have developed two versions of v3 and v4 within the company, but they have not been released to the community in the end. We will release the v5 version to the community simultaneously.
+V2 has been released a long time ago. In the last two years, we have developed two versions of v3 and v4 within the company, but they have not been released to the community in the end.
 
 ### Should I start using the v5 version now?
 
@@ -64,3 +64,7 @@ For the detailed explanation, please refer to:
 
 - [300ms tap delay, gone away](https://developers.google.com/web/updates/2013/12/300ms-tap-delay-gone-away)
 - [More Responsive Tapping on iOS](https://webkit.org/blog/5610/more-responsive-tapping-on-ios/)
+
+### About React Hot Loader
+
+React Hot Loader is relatively intrusive to the project, and many components in antd-mobile (such as Swiper Tabs Form TabBar SideBar Dropdown Space Steps) are not compatible with it, and React Hot Loader itself is also recommended in the README. Don't use it anymore, so please consider removing React Hot Loader or replacing it with [React Fast Refresh](https://github.com/facebook/react/issues/16604).

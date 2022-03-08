@@ -6,10 +6,9 @@ const pxToRem = require('postcss-pxtorem')
 const config: IConfig = {
   mode: 'site',
   title: 'Ant Design Mobile',
-  logo: 'https://gw.alipayobjects.com/zos/bmw-prod/b4eaf7fb-c494-497a-81a7-4b588555948c.svg',
-  // logo: 'https://gw.alipayobjects.com/zos/bmw-prod/ca6dffc0-d922-478d-9854-1f8a3d2eab4c.svg',
+  logo: 'https://gw.alipayobjects.com/zos/bmw-prod/b874caa9-4458-412a-9ac6-a61486180a62.svg',
   favicon:
-    'https://gw.alipayobjects.com/zos/bmw-prod/48fd0638-85c4-42a6-9420-617b80845004.svg',
+    'https://gw.alipayobjects.com/zos/bmw-prod/69a27fcc-ce52-4f27-83f1-c44541e9b65d.svg',
   navs: {
     'en': [
       {
@@ -151,6 +150,10 @@ const config: IConfig = {
         path: '/guide/import-on-demand',
       },
       {
+        title: 'About Experimental',
+        path: '/zh/guide/what-is-experimental',
+      },
+      {
         title: 'HD (Experimental)',
         path: '/guide/hd',
       },
@@ -183,6 +186,10 @@ const config: IConfig = {
       {
         title: '按需加载',
         path: '/zh/guide/import-on-demand',
+      },
+      {
+        title: '关于试验性',
+        path: '/zh/guide/what-is-experimental',
       },
       {
         title: '高清适配（试验性）',

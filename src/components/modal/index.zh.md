@@ -2,6 +2,10 @@
 
 <code src="./demos/demo1.tsx"></code>
 
+<code src="./demos/demo2.tsx"></code>
+
+<code src="./demos/demo3.tsx" debug></code>
+
 ## Modal
 
 ### 属性
@@ -86,3 +90,7 @@ const handler = Modal.show(props)
 | onConfirm   | 点击确认按钮时触发 | `() => void \| Promise<void>` | -        |
 | cancelText  | 取消按钮的内容     | `ReactNode`                   | `'取消'` |
 | onCancel    | 点击取消按钮时触发 | `() => void \| Promise<void>` | -        |
+
+### Modal.clear
+
+可以通过调用 `Modal` 上的 `clear` 方法关闭所有打开的弹窗，通常用于路由监听中，处理路由前进、后退不能关闭弹窗的问题。

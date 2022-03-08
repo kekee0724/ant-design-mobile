@@ -1,4 +1,4 @@
-import React, { FC, useContext, useCallback, useState } from 'react'
+import React, { FC, useContext, useCallback, useState, useMemo } from 'react'
 import classNames from 'classnames'
 import { NativeProps } from '../../utils/native-props'
 import { Field, FormInstance } from 'rc-field-form'
@@ -11,6 +11,9 @@ import { FormContext, NoStyleItemContext } from './context'
 import { toArray } from './utils'
 import List, { ListItemProps } from '../list'
 import type { FormLayout } from './index'
+import Popover from '../popover'
+import { QuestionCircleOutline } from 'antd-mobile-icons'
+import { useConfig } from '../config-provider'
 
 const NAME_SPLIT = '__SPLIT__'
 
@@ -35,7 +38,10 @@ export type FormItemProps = Pick<
   | 'shouldUpdate'
   | 'initialValue'
 > &
-  Pick<ListItemProps, 'style' | 'onClick' | 'extra' | 'arrow'> & {
+  Pick<
+    ListItemProps,
+    'style' | 'onClick' | 'extra' | 'arrow' | 'description'
+  > & {
     label?: React.ReactNode
     help?: React.ReactNode
     hasFeedback?: boolean
@@ -44,6 +50,7 @@ export type FormItemProps = Pick<
     disabled?: boolean
     hidden?: boolean
     layout?: FormLayout
+    childElementPosition?: 'normal' | 'right'
     children: ChildrenType
   } & NativeProps
 
@@ -72,6 +79,8 @@ type FormItemLayoutProps = Pick<
   | 'layout'
   | 'extra'
   | 'arrow'
+  | 'description'
+  | 'childElementPosition'
 > & {
   htmlFor?: string
   errors?: string[]
@@ -91,9 +100,13 @@ const FormItemLayout: React.FC<FormItemLayoutProps> = props => {
     hidden,
     errors,
     arrow,
+    description,
+    childElementPosition = 'normal',
   } = props
 
   const context = useContext(FormContext)
+
+  const { locale } = useConfig()
 
   const hasFeedback =
     props.hasFeedback !== undefined ? props.hasFeedback : context.hasFeedback
@@ -101,17 +114,57 @@ const FormItemLayout: React.FC<FormItemLayoutProps> = props => {
 
   const feedback = hasFeedback && errors && errors.length > 0 ? errors[0] : null
 
+  const requiredMark = (() => {
+    const { requiredMarkStyle } = context
+    switch (requiredMarkStyle) {
+      case 'asterisk':
+        return (
+          required && (
+            <span className={`${classPrefix}-required-asterisk`}>*</span>
+          )
+        )
+      case 'text-required':
+        return (
+          required && (
+            <span className={`${classPrefix}-required-text`}>
+              ({locale.Form.required})
+            </span>
+          )
+        )
+      case 'text-optional':
+        return (
+          !required && (
+            <span className={`${classPrefix}-required-text`}>
+              ({locale.Form.optional})
+            </span>
+          )
+        )
+      default:
+        return null
+    }
+  })()
+
   const labelElement = label ? (
     <label className={`${classPrefix}-label`} htmlFor={htmlFor}>
       {label}
-      {required && <span className={`${classPrefix}-label-required`}>*</span>}
-      {help && <span className={`${classPrefix}-label-help`}>{help}</span>}
+      {requiredMark}
+      {help && (
+        <span className={`${classPrefix}-label-help`}>
+          <Popover content={help} mode='dark' trigger='click'>
+            <QuestionCircleOutline />
+          </Popover>
+        </span>
+      )}
     </label>
   ) : null
 
-  const descriptionElement = feedback && (
-    <div className={`${classPrefix}-footer`}>{feedback}</div>
-  )
+  const descriptionElement =
+    feedback || description ? (
+      <>
+        {description}
+        <div className={`${classPrefix}-footer`}>{feedback}</div>
+      </>
+    ) : null
 
   return (
     <List.Item
@@ -120,14 +173,28 @@ const FormItemLayout: React.FC<FormItemLayoutProps> = props => {
       prefix={layout === 'horizontal' && labelElement}
       extra={extra}
       description={descriptionElement}
-      className={classNames(classPrefix, className, {
-        [`${classPrefix}-hidden`]: hidden,
-      })}
+      className={classNames(
+        classPrefix,
+        className,
+        `${classPrefix}-${layout}`,
+        {
+          [`${classPrefix}-hidden`]: hidden,
+        }
+      )}
       disabled={disabled}
       onClick={props.onClick}
       arrow={arrow}
     >
-      {children}
+      <div
+        className={classNames(
+          `${classPrefix}-child`,
+          `${classPrefix}-child-position-${childElementPosition}`
+        )}
+      >
+        <div className={classNames(`${classPrefix}-child-inner`)}>
+          {children}
+        </div>
+      </div>
     </List.Item>
   )
 }
@@ -147,6 +214,8 @@ export const FormItem: FC<FormItemProps> = props => {
     noStyle,
     hidden,
     layout,
+    childElementPosition,
+    description,
     // Field 相关
     disabled,
     rules,
@@ -215,6 +284,7 @@ export const FormItem: FC<FormItemProps> = props => {
         label={label}
         extra={extra}
         help={help}
+        description={description}
         required={isRequired}
         disabled={disabled}
         hasFeedback={hasFeedback}
@@ -223,6 +293,7 @@ export const FormItem: FC<FormItemProps> = props => {
         onClick={onClick}
         hidden={hidden}
         layout={layout}
+        childElementPosition={childElementPosition}
         arrow={arrow}
       >
         <NoStyleItemContext.Provider value={onSubMetaChange}>
@@ -272,14 +343,9 @@ export const FormItem: FC<FormItemProps> = props => {
         const isRequired =
           required !== undefined
             ? required
-            : !!(
-                rules &&
-                rules.some(rule => {
-                  if (rule && typeof rule === 'object' && rule.required) {
-                    return true
-                  }
-                  return false
-                })
+            : rules &&
+              rules.some(
+                rule => !!(rule && typeof rule === 'object' && rule.required)
               )
 
         const fieldId = (toArray(name).length && meta ? meta.name : []).join(

@@ -3,9 +3,9 @@
 ## Installation
 
 ```bash
-$ npm install --save antd-mobile@next
+$ npm install --save antd-mobile
 # or
-$ yarn add antd-mobile@next
+$ yarn add antd-mobile
 ```
 
 ## Import
@@ -39,6 +39,10 @@ With the following babel configuration, maximum compatibility can be achieved fo
   ]
 }
 ```
+
+For TypeScript, antd-mobile is compatible with versions >= 3.8.
+
+For React, antd-mobile is compatible with versions >= 16.8.0.
 
 ## Playground
 

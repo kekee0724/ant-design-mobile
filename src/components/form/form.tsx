@@ -1,4 +1,4 @@
-import React, { ReactNode, forwardRef, ForwardedRef } from 'react'
+import React, { ReactNode, forwardRef, ForwardedRef, useMemo } from 'react'
 import classNames from 'classnames'
 import { NativeProps } from '../../utils/native-props'
 import List, { ListProps } from '../list'
@@ -7,10 +7,12 @@ import type {
   FormProps as RcFormProps,
   FormInstance as RCFormInstance,
 } from 'rc-field-form'
-import { FormContext, FormContextType } from './context'
+import { defaultFormContext, FormContext, FormContextType } from './context'
 import { mergeProps } from '../../utils/with-default-props'
 import type { FormLayout } from '.'
 import { Header } from './header'
+import { useConfig } from '../config-provider'
+import merge from 'lodash/merge'
 
 const classPrefix = 'adm-form'
 
@@ -43,17 +45,14 @@ export type FormProps = Pick<
   | 'onValuesChange'
   | 'children'
 > &
-  NativeProps &
+  NativeProps<'--border-inner' | '--border-top' | '--border-bottom'> &
   Partial<FormContextType> & {
     footer?: ReactNode
     layout?: FormLayout
     mode?: ListProps['mode']
   }
 
-const defaultProps = {
-  hasFeedback: true,
-  layout: 'vertical',
-}
+const defaultProps = defaultFormContext
 
 export const Form = forwardRef<FormInstance, FormProps>((p, ref) => {
   const props = mergeProps(defaultProps, p)
@@ -65,8 +64,21 @@ export const Form = forwardRef<FormInstance, FormProps>((p, ref) => {
     layout,
     footer,
     mode,
+    requiredMarkStyle,
     ...formProps
   } = props
+
+  const { locale } = useConfig()
+
+  const validateMessages = useMemo(
+    () =>
+      merge(
+        {},
+        locale.Form.defaultValidateMessages,
+        formProps.validateMessages
+      ),
+    [locale.Form.defaultValidateMessages, formProps.validateMessages]
+  )
 
   const lists: ReactNode[] = []
 
@@ -83,7 +95,7 @@ export const Form = forwardRef<FormInstance, FormProps>((p, ref) => {
     )
     items = []
   }
-  React.Children.forEach(props.children, (child, index) => {
+  React.Children.forEach(props.children, child => {
     if (React.isValidElement(child) && child.type === Header) {
       collect()
       currentHeader = child.props.children
@@ -95,15 +107,17 @@ export const Form = forwardRef<FormInstance, FormProps>((p, ref) => {
 
   return (
     <RcForm
-      className={classNames(classPrefix, `${classPrefix}-${layout}`, className)}
+      className={classNames(classPrefix, className)}
       style={style}
       ref={ref as ForwardedRef<RCFormInstance>}
       {...formProps}
+      validateMessages={validateMessages}
     >
       <FormContext.Provider
         value={{
-          hasFeedback: hasFeedback,
+          hasFeedback,
           layout,
+          requiredMarkStyle,
         }}
       >
         {lists}

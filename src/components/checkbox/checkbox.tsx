@@ -1,4 +1,4 @@
-import React, { FC, useContext } from 'react'
+import React, { FC, useContext, useEffect, useRef } from 'react'
 import { NativeProps, withNativeProps } from '../../utils/native-props'
 import classNames from 'classnames'
 import { CheckboxGroupContext } from './group-context'
@@ -7,6 +7,7 @@ import { mergeProps } from '../../utils/with-default-props'
 import { devWarning } from '../../utils/dev-log'
 import { CheckIcon } from './check-icon'
 import { IndeterminateIcon } from './indeterminate-icon'
+import { isDev } from '../../utils/is-dev'
 
 const classPrefix = `adm-checkbox`
 
@@ -38,27 +39,25 @@ export const Checkbox: FC<CheckboxProps> = p => {
     value: props.checked,
     defaultValue: props.defaultChecked,
     onChange: props.onChange,
-  })
+  }) as [boolean, (v: boolean) => void]
   let disabled = props.disabled
-
-  const usageWarning = () => {
-    if (p.checked !== undefined) {
-      devWarning(
-        'Checkbox',
-        'When used with `Checkbox.Group`, the `checked` prop of `Checkbox` will not work if `value` prop of `Checkbox` is not undefined.'
-      )
-    }
-    if (p.defaultChecked !== undefined) {
-      devWarning(
-        'Checkbox',
-        'When used with `Checkbox.Group`, the `defaultChecked` prop of `Checkbox` will not work if `value` prop of `Checkbox` is not undefined.'
-      )
-    }
-  }
 
   const { value } = props
   if (groupContext && value !== undefined) {
-    usageWarning()
+    if (isDev) {
+      if (p.checked !== undefined) {
+        devWarning(
+          'Checkbox',
+          'When used within `Checkbox.Group`, the `checked` prop of `Checkbox` will not work.'
+        )
+      }
+      if (p.defaultChecked !== undefined) {
+        devWarning(
+          'Checkbox',
+          'When used within `Checkbox.Group`, the `defaultChecked` prop of `Checkbox` will not work.'
+        )
+      }
+    }
 
     checked = groupContext.value.includes(value)
     setChecked = (checked: boolean) => {
@@ -88,9 +87,27 @@ export const Checkbox: FC<CheckboxProps> = p => {
     )
   }
 
+  const inputRef = useRef<HTMLInputElement>(null)
+  const labelRef = useRef<HTMLLabelElement>(null)
+  useEffect(() => {
+    labelRef.current?.addEventListener(
+      'click',
+      e => {
+        if (e.target !== inputRef.current) {
+          e.stopPropagation()
+          e.stopImmediatePropagation()
+        }
+      },
+      {
+        capture: false,
+      }
+    )
+  }, [])
+
   return withNativeProps(
     props,
     <label
+      ref={labelRef}
       className={classNames(classPrefix, {
         [`${classPrefix}-checked`]: checked && !props.indeterminate,
         [`${classPrefix}-indeterminate`]: props.indeterminate,
@@ -99,14 +116,11 @@ export const Checkbox: FC<CheckboxProps> = p => {
       })}
     >
       <input
+        ref={inputRef}
         type='checkbox'
         checked={checked}
         onChange={e => {
           setChecked(e.target.checked)
-        }}
-        onClick={e => {
-          e.stopPropagation()
-          e.nativeEvent.stopImmediatePropagation()
         }}
         disabled={disabled}
         id={props.id}

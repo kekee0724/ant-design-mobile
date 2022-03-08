@@ -1,10 +1,12 @@
-import React, { FC, useContext } from 'react'
+import React, { FC, useContext, useEffect, useRef } from 'react'
 import { NativeProps, withNativeProps } from '../../utils/native-props'
 import classNames from 'classnames'
 import { RadioGroupContext } from './group-context'
 import { usePropsValue } from '../../utils/use-props-value'
 import { mergeProps } from '../../utils/with-default-props'
 import { CheckIcon } from '../checkbox/check-icon'
+import { devWarning } from '../../utils/dev-log'
+import { isDev } from '../../utils/is-dev'
 
 const classPrefix = `adm-radio`
 
@@ -33,11 +35,26 @@ export const Radio: FC<RadioProps> = p => {
     value: props.checked,
     defaultValue: props.defaultChecked,
     onChange: props.onChange,
-  })
+  }) as [boolean, (v: boolean) => void]
   let disabled = props.disabled
 
   const { value } = props
   if (groupContext && value !== undefined) {
+    if (isDev) {
+      if (p.checked !== undefined) {
+        devWarning(
+          'Radio',
+          'When used within `Radio.Group`, the `checked` prop of `Radio` will not work.'
+        )
+      }
+      if (p.defaultChecked !== undefined) {
+        devWarning(
+          'Radio',
+          'When used within `Radio.Group`, the `defaultChecked` prop of `Radio` will not work.'
+        )
+      }
+    }
+
     checked = groupContext.value.includes(value)
     setChecked = (checked: boolean) => {
       if (checked) {
@@ -64,25 +81,39 @@ export const Radio: FC<RadioProps> = p => {
     )
   }
 
+  const inputRef = useRef<HTMLInputElement>(null)
+  const labelRef = useRef<HTMLLabelElement>(null)
+  useEffect(() => {
+    labelRef.current?.addEventListener(
+      'click',
+      e => {
+        if (e.target !== inputRef.current) {
+          e.stopPropagation()
+          e.stopImmediatePropagation()
+        }
+      },
+      {
+        capture: false,
+      }
+    )
+  }, [])
+
   return withNativeProps(
     props,
     <label
-      className={classNames(classPrefix, props.className, {
+      ref={labelRef}
+      className={classNames(classPrefix, {
         [`${classPrefix}-checked`]: checked,
         [`${classPrefix}-disabled`]: disabled,
         [`${classPrefix}-block`]: props.block,
       })}
-      style={props.style}
     >
       <input
+        ref={inputRef}
         type='radio'
         checked={checked}
         onChange={e => {
           setChecked(e.target.checked)
-        }}
-        onClick={e => {
-          e.stopPropagation()
-          e.nativeEvent.stopImmediatePropagation()
         }}
         disabled={disabled}
         id={props.id}
