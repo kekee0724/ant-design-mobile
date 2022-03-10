@@ -1,3 +1,4 @@
+declare module 'simditor'
 declare namespace Levi {
   namespace Config {
     /**

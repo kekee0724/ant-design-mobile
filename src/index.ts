@@ -115,6 +115,8 @@ export { Hint } from './components/foo-hint'
 
 export { HtmlContent } from './components/foo-html-content'
 
+export { IEditor } from './components/foo-ieditor'
+
 export { ImageAuto } from './components/foo-image-auto'
 
 export { ImageText } from './components/foo-image-text'

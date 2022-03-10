@@ -101,6 +101,7 @@ export const components = {
     '/components/foo-gd-map',
     '/components/foo-hint',
     '/components/foo-html-content',
+    '/components/foo-ieditor',
     '/components/foo-image-auto',
     '/components/foo-image-text',
     '/components/foo-input-label',
