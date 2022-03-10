@@ -181,6 +181,21 @@ When `shouldUpdate` is a function, it will be called by form values update. Prov
 </Form.Item>
 ```
 
+### messageVariables
+
+You can modify the default verification information of Form.Item through `messageVariables`.
+
+```jsx
+<Form>
+  <Form.Item messageVariables={{ another: 'good' }} label="user">
+    <Input />
+  </Form.Item>
+  <Form.Item messageVariables={{ label: 'good' }} label={<span>user</span>}>
+    <Input />
+  </Form.Item>
+</Form>
+```
+
 ## Custom field
 
 Customized or third-party form controls can be used in Form, too. Controls must follow these conventions:
@@ -213,20 +228,37 @@ You can use `Form.Header` to group form items.
 
 <code src="./demos/demo-subscribe.tsx"></code>
 
-### messageVariables
+## Form.Array <Experimental></Experimental>
 
-You can modify the default verification information of Form.Item through `messageVariables`.
+Provides array management for fields.
 
-```jsx
-<Form>
-  <Form.Item messageVariables={{ another: 'good' }} label="user">
-    <Input />
-  </Form.Item>
-  <Form.Item messageVariables={{ label: 'good' }} label={<span>user</span>}>
-    <Input />
-  </Form.Item>
-</Form>
-```
+| Name         | Description                                                                       | Type                                                                          | Default |
+| ------------ | --------------------------------------------------------------------------------- | ----------------------------------------------------------------------------- | ------- |
+| name         | Field name, support array.                                                        | `NamePath[]`                                                                  | -       |
+| children     | Render function.                                                                  | `(fields: FormArrayField[], operation: FormArrayOperation) => ReactElement[]` | -       |
+| renderHeader | Render the header of each field.                                                  | `(field: FormArrayField, operation: FormArrayOperation) => ReactNode`         | -       |
+| renderAdd    | Render the content of add button.                                                 | `() => ReactNode`                                                             | -       |
+| initialValue | Config sub default value. Form `initialValues` get higher priority when conflict. | `any[]`                                                                       | -       |
+
+### FormArrayField
+
+| Name  | Description      | Type     |
+| ----- | ---------------- | -------- |
+| index | The array index. | `number` |
+| key   | The unique key.  | `number` |
+
+### FormArrayOperation
+
+The operation functions for Form.Array.
+
+| Name   | Description     | Type                       |
+| ------ | --------------- | -------------------------- |
+| add    | Add a field.    | `(initValue: any) => void` |
+| remove | Remove a field. | `(index: number) => void`  |
+
+### Demo
+
+<code src="./demos/demo-array.tsx"></code>
 
 ## Some Common Type Definitions
 
@@ -243,3 +275,28 @@ You can modify the default verification information of Form.Item through `messag
 | touched    | Whether is operated      | `boolean`    |
 | validating | Whether is in validating | `boolean`    |
 | value      | Field value              | `any`        |
+
+### Rule
+
+Rule supports a config object, or a function returning config object:
+
+```tsx
+type Rule = RuleConfig | ((form: FormInstance) => RuleConfig);
+```
+
+| Name            | Description                                                                                                                            | Type                       |
+| --------------- | -------------------------------------------------------------------------------------------------------------------------------------- | -------------------------- |
+| defaultField    | Validate rule for all array elements, valid when `type` is `array`                                                                     | `rule`                     |
+| enum            | Match enum value. You need to set `type` to `enum` to enable this                                                                      | `any[]`                    |
+| len             | Length of string, number, array                                                                                                        | `number`                   |
+| max             | `type` required: max length of `string`, `number`, `array`                                                                             | `number`                   |
+| message         | Error message. Will auto generate by [template](#validatemessages) if not provided                                                     | `string`                   |
+| min             | `type` required: min length of `string`, `number`, `array`                                                                             | `number`                   |
+| pattern         | Regex pattern                                                                                                                          | `RegExp`                   |
+| required        | Required field                                                                                                                         | `boolean`                  |
+| transform       | Transform value to the rule before validation                                                                                          | `(value) => any`           |
+| type            | Normally `string` \|`number` \|`boolean` \|`url` \| `email`. More type to ref [here](https://github.com/yiminghe/async-validator#type) | `string`                   |
+| validateTrigger | Set validate trigger event. Must be the sub set of `validateTrigger` in Form.Item                                                      | `string \| string[]`       |
+| validator       | Customize validation rule. Accept Promise as return. See [example](#custom-field)                                                      | `(rule, value) => Promise` |
+| warningOnly     | Warning only. Not block form submit                                                                                                    | `boolean`                  |
+| whitespace      | Failed if only has whitespace, only work with `type: 'string'` rule                                                                    | `boolean`                  |
