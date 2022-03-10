@@ -128,3 +128,9 @@ export { ListContainer } from './components/foo-list-container'
 export { ListTitle } from './components/foo-list-title'
 
 export { NavBar as Navbar } from './components/foo-navbar'
+
+export {
+  TabBarCompose,
+  TabBarContext,
+  TabBarModalContext,
+} from './components/foo-tarbar'

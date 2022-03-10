@@ -114,7 +114,7 @@ const __goTo = (
   path: string | LocationDescriptorObject,
   state?: CoreComponentState
 ) => {
-  getHistory(props).push(path, state)
+  getHistory(props)?.push(path, state)
 }
 
 export const jump = (

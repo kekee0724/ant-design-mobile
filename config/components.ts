@@ -107,5 +107,6 @@ export const components = {
     '/components/foo-input-label',
     '/components/foo-list-container',
     '/components/foo-list-title',
+    '/components/foo-tarbar',
   ],
 }
