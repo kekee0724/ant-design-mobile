@@ -1,16 +1,18 @@
 import React, { memo, ReactNode, useCallback, useEffect, useState } from 'react'
 import { mergeProps } from '../../utils/with-default-props'
 import { Wheel } from './wheel'
-import { useColumns } from './use-columns'
+import { useColumnsExtend } from './columns-extend'
 import { NativeProps, withNativeProps } from '../../utils/native-props'
-import { usePickerValueExtend } from './use-picker-value-extend'
 import { useDebounceEffect } from 'ahooks'
+import { PickerProps } from '../picker'
+import { defaultRenderLabel } from '../picker/picker-utils'
 
 const classPrefix = `adm-picker-view`
 
 export type PickerValue = string | null
 
 export type PickerValueExtend = {
+  columns: PickerColumnItem[][]
   items: (PickerColumnItem | null)[]
 }
 
@@ -26,10 +28,12 @@ export type PickerViewProps = {
   value?: PickerValue[]
   defaultValue?: PickerValue[]
   onChange?: (value: PickerValue[], extend: PickerValueExtend) => void
-} & NativeProps<'--height' | '--item-height' | '--item-font-size'>
+} & Pick<PickerProps, 'renderLabel'> &
+  NativeProps<'--height' | '--item-height' | '--item-font-size'>
 
 const defaultProps = {
   defaultValue: [],
+  renderLabel: defaultRenderLabel,
 }
 
 export const PickerView = memo<PickerViewProps>(p => {
@@ -37,19 +41,6 @@ export const PickerView = memo<PickerViewProps>(p => {
 
   const [innerValue, setInnerValue] = useState<PickerValue[]>(
     props.value === undefined ? props.defaultValue : props.value
-  )
-
-  useDebounceEffect(
-    () => {
-      if (props.value === innerValue) return
-      props.onChange?.(innerValue, generateValueExtend(innerValue))
-    },
-    [innerValue],
-    {
-      wait: 0,
-      leading: false,
-      trailing: true,
-    }
   )
 
   // Sync `value` to `innerValue`
@@ -71,8 +62,21 @@ export const PickerView = memo<PickerViewProps>(p => {
     }
   }, [props.value, innerValue])
 
-  const columns = useColumns(props.columns, innerValue)
-  const generateValueExtend = usePickerValueExtend(columns)
+  const extend = useColumnsExtend(props.columns, innerValue)
+  const columns = extend.columns
+
+  useDebounceEffect(
+    () => {
+      if (props.value === innerValue) return
+      props.onChange?.(innerValue, extend)
+    },
+    [innerValue],
+    {
+      wait: 0,
+      leading: false,
+      trailing: true,
+    }
+  )
 
   const handleSelect = useCallback((val: PickerValue, index: number) => {
     setInnerValue(prev => {
@@ -92,6 +96,7 @@ export const PickerView = memo<PickerViewProps>(p => {
           column={column}
           value={innerValue[index]}
           onSelect={handleSelect}
+          renderLabel={props.renderLabel}
         />
       ))}
       <div className={`${classPrefix}-mask`}>

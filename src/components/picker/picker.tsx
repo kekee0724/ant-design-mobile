@@ -10,11 +10,14 @@ import {
   PickerValueExtend,
 } from './index'
 import PickerView from '../picker-view'
-import { useColumns } from '../picker-view/use-columns'
+import {
+  generateColumnsExtend,
+  useColumnsExtend,
+} from '../picker-view/columns-extend'
 import { useConfig } from '../config-provider'
-import { usePickerValueExtend } from '../picker-view/use-picker-value-extend'
 import { useMemoizedFn } from 'ahooks'
 import SafeArea from '../safe-area'
+import { defaultRenderLabel } from './picker-utils'
 
 const classPrefix = `adm-picker`
 
@@ -32,6 +35,7 @@ export type PickerProps = {
   confirmText?: ReactNode
   cancelText?: ReactNode
   children?: (items: (PickerColumnItem | null)[]) => ReactNode
+  renderLabel?: (item: PickerColumnItem) => ReactNode
 } & Pick<
   PopupProps,
   'getContainer' | 'afterShow' | 'afterClose' | 'onClick' | 'stopPropagation'
@@ -46,6 +50,7 @@ export type PickerProps = {
 const defaultProps = {
   defaultValue: [],
   closeOnMaskClick: true,
+  renderLabel: defaultRenderLabel,
 }
 
 export const Picker = memo<PickerProps>(p => {
@@ -62,13 +67,12 @@ export const Picker = memo<PickerProps>(p => {
   const [value, setValue] = usePropsValue({
     ...props,
     onChange: val => {
-      props.onConfirm?.(val, generateValueExtend(val))
+      const extend = generateColumnsExtend(props.columns, val)
+      props.onConfirm?.(val, extend)
     },
   })
 
-  // TODO: columns generated twice in Picker and PickerView, which can be improved
-  const columns = useColumns(props.columns, value)
-  const generateValueExtend = usePickerValueExtend(columns)
+  const extend = useColumnsExtend(props.columns, value)
 
   const [innerValue, setInnerValue] = useState<PickerValue[]>(value)
   useEffect(() => {
@@ -116,6 +120,7 @@ export const Picker = memo<PickerProps>(p => {
       <div className={`${classPrefix}-body`}>
         <PickerView
           columns={props.columns}
+          renderLabel={props.renderLabel}
           value={innerValue}
           onChange={onChange}
         />
@@ -149,7 +154,7 @@ export const Picker = memo<PickerProps>(p => {
   return (
     <>
       {popupElement}
-      {props.children?.(generateValueExtend(value).items)}
+      {props.children?.(extend.items)}
     </>
   )
 })

@@ -40,7 +40,7 @@ export type FormItemProps = Pick<
 > &
   Pick<
     ListItemProps,
-    'style' | 'onClick' | 'extra' | 'arrow' | 'description'
+    'style' | 'onClick' | 'extra' | 'clickable' | 'arrow' | 'description'
   > & {
     label?: React.ReactNode
     help?: React.ReactNode
@@ -51,7 +51,7 @@ export type FormItemProps = Pick<
     hidden?: boolean
     layout?: FormLayout
     childElementPosition?: 'normal' | 'right'
-    children: ChildrenType
+    children?: ChildrenType
   } & NativeProps
 
 interface MemoInputProps {
@@ -78,6 +78,7 @@ type FormItemLayoutProps = Pick<
   | 'hidden'
   | 'layout'
   | 'extra'
+  | 'clickable'
   | 'arrow'
   | 'description'
   | 'childElementPosition'
@@ -146,11 +147,16 @@ const FormItemLayout: React.FC<FormItemLayoutProps> = props => {
       {label}
       {requiredMark}
       {help && (
-        <span className={`${classPrefix}-label-help`}>
-          <Popover content={help} mode='dark' trigger='click'>
+        <Popover content={help} mode='dark' trigger='click'>
+          <span
+            className={`${classPrefix}-label-help`}
+            onClick={e => {
+              e.preventDefault()
+            }}
+          >
             <QuestionCircleOutline />
-          </Popover>
-        </span>
+          </span>
+        </Popover>
       )}
     </label>
   ) : null
@@ -198,6 +204,7 @@ const FormItemLayout: React.FC<FormItemLayoutProps> = props => {
       )}
       disabled={disabled}
       onClick={props.onClick}
+      clickable={props.clickable}
       arrow={arrow}
     >
       <div
@@ -241,12 +248,14 @@ export const FormItem: FC<FormItemProps> = props => {
     onClick,
     shouldUpdate,
     dependencies,
+    clickable,
     arrow,
     ...fieldProps
   } = props
 
-  const { validateTrigger: contextValidateTrigger } =
-    React.useContext(FieldContext)
+  const { name: formName } = useContext(FormContext)
+  const { validateTrigger: contextValidateTrigger } = useContext(FieldContext)
+
   const mergedValidateTrigger =
     validateTrigger !== undefined ? validateTrigger : contextValidateTrigger
 
@@ -321,6 +330,7 @@ export const FormItem: FC<FormItemProps> = props => {
         hidden={hidden}
         layout={layout}
         childElementPosition={childElementPosition}
+        clickable={clickable}
         arrow={arrow}
       >
         <NoStyleItemContext.Provider value={onSubMetaChange}>
@@ -375,9 +385,10 @@ export const FormItem: FC<FormItemProps> = props => {
                 rule => !!(rule && typeof rule === 'object' && rule.required)
               )
 
-        const fieldId = (toArray(name).length && meta ? meta.name : []).join(
-          '_'
-        )
+        const nameList = toArray(name).length && meta ? meta.name : []
+        const fieldId = (
+          nameList.length > 0 && formName ? [formName, ...nameList] : nameList
+        ).join('_')
 
         if (shouldUpdate && dependencies) {
           devWarning(

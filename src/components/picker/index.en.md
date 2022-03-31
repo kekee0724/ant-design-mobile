@@ -25,21 +25,22 @@ type PickerValueExtend = {
 }
 ```
 
-| Name             | Description                                    | Type                                                           | Default  |
-| ---------------- | ---------------------------------------------- | -------------------------------------------------------------- | -------- |
-| columns          | Options to configure each column               | `PickerColumn[] \| ((value: PickerValue[]) => PickerColumn[])` | -        |
-| value            | Selected options                               | `PickerValue[]`                                                | -        |
-| defaultValue     | Default selected options                       | `PickerValue[]`                                                | `[]`     |
-| onSelect         | Triggered when the options are changed         | `(value: PickerValue[], extend: PickerValueExtend) => void`    | -        |
-| onConfirm        | Triggered when confirming                      | `(value: PickerValue[], extend: PickerValueExtend) => void`    | -        |
-| onCancel         | Triggered when cancelling                      | `() => void`                                                   | -        |
-| onClose          | Triggered when confirming or cancelling        | `() => void`                                                   | -        |
-| closeOnMaskClick | Whether to close after clicking the mask layer | `boolean`                                                      | `true`   |
-| visible          | Whether to show or hide the Picker             | `boolean`                                                      | `false`  |
-| title            | Title                                          | `ReactNode`                                                    | -        |
-| confirmText      | Text of the ok button                          | `ReactNode`                                                    | `'确定'` |
-| cancelText       | Text of the cancel button                      | `ReactNode`                                                    | `'取消'` |
-| children         | Render function of the selected options        | `(items: PickerColumnItem[]) => ReactNode`                     | -        |
+| Name             | Description                                                  | Type                                                           | Default                |
+| ---------------- | ------------------------------------------------------------ | -------------------------------------------------------------- | ---------------------- |
+| columns          | Options to configure each column                             | `PickerColumn[] \| ((value: PickerValue[]) => PickerColumn[])` | -                      |
+| value            | Selected options                                             | `PickerValue[]`                                                | -                      |
+| defaultValue     | Default selected options                                     | `PickerValue[]`                                                | `[]`                   |
+| onSelect         | Triggered when the options are changed                       | `(value: PickerValue[], extend: PickerValueExtend) => void`    | -                      |
+| onConfirm        | Triggered when confirming                                    | `(value: PickerValue[], extend: PickerValueExtend) => void`    | -                      |
+| onCancel         | Triggered when cancelling                                    | `() => void`                                                   | -                      |
+| onClose          | Triggered when confirming or cancelling                      | `() => void`                                                   | -                      |
+| closeOnMaskClick | Whether to close after clicking the mask layer               | `boolean`                                                      | `true`                 |
+| visible          | Whether to show or hide the Picker                           | `boolean`                                                      | `false`                |
+| title            | Title                                                        | `ReactNode`                                                    | -                      |
+| confirmText      | Text of the ok button                                        | `ReactNode`                                                    | `'确定'`               |
+| cancelText       | Text of the cancel button                                    | `ReactNode`                                                    | `'取消'`               |
+| children         | Render function of the selected options                      | `(items: PickerColumnItem[]) => ReactNode`                     | -                      |
+| renderLabel      | The function to custom rendering the label shown on a column | `(item: PickerColumnItem) => ReactNode`                        | `(item) => item.label` |
 
 In addition, the following attributes of [Popup](./popup) are supported: `getContainer` `afterShow` `afterClose` `onClick` `stopPropagation`
 
@@ -110,6 +111,30 @@ type DatePickerFilter = Partial<
 ```
 
 In addition, the following attributes of `Picker` are supported: `onCancel` `onClose` `closeOnMaskClick` `visible` `confirmText` `cancelText` `getContainer` `afterShow` `afterClose` `onClick` `title` `stopPropagation`
+
+**Please note that the type of the `columns` property is a two-level array**, the first level corresponds to each column, and the second level corresponds to each option in a column. Therefore, the following writing is wrong:
+
+```jsx
+<Picker
+  columns={[
+    { label: 'Foo', value: 'foo' },
+    { label: 'Bar', value: 'bar' },
+  ]}
+/>
+```
+
+Need to be written as:
+
+```jsx
+<Picker
+  columns={[
+    [
+      { label: 'Foo', value: 'foo' },
+      { label: 'Bar', value: 'bar' },
+    ]
+  ]}
+/>
+```
 
 ### CSS Variables
 

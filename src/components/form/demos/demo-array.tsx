@@ -27,14 +27,15 @@ export default () => {
 
         <Form.Array
           name='contacts'
+          onAdd={operation => operation.add({ name: '张三' })}
           renderAdd={() => (
             <span>
               <AddCircleOutline /> 添加
             </span>
           )}
-          renderHeader={({ index, key }, { remove }) => (
+          renderHeader={({ index }, { remove }) => (
             <>
-              <span>联系人{key + 1}</span>
+              <span>联系人{index + 1}</span>
               <a onClick={() => remove(index)} style={{ float: 'right' }}>
                 删除
               </a>

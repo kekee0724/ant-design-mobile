@@ -18,11 +18,11 @@ import { Button } from 'antd-mobile'
 
 如果你开发的是阿里/蚂蚁内部项目，那么请额外阅读一下[这篇指引](https://yuque.antfin.com/antd-mobile/kfcgs3/md4or5)。
 
+如果你使用的是 umi 框架，那么推荐阅读一下常见问题中的 "[umi 项目安装 antd-mobile v5 后报错如何解决？](./faq#umi-%E9%A1%B9%E7%9B%AE%E5%AE%89%E8%A3%85-antd-mobile-v5-%E5%90%8E%E6%8A%A5%E9%94%99%E5%A6%82%E4%BD%95%E8%A7%A3%E5%86%B3%EF%BC%9F)"。
+
 ## 兼容性
 
-如果你不做任何额外的处理，那么 antd-mobile 默认的兼容性为 iOS Safari >= 10 和 Chrome >= 51（也就是 ES6 的兼容标准）。
-
-而通过下面的 babel 配置后，可以达到最大兼容性，为 iOS Safari >= 10 和 Chrome >= 49：
+我们建议在项目中增加下面的 babel 配置，这样可以达到最大兼容性，为 iOS Safari >= 10 和 Chrome >= 49：
 
 ```json
 {
