@@ -10,7 +10,7 @@ function isEmptyInputValue(value: any): boolean {
 }
 
 export const Validators = {
-  cellphone(control: Levi.Config.Validation.AbstractControl) {
+  cellphone(control: Levi.Validation.AbstractControl) {
     if (isEmptyInputValue(control.value)) {
       return null
     }
@@ -19,10 +19,10 @@ export const Validators = {
       : { cellPhone: { msg: '${name}格式错误。' } }
   },
 
-  min(min: number): Levi.Config.Validation.ValidatorFn {
+  min(min: number): Levi.Validation.ValidatorFn {
     return (
-      control: Levi.Config.Validation.AbstractControl
-    ): Levi.Config.Validation.ValidationErrors | null => {
+      control: Levi.Validation.AbstractControl
+    ): Levi.Validation.ValidationErrors | null => {
       if (isEmptyInputValue(control.value) || isEmptyInputValue(min)) {
         return null
       }
@@ -40,10 +40,10 @@ export const Validators = {
     }
   },
 
-  max(max: number): Levi.Config.Validation.ValidatorFn {
+  max(max: number): Levi.Validation.ValidatorFn {
     return (
-      control: Levi.Config.Validation.AbstractControl
-    ): Levi.Config.Validation.ValidationErrors | null => {
+      control: Levi.Validation.AbstractControl
+    ): Levi.Validation.ValidationErrors | null => {
       if (isEmptyInputValue(control.value) || isEmptyInputValue(max)) {
         return null
       }
@@ -61,22 +61,22 @@ export const Validators = {
     }
   },
   required(
-    control: Levi.Config.Validation.AbstractControl
-  ): Levi.Config.Validation.ValidationErrors | null {
+    control: Levi.Validation.AbstractControl
+  ): Levi.Validation.ValidationErrors | null {
     return isEmptyInputValue(control.value)
       ? { required: { msg: '${name}必填。' } }
       : null
   },
   requiredTrue(
-    control: Levi.Config.Validation.AbstractControl
-  ): Levi.Config.Validation.ValidationErrors | null {
+    control: Levi.Validation.AbstractControl
+  ): Levi.Validation.ValidationErrors | null {
     return control.value === true
       ? null
       : { required: { msg: '${name}必选。' } }
   },
   email(
-    control: Levi.Config.Validation.AbstractControl
-  ): Levi.Config.Validation.ValidationErrors | null {
+    control: Levi.Validation.AbstractControl
+  ): Levi.Validation.ValidationErrors | null {
     if (isEmptyInputValue(control.value)) {
       return null
     }
@@ -84,10 +84,10 @@ export const Validators = {
       ? null
       : { email: { msg: '${name}格式错误。' } }
   },
-  minLength(minLength: number): Levi.Config.Validation.ValidatorFn {
+  minLength(minLength: number): Levi.Validation.ValidatorFn {
     return (
-      control: Levi.Config.Validation.AbstractControl
-    ): Levi.Config.Validation.ValidationErrors | null => {
+      control: Levi.Validation.AbstractControl
+    ): Levi.Validation.ValidationErrors | null => {
       if (isEmptyInputValue(control.value)) {
         return null
       }
@@ -103,10 +103,10 @@ export const Validators = {
         : null
     }
   },
-  maxLength(maxLength: number): Levi.Config.Validation.ValidatorFn {
+  maxLength(maxLength: number): Levi.Validation.ValidatorFn {
     return (
-      control: Levi.Config.Validation.AbstractControl
-    ): Levi.Config.Validation.ValidationErrors | null => {
+      control: Levi.Validation.AbstractControl
+    ): Levi.Validation.ValidationErrors | null => {
       const length: number = control.value ? control.value.length : 0
       return length > maxLength
         ? {
@@ -119,7 +119,7 @@ export const Validators = {
         : null
     }
   },
-  pattern(pattern: string | RegExp): Levi.Config.Validation.ValidatorFn {
+  pattern(pattern: string | RegExp): Levi.Validation.ValidatorFn {
     if (!pattern) return Validators.nullValidator
     let regex: RegExp
     let regexStr: string
@@ -138,8 +138,8 @@ export const Validators = {
       regex = pattern
     }
     return (
-      control: Levi.Config.Validation.AbstractControl
-    ): Levi.Config.Validation.ValidationErrors | null => {
+      control: Levi.Validation.AbstractControl
+    ): Levi.Validation.ValidationErrors | null => {
       if (isEmptyInputValue(control.value)) {
         return null
       }
@@ -156,20 +156,21 @@ export const Validators = {
     }
   },
   nullValidator(
-    _control: Levi.Config.Validation.AbstractControl
-  ): Levi.Config.Validation.ValidationErrors | null {
+    _control: Levi.Validation.AbstractControl
+  ): Levi.Validation.ValidationErrors | null {
     return null
   },
 
   compose(
-    validators: (Levi.Config.Validation.ValidatorFn | null | undefined)[] | null
-  ): Levi.Config.Validation.ValidatorFn | null {
+    validators: (Levi.Validation.ValidatorFn | null | undefined)[] | null
+  ): Levi.Validation.ValidatorFn | null {
     if (!validators) return null
-    const presentValidators: Levi.Config.Validation.ValidatorFn[] =
-      validators.filter(isPresent) as any
+    const presentValidators: Levi.Validation.ValidatorFn[] = validators.filter(
+      isPresent
+    ) as any
     if (presentValidators.length === 0) return null
 
-    return function (control: Levi.Config.Validation.AbstractControl) {
+    return function (control: Levi.Validation.AbstractControl) {
       return _mergeErrors(
         control,
         _executeValidators(control, presentValidators)
@@ -177,14 +178,13 @@ export const Validators = {
     }
   },
   composeControl(
-    validators:
-      | (Levi.Config.Validation.ValidatorFn | null | undefined)[]
-      | null,
-    control: Levi.Config.Validation.AbstractControl
+    validators: (Levi.Validation.ValidatorFn | null | undefined)[] | null,
+    control: Levi.Validation.AbstractControl
   ) {
     if (!validators || !control) return null
-    const presentValidators: Levi.Config.Validation.ValidatorFn[] =
-      validators.filter(isPresent) as any
+    const presentValidators: Levi.Validation.ValidatorFn[] = validators.filter(
+      isPresent
+    ) as any
     if (presentValidators.length === 0) return null
 
     return function () {
@@ -196,12 +196,12 @@ export const Validators = {
   },
   ValidatorControl(
     ...validators: (
-      | (() => Levi.Config.Validation.ValidationErrors | null)
+      | (() => Levi.Validation.ValidationErrors | null)
       | null
       | undefined
     )[]
   ) {
-    const presentValidators: (() => Levi.Config.Validation.ValidationErrors | null)[] =
+    const presentValidators: (() => Levi.Validation.ValidationErrors | null)[] =
       validators.filter(isPresent) as any
 
     if (presentValidators.length === 0) return null
@@ -218,12 +218,12 @@ export const Validators = {
   },
   ValidatorControlAll(
     ...validators: (
-      | (() => Levi.Config.Validation.ValidationErrors | null)
+      | (() => Levi.Validation.ValidationErrors | null)
       | null
       | undefined
     )[]
   ) {
-    const presentValidators: (() => Levi.Config.Validation.ValidationErrors | null)[] =
+    const presentValidators: (() => Levi.Validation.ValidationErrors | null)[] =
       validators.filter(isPresent) as any
 
     if (presentValidators.length === 0) return null
@@ -241,8 +241,8 @@ function isPresent(o: any): boolean {
 }
 
 function _executeValidators(
-  control: Levi.Config.Validation.AbstractControl,
-  validators: Levi.Config.Validation.ValidatorFn[]
+  control: Levi.Validation.AbstractControl,
+  validators: Levi.Validation.ValidatorFn[]
 ): any[] {
   return validators.map(
     v => (
@@ -253,13 +253,13 @@ function _executeValidators(
 }
 
 function _mergeErrors(
-  control: Levi.Config.Validation.AbstractControl,
-  arrayOfErrors: Levi.Config.Validation.ValidationErrors[]
-): Levi.Config.Validation.ValidationErrors | null {
+  control: Levi.Validation.AbstractControl,
+  arrayOfErrors: Levi.Validation.ValidationErrors[]
+): Levi.Validation.ValidationErrors | null {
   const res: { [key: string]: any } = arrayOfErrors.reduce(
       (
-        res: Levi.Config.Validation.ValidationErrors | null,
-        errors: Levi.Config.Validation.ValidationErrors | null
+        res: Levi.Validation.ValidationErrors | null,
+        errors: Levi.Validation.ValidationErrors | null
       ) => {
         return errors != null ? { ...res!, ...errors } : res!
       },

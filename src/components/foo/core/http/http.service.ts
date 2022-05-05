@@ -68,7 +68,7 @@ export class BaseHttpService {
   protected httpGetDownload(
     url: string,
     options?: RequestOptionsArgs,
-    filename?: string
+    filename?: any
   ) {
     return this.http
       .get(this.transformUrl(url), { observe: 'response', ...options })
@@ -87,7 +87,7 @@ export class BaseHttpService {
     url: string,
     body: any = null,
     options?: RequestOptionsArgs,
-    filename?: string
+    filename?: any
   ) {
     return this.http
       .post(this.transformUrl(url), body, { observe: 'response', ...options })

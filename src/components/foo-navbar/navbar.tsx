@@ -1,4 +1,4 @@
-import React, { FC, forwardRef, ReactNode } from 'react'
+import React, { FC, ReactNode } from 'react'
 
 import { mergeProps } from '../../utils/with-default-props'
 import { PureComponentProps } from '../foo'
@@ -35,7 +35,7 @@ const defaultProps = {
   fabContentOpen: true,
 }
 
-export const NavBar: FC<NavBarProp> = forwardRef(p => {
+export const NavBar: FC<NavBarProp> = p => {
   const props = mergeProps(defaultProps, p)
   const {
     visible,
@@ -66,4 +66,4 @@ export const NavBar: FC<NavBarProp> = forwardRef(p => {
   } else {
     return <>{fabContentOpen && (fabContent || renderFab(right))}</>
   }
-})
+}

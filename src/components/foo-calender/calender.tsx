@@ -403,6 +403,7 @@ export const RMCalendar: FC = forwardRef((p: RMCalendarProps) => {
     return <h2 className='text-center'>抱歉出错了~请重新打开页面</h2>
   }
 
+  const VSViews = VirtualizeSwipeableViews as any
   return (
     <div
       ref={calendar}
@@ -513,7 +514,7 @@ export const RMCalendar: FC = forwardRef((p: RMCalendarProps) => {
         </div>
       )}
       <div className={'date-body ' + bodyClassName}>
-        <VirtualizeSwipeableViews
+        <VSViews
           disabled={!touch}
           slideCount={computeSlideCount()}
           resistance

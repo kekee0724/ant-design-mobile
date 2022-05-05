@@ -206,52 +206,50 @@ export function slideRenderer(
           ))}
         {type === 'week' && (
           <tr>
-            {dataOfBoard
-              .slice(weekRowIndex * 7, (weekRowIndex + 1) * 7)
-              .map(
-                (item: {
-                  day:
+            {dataOfBoard.slice(weekRowIndex * 7, (weekRowIndex + 1) * 7).map(
+              (item: {
+                day:
+                  | boolean
+                  | React.ReactChild
+                  | React.ReactFragment
+                  | React.ReactPortal
+                  | null
+                  | undefined
+                year: any
+                month: number
+                data: {
+                  title:
                     | boolean
                     | React.ReactChild
                     | React.ReactFragment
                     | React.ReactPortal
                     | null
                     | undefined
-                  year: any
-                  month: number
-                  data: {
-                    title:
-                      | boolean
-                      | React.ReactChild
-                      | React.ReactFragment
-                      | React.ReactPortal
-                      | null
-                      | undefined
-                  }
-                }) => (
-                  <td
-                    key={item.day || Math.random()}
-                    onClick={() => handleCellClick(item)}
-                    title={`${item.year}-${item.month + 1}-${item.day}`}
-                  >
-                    {item && (
-                      <div
-                        className={'cell'}
-                        // style={{
-                        //   height: `${cellHeight}px`
-                        // }}
-                      >
-                        <div className={styleCellBody(item)}>
-                          {item.day}
-                          {item.data && item.data.title && (
-                            <span className={'title'}>{item.data.title}</span>
-                          )}
-                        </div>
+                }
+              }) => (
+                <td
+                  key={item.day || (Math.random() as any)}
+                  onClick={() => handleCellClick(item)}
+                  title={`${item.year}-${item.month + 1}-${item.day}`}
+                >
+                  {item && (
+                    <div
+                      className={'cell'}
+                      // style={{
+                      //   height: `${cellHeight}px`
+                      // }}
+                    >
+                      <div className={styleCellBody(item as any)}>
+                        {item.day}
+                        {item.data && item.data.title && (
+                          <span className={'title'}>{item.data.title}</span>
+                        )}
                       </div>
-                    )}
-                  </td>
-                )
-              )}
+                    </div>
+                  )}
+                </td>
+              )
+            )}
           </tr>
         )}
       </tbody>

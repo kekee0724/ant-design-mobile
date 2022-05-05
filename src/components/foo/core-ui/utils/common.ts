@@ -37,7 +37,7 @@ export function getHotUpdateVersion() {
 export function getHotUpdateVersionBefore() {
   const result = postBridgeMessage('getHotUpdateVersion', '获取热更新版本号')
   if (result) {
-    return result.then((data: string) => {
+    return result.then((data: any) => {
       if (typeof data === 'string') {
         return (appVersion.hotUpdateVersion = data)
       }
@@ -50,7 +50,7 @@ export function getHotUpdateVersionBefore() {
 export function getVersionBefore() {
   const result = postBridgeMessage('getVersion', '获取版本号')
   if (result) {
-    return result.then((data: string) => {
+    return result.then((data: any) => {
       if (typeof data === 'string') {
         return (appVersion.version = data)
       }
@@ -147,7 +147,7 @@ export const gusture = {
 export function isGesture() {
   const result = postBridgeMessage('isGesture', '获取手势密码是否开启')
   if (result) {
-    return result.then((data: number) => {
+    return result.then((data: any) => {
       return (gusture.isGusture = data)
     })
   }
@@ -205,10 +205,10 @@ export function postBridgeSetAnonymousToken(token?: string) {
   return new Promise((resolve, reject) => {
     ;(token
       ? Promise.resolve(token)
-      : (typeof window['getAnonymousToken'] === 'function' &&
-          window['getAnonymousToken']()) ||
+      : (typeof (window as any)['getAnonymousToken'] === 'function' &&
+          (window as any)['getAnonymousToken']()) ||
         Promise.reject(token)
-    ).then(d => {
+    ).then((d: any) => {
       d ? postBridgeMessage('setToken', d).then(resolve, reject) : reject()
     }, reject)
   })
@@ -251,7 +251,7 @@ export function download(url: string) {
  */
 export function sweepCodeCard() {
   // 正式获取扫码图片
-  return postBridgeMessage('scanBusinessCard').then(({ data }) => data)
+  return postBridgeMessage('scanBusinessCard').then(({ data }: any) => data)
 }
 
 export function getSharePicture(cover?: any, content?: any, icon?: any) {

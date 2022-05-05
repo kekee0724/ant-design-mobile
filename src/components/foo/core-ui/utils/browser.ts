@@ -23,10 +23,10 @@ function registerTimeout<T>(
       options.timeout >= 0
         ? setTimeout(() => (untied(), reject()), options.timeout)
         : undefined,
-    resolveID = registerGlobalFunc(d => {
+    resolveID = registerGlobalFunc((d: any) => {
       time || clearTimeout(time), untied(), resolve(d)
     }),
-    rejectID = registerGlobalFunc(d => {
+    rejectID = registerGlobalFunc((d: any) => {
       time || clearTimeout(time), untied(), reject(d)
     })
 

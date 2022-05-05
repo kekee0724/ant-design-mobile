@@ -1,11 +1,4 @@
-import React, {
-  FC,
-  forwardRef,
-  ReactNode,
-  useEffect,
-  useRef,
-  useState,
-} from 'react'
+import React, { FC, ReactNode, useEffect, useRef, useState } from 'react'
 
 import classNames from 'classnames'
 
@@ -34,6 +27,7 @@ export interface ImageAutoProps extends PureComponentProps {
   fallback?: ReactNode // 错误时占位
   placeholder?: ReactNode // 加载时占位
   ratio?: ratioType // 比例显示图片
+  dom?: any // dom
 }
 
 export const ImageAuto: FC<ImageAutoProps> = props => {
@@ -147,7 +141,7 @@ ImageAuto.defaultProps = {
   onClick: () => {},
 }
 
-export const Images: FC<ImageAutoProps> = forwardRef(props => {
+export const Images: FC<ImageAutoProps> = props => {
   const {
     src: target,
     fit,
@@ -209,4 +203,4 @@ export const Images: FC<ImageAutoProps> = forwardRef(props => {
       style={{ ...style, borderRadius: borderRadius }}
     />
   )
-})
+}

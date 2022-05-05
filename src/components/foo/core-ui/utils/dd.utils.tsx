@@ -56,12 +56,12 @@ export function isOnlineDoc(_this: any, item: any) {
   if (onlineDoc) {
     if (item.previewUrl) {
       if (browser.versions.weChatMini) {
-        wx.miniProgram.navigateTo({
-          url:
-            '/apps-preview/apps-preview/apps-preview?path=' +
-            server.previewUrl +
-            item.previewUrl,
-        })
+        // wx.miniProgram.navigateTo({
+        //   url:
+        //     '/apps-preview/apps-preview/apps-preview?path=' +
+        //     server.previewUrl +
+        //     item.previewUrl,
+        // })
       } else {
         window.open(server.previewUrl + item.previewUrl)
       }
@@ -69,9 +69,9 @@ export function isOnlineDoc(_this: any, item: any) {
       getPreviewUrl(item)
         .then(url => {
           if (browser.versions.weChatMini) {
-            wx.miniProgram.navigateTo({
-              url: '/apps-preview/apps-preview/apps-preview?path=' + url,
-            })
+            // wx.miniProgram.navigateTo({
+            //   url: '/apps-preview/apps-preview/apps-preview?path=' + url,
+            // })
           } else {
             window.open(url)
           }
@@ -145,15 +145,19 @@ export function ddNavRightOne(
 }
 
 // 钉钉设置页面标题处理
-export function setNavTitle(title: string, nextProps?: { location: any }) {
+export function setNavTitle(
+  this: any,
+  title: string,
+  nextProps?: { location: any }
+) {
   const locationChanged = nextProps
     ? nextProps.location !== this.props.location
     : null
   // 没传nextProps或者页面是从子路由返回时设置title
   if (
     (locationChanged &&
-      nextProps.location!.pathname.length <
-        this.props.location!.pathname!.length) ||
+      nextProps!.location?.pathname.length <
+        this.props.location?.pathname?.length) ||
     !nextProps
   ) {
     if (ddkit && !(ddkit.env.platform === 'notInDingTalk')) {
