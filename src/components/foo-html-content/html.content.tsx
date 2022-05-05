@@ -11,7 +11,7 @@ import {
   htmlInjectEncode,
   PureComponentProps,
   transformAssetsUrl,
-} from '../foo'
+} from '../foo/index'
 import ImageViewer from '../image-viewer'
 
 export interface HtmlContentProps extends PureComponentProps {

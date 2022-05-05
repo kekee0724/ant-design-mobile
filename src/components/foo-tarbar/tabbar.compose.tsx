@@ -7,7 +7,7 @@ import {
   CoreComponentState,
   getObjectProp,
   goTo,
-} from '../foo'
+} from '../foo/index'
 import { ImageText } from '../foo-image-text'
 import Modal from '../modal'
 import TabBar from '../tab-bar'

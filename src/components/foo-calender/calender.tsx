@@ -19,7 +19,7 @@ import {
   PureComponentProps,
   PureComponentState,
   turnWeekNumToChar,
-} from '../foo'
+} from '../foo/index'
 import { goDateBoard, slideRenderer } from './slideRenderer'
 
 const VirtualizeSwipeableViews = virtualize(SwipeableViews)

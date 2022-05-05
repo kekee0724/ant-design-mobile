@@ -6,7 +6,7 @@ import { QuestionCircleOutline } from 'antd-mobile-icons'
 import AMapLoader from '@amap/amap-jsapi-loader'
 
 import { mergeProps } from '../../utils/with-default-props'
-import { getLocation, PureComponentProps } from '../foo'
+import { getLocation, PureComponentProps } from '../foo/index'
 
 export interface GDMapProps extends PureComponentProps {
   address?: string

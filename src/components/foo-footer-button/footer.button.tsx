@@ -3,7 +3,7 @@ import React, { CSSProperties, FC, ReactNode } from 'react'
 import classNames from 'classnames'
 
 import Button from '../button'
-import { PureComponentProps } from '../foo'
+import { PureComponentProps } from '../foo/index'
 import type { GridProps } from '../grid'
 import Grid from '../grid'
 import Popover from '../popover'

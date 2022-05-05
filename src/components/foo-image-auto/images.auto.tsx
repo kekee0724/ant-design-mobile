@@ -2,7 +2,7 @@ import React, { FC, ReactNode, useEffect, useRef, useState } from 'react'
 
 import classNames from 'classnames'
 
-import { PureComponentProps, transformAssetsUrl } from '../foo'
+import { PureComponentProps, transformAssetsUrl } from '../foo/index'
 import Image from '../image'
 
 type ratioType = '16:9' | '4:3' | '1:1' | '2:3'

@@ -4,7 +4,7 @@ import { AddOutline, CloseOutline } from 'antd-mobile-icons'
 import classNames from 'classnames'
 import $ from 'jquery'
 
-import { getExtraAttrs, getSlots } from '../foo'
+import { getExtraAttrs, getSlots } from '../foo/index'
 
 export type FabProps = {
   className?: string
