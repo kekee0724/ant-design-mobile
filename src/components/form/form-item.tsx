@@ -14,6 +14,7 @@ import type { FormLayout } from './index'
 import Popover from '../popover'
 import { QuestionCircleOutline } from 'antd-mobile-icons'
 import { useConfig } from '../config-provider'
+import { undefinedFallback } from '../../utils/undefined-fallback'
 
 const NAME_SPLIT = '__SPLIT__'
 
@@ -86,6 +87,7 @@ type FormItemLayoutProps = Pick<
   htmlFor?: string
   errors: string[]
   warnings: string[]
+  children: React.ReactNode
 }
 
 const FormItemLayout: React.FC<FormItemLayoutProps> = props => {
@@ -96,7 +98,6 @@ const FormItemLayout: React.FC<FormItemLayoutProps> = props => {
     label,
     help,
     required,
-    disabled,
     children,
     htmlFor,
     hidden,
@@ -111,6 +112,7 @@ const FormItemLayout: React.FC<FormItemLayoutProps> = props => {
   const hasFeedback =
     props.hasFeedback !== undefined ? props.hasFeedback : context.hasFeedback
   const layout = props.layout || context.layout
+  const disabled = props.disabled ?? context.disabled
 
   const requiredMark = (() => {
     const { requiredMarkStyle } = context
@@ -200,6 +202,7 @@ const FormItemLayout: React.FC<FormItemLayoutProps> = props => {
         `${classPrefix}-${layout}`,
         {
           [`${classPrefix}-hidden`]: hidden,
+          [`${classPrefix}-has-error`]: props.errors.length,
         }
       )}
       disabled={disabled}
@@ -244,7 +247,7 @@ export const FormItem: FC<FormItemProps> = props => {
     children,
     messageVariables,
     trigger = 'onChange',
-    validateTrigger,
+    validateTrigger = trigger,
     onClick,
     shouldUpdate,
     dependencies,
@@ -256,8 +259,11 @@ export const FormItem: FC<FormItemProps> = props => {
   const { name: formName } = useContext(FormContext)
   const { validateTrigger: contextValidateTrigger } = useContext(FieldContext)
 
-  const mergedValidateTrigger =
-    validateTrigger !== undefined ? validateTrigger : contextValidateTrigger
+  const mergedValidateTrigger = undefinedFallback(
+    validateTrigger,
+    contextValidateTrigger,
+    trigger
+  )
 
   const updateRef = React.useRef(0)
   updateRef.current += 1

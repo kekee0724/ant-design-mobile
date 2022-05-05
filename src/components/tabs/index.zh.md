@@ -6,6 +6,8 @@
 
 <code src="./demos/demo3.tsx"></code>
 
+<code src="./demos/demo4.tsx"></code>
+
 ## Tabs
 
 ### 属性
@@ -43,3 +45,7 @@
 ### Tabs 是否支持 sticky 吸顶效果？
 
 支持，但是 Tabs 并没有一个类似于 `sticky` 的属性。你可以自己在 Tabs 的外层容器中增加一下 `position: sticky` 的 CSS 样式，从而实现吸顶效果。
+
+### Tabs 怎么配合 Swiper、PullToRefresh、InfiniteScroll 实现一个复杂的信息流界面？
+
+可以参考这个 [demo](https://codesandbox.io/s/mystifying-glitter-knpc7u?file=/src/components/getPullToRefreshlData.tsx)。

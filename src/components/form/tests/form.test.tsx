@@ -22,7 +22,7 @@ describe('Form', () => {
     warnSpy.mockRestore()
   })
 
-  test('baisc usage', async () => {
+  test('basic usage', async () => {
     const fn = jest.fn()
 
     const { getByText, getByLabelText } = render(
@@ -51,6 +51,7 @@ describe('Form', () => {
     })
 
     expect($$(`.${classPrefix}-item-feedback-error`).length).toBeTruthy()
+    expect($$(`.${classPrefix}-item-has-error`).length).toBeTruthy()
     expect(console.error).toBeCalledTimes(0)
 
     fireEvent.change(getByLabelText(/name/i), { target: { value: 'name' } })
@@ -158,7 +159,7 @@ describe('Form', () => {
     expect(getByTestId('form')).toHaveTextContent(`'test' is required`)
   })
 
-  test("`shouldUpdate` shouldn't work with render porps", async () => {
+  test("`shouldUpdate` shouldn't work with render props", async () => {
     render(
       <Form>
         <Form.Item>{() => null}</Form.Item>

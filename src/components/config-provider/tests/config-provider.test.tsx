@@ -8,14 +8,17 @@ import ErrorBlock from '../../error-block'
 import Form from '../../form'
 import Picker from '../../picker'
 import SearchBar from '../../search-bar'
+import ImageUploader from '../../image-uploader'
 
 import zhCN from '../../../locales/zh-CN'
 import zhTW from '../../../locales/zh-TW'
 import zhHK from '../../../locales/zh-HK'
 import enUS from '../../../locales/en-US'
 import faIR from '../../../locales/fa-IR'
+import esES from '../../../locales/es-ES'
+import koKR from '../../../locales/ko-KR'
 
-const locales = [zhCN, zhTW, zhHK, enUS, faIR]
+const locales = [zhCN, zhTW, zhHK, enUS, faIR, esES, koKR]
 
 describe('ConfigProvider', () => {
   beforeAll(() => {
@@ -38,6 +41,14 @@ describe('ConfigProvider', () => {
       </Form>
       <Picker columns={[]} visible />
       <SearchBar showCancelButton />
+      <ImageUploader
+        upload={() => Promise.resolve({ url: '' })}
+        value={[
+          {
+            url: 'https://images.unsplash.com/photo-1567945716310-4745a6b7844b?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=60',
+          },
+        ]}
+      />
     </>
   )
   locales.forEach(locale => {

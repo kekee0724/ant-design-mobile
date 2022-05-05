@@ -13,6 +13,7 @@ import { useResizeEffect } from '../../utils/use-resize-effect'
 import { useTabListScroll } from '../../utils/use-tab-list-scroll'
 import ScrollMask from '../scroll-mask'
 import { ShouldRender } from '../../utils/should-render'
+import { traverseReactNode } from '../../utils/traverse-react-node'
 
 const classPrefix = `adm-capsule-tabs`
 
@@ -21,6 +22,7 @@ export type CapsuleTabProps = {
   disabled?: boolean
   forceRender?: boolean
   destroyOnClose?: boolean
+  children?: ReactNode
 } & NativeProps
 
 export const CapsuleTab: FC<CapsuleTabProps> = () => {
@@ -31,6 +33,7 @@ export type CapsuleTabsProps = {
   activeKey?: string | null
   defaultActiveKey?: string | null
   onChange?: (key: string) => void
+  children?: React.ReactNode
 } & NativeProps
 
 export const CapsuleTabs: FC<CapsuleTabsProps> = props => {
@@ -41,7 +44,7 @@ export const CapsuleTabs: FC<CapsuleTabsProps> = props => {
 
   const panes: ReactElement<ComponentProps<typeof CapsuleTab>>[] = []
 
-  React.Children.forEach(props.children, (child, index) => {
+  traverseReactNode(props.children, (child, index) => {
     if (!React.isValidElement(child)) return
     const key = child.key
     if (typeof key !== 'string') return

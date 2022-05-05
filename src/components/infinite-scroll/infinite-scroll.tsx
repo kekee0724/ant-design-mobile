@@ -3,6 +3,7 @@ import React, { FC, useEffect, useRef, useState } from 'react'
 import { useLockFn, useMemoizedFn } from 'ahooks'
 import { NativeProps, withNativeProps } from '../../utils/native-props'
 import { getScrollParent } from '../../utils/get-scroll-parent'
+import { useConfig } from '../config-provider'
 import DotLoading from '../dot-loading'
 
 function isWindow(element: any | Window): element is Window {
@@ -15,18 +16,21 @@ export type InfiniteScrollProps = {
   loadMore: () => Promise<void>
   hasMore: boolean
   threshold?: number
+  children?: React.ReactNode
 } & NativeProps
 
 const InfiniteScrollContent = ({ hasMore }: { hasMore: boolean }) => {
+  const { locale } = useConfig()
+
   return (
     <>
       {hasMore ? (
         <>
-          <span>加载中</span>
+          <span>{locale.common.loading}</span>
           <DotLoading />
         </>
       ) : (
-        <span>没有更多了</span>
+        <span>{locale.InfiniteScroll.noMore}</span>
       )}
     </>
   )

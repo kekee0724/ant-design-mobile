@@ -1,7 +1,7 @@
 import React, { FC, ReactNode, useCallback, useMemo } from 'react'
 import { useMemoizedFn } from 'ahooks'
 import Picker from '../picker'
-import type { PickerProps, PickerValue } from '../picker'
+import type { PickerProps, PickerValue, PickerColumn } from '../picker'
 import { NativeProps, withNativeProps } from '../../utils/native-props'
 import { mergeProps } from '../../utils/with-default-props'
 import { usePropsValue } from '../../utils/use-props-value'
@@ -29,6 +29,7 @@ export type DatePickerProps = Pick<
   | 'title'
   | 'stopPropagation'
   | 'style'
+  | 'mouseWheel'
 > & {
   value?: Date | null
   defaultValue?: Date | null
@@ -86,7 +87,7 @@ export const DatePicker: FC<DatePickerProps> = p => {
     props.onSelect?.(date)
   })
 
-  const columns = useCallback(
+  const columns = useCallback<(value: PickerValue[]) => PickerColumn[]>(
     selected =>
       generateDatePickerColumns(
         selected as string[],
@@ -106,6 +107,7 @@ export const DatePicker: FC<DatePickerProps> = p => {
       value={pickerValue}
       onCancel={props.onCancel}
       onClose={props.onClose}
+      closeOnMaskClick={props.closeOnMaskClick}
       visible={props.visible}
       confirmText={props.confirmText}
       cancelText={props.cancelText}
@@ -117,6 +119,7 @@ export const DatePicker: FC<DatePickerProps> = p => {
       onClick={props.onClick}
       title={props.title}
       stopPropagation={props.stopPropagation}
+      mouseWheel={props.mouseWheel}
     >
       {() => props.children?.(value)}
     </Picker>

@@ -19,6 +19,7 @@ export type PickerValueExtend = {
 export type PickerColumnItem = {
   label: ReactNode
   value: string
+  key?: string | number
 }
 
 export type PickerColumn = (string | PickerColumnItem)[]
@@ -27,6 +28,7 @@ export type PickerViewProps = {
   columns: PickerColumn[] | ((value: PickerValue[]) => PickerColumn[])
   value?: PickerValue[]
   defaultValue?: PickerValue[]
+  mouseWheel?: boolean
   onChange?: (value: PickerValue[], extend: PickerValueExtend) => void
 } & Pick<PickerProps, 'renderLabel'> &
   NativeProps<'--height' | '--item-height' | '--item-font-size'>
@@ -34,6 +36,7 @@ export type PickerViewProps = {
 const defaultProps = {
   defaultValue: [],
   renderLabel: defaultRenderLabel,
+  mouseWheel: false,
 }
 
 export const PickerView = memo<PickerViewProps>(p => {
@@ -97,6 +100,7 @@ export const PickerView = memo<PickerViewProps>(p => {
           value={innerValue[index]}
           onSelect={handleSelect}
           renderLabel={props.renderLabel}
+          mouseWheel={props.mouseWheel}
         />
       ))}
       <div className={`${classPrefix}-mask`}>

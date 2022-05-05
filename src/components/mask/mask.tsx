@@ -35,6 +35,7 @@ export type MaskProps = {
   afterShow?: () => void
   afterClose?: () => void
   stopPropagation?: PropagationEvent[]
+  children?: React.ReactNode
 } & NativeProps<'--z-index'>
 
 const defaultProps = {
@@ -106,6 +107,11 @@ export const Mask: React.FC<MaskProps> = p => {
           opacity,
           ...props.style,
           display: active ? 'unset' : 'none',
+        }}
+        onClick={e => {
+          if (e.target === e.currentTarget) {
+            props.onMaskClick?.(e)
+          }
         }}
       >
         {props.onMaskClick && (

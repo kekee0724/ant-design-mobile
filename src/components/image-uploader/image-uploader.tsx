@@ -7,6 +7,8 @@ import { usePropsValue } from '../../utils/use-props-value'
 import { useIsomorphicLayoutEffect, useMemoizedFn, useUnmount } from 'ahooks'
 import Space from '../space'
 import { NativeProps, withNativeProps } from '../../utils/native-props'
+import { useConfig } from '../config-provider'
+import type { ImageProps } from '../image'
 
 export type TaskStatus = 'pending' | 'fail'
 
@@ -45,6 +47,8 @@ export type ImageUploaderProps = {
   onDelete?: (item: ImageUploadItem) => boolean | Promise<boolean> | void
   preview?: boolean
   showFailed?: boolean
+  imageFit?: ImageProps['fit']
+  children?: React.ReactNode
 } & NativeProps<'--cell-size'>
 
 const classPrefix = `adm-image-uploader`
@@ -59,9 +63,11 @@ const defaultProps = {
   accept: 'image/*',
   preview: true,
   showFailed: true,
+  imageFit: 'cover',
 }
 
 export const ImageUploader: FC<ImageUploaderProps> = p => {
+  const { locale } = useConfig()
   const props = mergeProps(defaultProps, p)
   const [value, setValue] = usePropsValue(props)
   const updateValue = useMemoizedFn(
@@ -134,6 +140,7 @@ export const ImageUploader: FC<ImageUploaderProps> = p => {
 
     setTasks(prev => [...prev, ...newTasks])
 
+    e.target.value = '' // HACK: fix the same file doesn't trigger onChange
     await Promise.all(
       newTasks.map(async currentTask => {
         try {
@@ -169,8 +176,6 @@ export const ImageUploader: FC<ImageUploaderProps> = p => {
         }
       })
     ).catch(error => console.error(error))
-
-    e.target.value = '' // HACK: fix the same file doesn't trigger onChange
   }
 
   const imageViewerHandlerRef = useRef<ImageViewerShowHandler | null>(null)
@@ -202,6 +207,7 @@ export const ImageUploader: FC<ImageUploaderProps> = p => {
             key={fileItem.key ?? index}
             url={fileItem.thumbnailUrl ?? fileItem.url}
             deletable={props.deletable}
+            imageFit={props.imageFit}
             onClick={() => {
               if (props.preview) {
                 previewImage(index)
@@ -225,6 +231,7 @@ export const ImageUploader: FC<ImageUploaderProps> = p => {
               file={task.file}
               deletable={task.status !== 'pending'}
               status={task.status}
+              imageFit={props.imageFit}
               onDelete={() => {
                 setTasks(tasks.filter(x => x.id !== task.id))
               }}
@@ -239,6 +246,7 @@ export const ImageUploader: FC<ImageUploaderProps> = p => {
               <span
                 className={`${classPrefix}-cell ${classPrefix}-upload-button`}
                 role='button'
+                aria-label={locale.ImageUploader.upload}
               >
                 <span className={`${classPrefix}-upload-button-icon`}>
                   <AddOutline />
@@ -253,6 +261,7 @@ export const ImageUploader: FC<ImageUploaderProps> = p => {
                 type='file'
                 className={`${classPrefix}-input`}
                 onChange={onChange}
+                aria-hidden
               />
             )}
           </div>
