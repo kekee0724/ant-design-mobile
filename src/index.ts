@@ -85,7 +85,7 @@ export { default as WaterMark } from './components/water-mark'
 
 export { Foo } from './components/foo'
 
-export * from './components/foo/index'
+export * from './components/foo'
 
 export { RMCalendar } from './components/foo-calender'
 

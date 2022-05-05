@@ -2,7 +2,7 @@ import React, { FC, useEffect } from 'react'
 
 import * as Simditor from 'simditor'
 
-import { PureComponentProps } from '../foo/index'
+import { PureComponentProps } from '../foo'
 
 export interface IEditorProps extends PureComponentProps {
   placeholder?: string

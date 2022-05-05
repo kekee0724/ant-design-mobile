@@ -9,7 +9,7 @@ import {
   prefixClass,
   PureComponent,
   PureComponentProps,
-} from '../foo/index'
+} from '../foo'
 
 type Align = 'end' | 'center' | 'start' | 'top' | 'bottom' | 'left' | 'right'
 

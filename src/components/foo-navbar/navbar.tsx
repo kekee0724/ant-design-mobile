@@ -1,7 +1,7 @@
 import React, { FC, ReactNode } from 'react'
 
 import { mergeProps } from '../../utils/with-default-props'
-import { PureComponentProps } from '../foo/index'
+import { PureComponentProps } from '../foo'
 import { Fab, FabButton, FabButtons } from '../foo-fab'
 import AntNavBar from '../nav-bar'
 import type { NavBarProps } from '../nav-bar'
