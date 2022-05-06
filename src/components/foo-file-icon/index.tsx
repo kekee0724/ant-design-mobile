@@ -1,5 +1,5 @@
 import './file-icon.less'
-import '../foo-image-text/imageText.less'
+import '../foo-image-text/image-text.less'
 
 import { FileIcon } from './file.icon'
 

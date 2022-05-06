@@ -8,6 +8,10 @@
 /*灰阶*/
 /*红色*/
 /*_spacing调整间距*/
+@import '../components/foo-image-text/image-text.less';
+@import '../components/foo-html-content/html-content.less';
+@import '~simditor/styles/simditor.css';
+
 :root {
   --bg-color: #efeff4;
   --nav-bar-color: #ffffff;
@@ -365,9 +369,9 @@ a {
   font-size: 48px !important;
 }
 /*字体 12px-32px end*/
-.mobile {
-  font-size: 17px;
-}
+// .mobile {
+//   font-size: 17px;
+// }
 .border-left {
   border-left: 1px var(--adm-border-color) solid;
 }
@@ -821,6 +825,7 @@ div.adm-capsule-tabs-header {
   position: relative;
 }
 .container-fill {
+  text-align: left;
   height: 100%;
 }
 .container-fill > .container-fill {
@@ -2709,12 +2714,12 @@ div.loading-nav-bar .am-navbar-left-icon {
 .reco-image-text {
   position: relative;
   text-align: center;
-}
-.reco-image-text i {
-  font-size: 32px;
-}
-.reco-image-text .text {
-  margin-top: var(--xs);
+  i {
+    font-size: 32px;
+  }
+  .text {
+    margin-top: var(--xs);
+  }
 }
 .reco-image-back {
   display: flex;

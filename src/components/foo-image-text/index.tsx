@@ -1,7 +1,7 @@
-import './imageText.less'
+import './image-text.less'
 
-import { ImageText } from './image.text'
+import { ImageText } from './image-text'
 
-export type { ImageTextProps } from './image.text'
+export type { ImageTextProps } from './image-text'
 
 export { ImageText }

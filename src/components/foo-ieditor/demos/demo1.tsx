@@ -10,7 +10,7 @@ export default () => {
   const [isAskReceipt, setIsAskReceipt] = useState(false)
   return (
     <div>
-      <List mode='card' style={{ '--prefix-width': '70px' }}>
+      <List mode='card' style={{ '--prefix-width': '80px' }}>
         <List.Item
           prefix={<InputLabel required>收件人</InputLabel>}
           onClick={() => {
